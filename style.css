@@ -43,10 +43,6 @@ body {
 .navbarcenter {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    width: 100%;
 }
 
 .navbarcenter a {
@@ -55,7 +51,6 @@ body {
     justify-content: center;
     text-decoration: none;
     color: #CDCDCD;
-    padding: 22px;
     width: 100%;
 }
    
@@ -69,14 +64,26 @@ body {
     background-color: #091931;
     margin-top: -2px;
     margin-bottom: -2px;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     width: 100%;
 }
 
 .nav-icon {
     width: 24px;
     margin-right: 24px; 
+}
+
+.navbarbox {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+    width: 232px;
+    gap: 8px;
+    height: 60px;
+    cursor: pointer;
 }
 
 .navbarbottom {
