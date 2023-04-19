@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+}
+
+.test {
+    width: 100vw;
+    background-color: black;
+    color: white;
+}
+
+.testseitlich {
+    width: 25vw;
+    height: 100vh;
+    z-index: 3;
+    background-color: blue;
+    color: white;
+}
+
+.dflex {
+    display: flex;
+}
+
+.right-side {
+    width: 100vw;
+    position: relative;
+}
+
+.test2 {
+    background-color: lightcoral;
+    color: green;
+    width: 75vw;
+    height: 100vh;
+}
