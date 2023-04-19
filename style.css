@@ -43,6 +43,7 @@ body {
 .navbarcenter {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .navbarcenter a {
