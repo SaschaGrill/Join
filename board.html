@@ -3,12 +3,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <script src="board_script.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <title>Join | Board</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="initializeBoard()">
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
     <div class="dflex ">
@@ -23,39 +24,21 @@
                     <img src="assets/img/search.png" alt="" class="board-input-img">
                 </div>
 
-                <button class="login-btn pointer">
+                <button class="login-btn pointer" onclick="openAddTaskMenu()">
                         Add task +       
                 </button>
             </div>
-
+            <div class="overlay dnone" id="addTaskOverlay"></div>
             <div class="board-content">
+              
+                <div w3-include-html="assets/templates/add_task_pop_up_template.html" class="dnone" id="addTaskPopUp"></div>
                 <div class="board-column">
                     <div class="board-column-heading">
                         <h4>To do</h4> 
                         <img src="assets/img/plusbutton.png" alt="" class ="pointer">
                     </div>
                     <div class="board-pin-space" id="pinSpace-ToDo">
-
-                        <div class="small-card pointer">
-                            <span class="small-card-category"> Design</span>
-                            <h4>Website redesign</h4>
-                            <p class="small-card-description"> 
-                                Modify the contents of the main website...
-                            </p>
-                            <div class="progress-bar">
-                                <div class="bar-with-fill"></div>
-                                <p>1/2 Done</p>
-                            </div>
-                            <div class="small-card-bottom">
-                                <div class="small-card-members-container">
-                                    <div class="card-member">SM</div>
-                                    <div class="card-member">MV</div>
-                                    <div class="card-member">EF</div>
-                                </div>
-                               <img src="assets/img/priorityLow.png" alt="" class="small-card-priority">
-                            </div>
-                        </div>
-
+                        <!-- ENTER CARDS HERE -->
                     </div>
                 </div>
                 <div class="board-column">

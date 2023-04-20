@@ -1,0 +1,104 @@
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../script.js"></script>
+    <script src="../../board_script.js"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head> -->
+<!-- MUSS RAUSGENOMMEN WERDEN, DA SONST IDs NICHT ÜBERNOMMEN WERDEN -->
+<body>
+
+
+    <div class="add-task-container-pop-up">
+        <h1 class="add-task-heading headlines">Add Task</h1>
+        <div class="add-task-content">
+
+          <div class="add-task-half" >
+            <div class="add-task-input-container">
+                <p>Title</p>
+                <div class="input-field">
+                    <input type="text" placeholder="Enter a title" id="addTaskTitle" required>
+                </div>
+            </div>
+
+            <div class="add-task-input-container">
+                <p>Description</p>
+                <div class="text-area-field">
+                <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription"></textarea>
+                </div>
+            </div>
+
+            <div class="add-task-input-container">
+                <p>Category</p>
+                <div class="input-field">
+                    <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory" required>
+                        <option value="0">Select task Category</option>
+                        <option value="Design">Design</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Backoffice">Backoffice</option>
+                        <option value="Media">Media</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="add-task-input-container">
+                <p>Assigned to</p>
+                <div class="input-field">
+                    <select name="add-task-category-select" id="AddTaskCategory" class="select-category pointer" required>
+                        <option value="0">Select contacts to assign </option>
+                        <option value="Gloria">Gloria</option>
+                        <option value="Sascha">Sascha</option>
+                        <option value="Danny">Danny</option>
+                    </select>
+                </div>
+            </div>
+          </div>
+
+          <span class="vertical-line"></span>
+          <!-- TRENNUNG!!! -->
+          <div class="add-task-half">
+           <div class="add-task-input-container">
+                <p>Due Date</p>
+                <div class="input-field">
+                    <input type="date" placeholder="dd/mm/yyyy"  class="pointer">
+                </div>
+           </div>
+
+           <div class="select-prio">
+             <p>Prio</p>
+             <div class="dflex gap10">
+                <div class="prio-container pointer">
+                    <div>Urgent</div>
+                    <img src="assets/img/priorityUrgent.png" alt="">
+                </div>
+                
+                <div class="prio-container pointer">
+                    <div>Medium</div>
+                    <img src="assets/img/priorityMedium.png" alt="">
+                </div>
+                
+                <div class="prio-container pointer">
+                    <div>Low</div>
+                    <img src="assets/img/priorityLow.png" alt="">
+                </div>
+             </div>
+           </div>
+           
+            <div class="add-task-input-container">
+            <p>Subtasks</p>
+               <div class="input-field">
+                 <input type="text" placeholder="Add new subtask">
+                 <img src="assets/img/plusbutton.png" alt="" class="pointer">
+               </div>
+            </div>
+
+        </div>
+        <div class="btn-container">
+            <button class="login-btn clear-btn" onclick="closeAddTaskMenu()">Clear X</button>
+            <button type="submit" class="login-btn add-task-btn" onclick="addTask()">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
+        </div>
+    </div>
+    </div>
+</body>

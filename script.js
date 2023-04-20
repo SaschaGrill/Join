@@ -11,3 +11,11 @@ async function includeHTML() {
         }
     }
 }
+
+function showElement(elementID) {
+    document.getElementById(elementID).classList.remove("dnone");
+}
+
+function hideElement(elementID) {
+    document.getElementById(elementID).classList.add("dnone");
+}

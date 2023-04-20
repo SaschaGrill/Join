@@ -13,27 +13,29 @@
     <div w3-include-html="assets/templates/desktop_template.html"></div>
     <div class="dflex">
         <div w3-include-html="assets/templates/desktop_side_template.html"></div>
-        <div class="add-task-container">
-            <div>
-                <h1 class="add-task-heading headlines">Add Task</h1>
+        <div class="add-task-container-pop-up">
+            <h1 class="add-task-heading headlines">Add Task</h1>
+            <form class="add-task-content">
+
+              <div class="add-task-half" >
                 <div class="add-task-input-container">
                     <p>Title</p>
                     <div class="input-field">
-                        <input type="text" placeholder="Enter a title">
+                        <input type="text" placeholder="Enter a title" id="addTaskTitle" required>
                     </div>
                 </div>
 
                 <div class="add-task-input-container">
                     <p>Description</p>
                     <div class="text-area-field">
-                    <textarea name="" id="" cols="30" rows="4" placeholder="Enter a Description"></textarea>
+                    <textarea name="" id="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription"></textarea>
                     </div>
                 </div>
 
                 <div class="add-task-input-container">
                     <p>Category</p>
                     <div class="input-field">
-                        <select name="add-task-category-select" id="AddTaskCategory" class="select-category">
+                        <select name="add-task-category-select" id="AddTaskCategory" class="select-category pointer" id="addTaskCategory" required>
                             <option value="0">Select task Category</option>
                             <option value="Design">Design</option>
                             <option value="Sales">Sales</option>
@@ -47,7 +49,7 @@
                 <div class="add-task-input-container">
                     <p>Assigned to</p>
                     <div class="input-field">
-                        <select name="add-task-category-select" id="AddTaskCategory" class="select-category">
+                        <select name="add-task-category-select" id="AddTaskCategory" class="select-category pointer" required>
                             <option value="0">Select contacts to assign </option>
                             <option value="Gloria">Gloria</option>
                             <option value="Sascha">Sascha</option>
@@ -55,12 +57,12 @@
                         </select>
                     </div>
                 </div>
-            </div>
+              </div>
 
-            <span class="vertical-line"></span>
-            <!-- TRENNUNG!!! -->
-            <div>
-                <div class="add-task-input-container">
+              <span class="vertical-line"></span>
+              <!-- TRENNUNG!!! -->
+              <div class="add-task-half">
+               <div class="add-task-input-container">
                     <p>Due Date</p>
                     <div class="input-field">
                         <input type="date" placeholder="dd/mm/yyyy"  class="pointer">
@@ -68,8 +70,8 @@
                </div>
 
                <div class="select-prio">
-                <p>Prio</p>
-                <div class="dflex gap10">
+                 <p>Prio</p>
+                 <div class="dflex gap10">
                     <div class="prio-container pointer">
                         <div>Urgent</div>
                         <img src="assets/img/priorityUrgent.png" alt="">
@@ -84,26 +86,26 @@
                         <div>Low</div>
                         <img src="assets/img/priorityLow.png" alt="">
                     </div>
+                 </div>
+               </div>
+               
+                <div class="add-task-input-container">
+                <p>Subtasks</p>
+                   <div class="input-field">
+                     <input type="text" placeholder="Add new subtask">
+                     <img src="assets/img/plusbutton.png" alt="" class="pointer">
+                   </div>
                 </div>
 
-               <div class="add-task-input-container">
-                 <p>Subtasks</p>
-                    <div class="input-field">
-                      <input type="text" placeholder="Add new subtask">
-                      <img src="assets/img/plusbutton.png" alt="">
-                    </div>
-               </div>
-
-               
-                    
-                    
-               </div>
-
-               
-           </div>
-            
             </div>
+            <div class="btn-container">
+                <button class="login-btn clear-btn">Clear X</button>
+                <button type="submit" class="login-btn add-task-btn">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
+            </div>
+        </form>
         </div>
+        
+
     </div>
 
 </body>
