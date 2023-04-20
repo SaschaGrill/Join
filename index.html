@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,29 @@
     <link rel="stylesheet" href="style.css">
     <title>Join - Login</title>
 </head>
-<body onload="includeHTML()">
-    <div w3-include-html="assets/templates/desktop_template.html"></div>
+
+<body>
+    <div class="login-section">
+        <img class="login-join-img" src="assets/img/joinlogodark.png">
+        <div class="login-signup">
+            <span>Not a Join user?</span>
+            <img src="assets/img/signupButton.svg">
+        </div>
+        <div class="login-bars">
+            <span class="headlines">Log in</span>
+            <input type="email" id="email-login" class="login-bar bg-email" placeholder="Email">
+            <input type="password" id="password-login" class="login-bar bg-password" placeholder="Password">
+            <div class="login-remember">
+                <input type="checkbox" id="login-checkbox">
+                <span class="remember-text">Remember me</span>
+                <a href="#" class="forgot-password">Forgot my password</a>
+            </div>
+            <div class="dflex login-btns">
+                <button class="login-btn">Log in</button>
+                <button class="login-btn login-btn-guest">Guest Log in</button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
