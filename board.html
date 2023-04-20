@@ -11,10 +11,80 @@
 <body onload="includeHTML()">
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
-    <div class="dflex overflow">
+    <div class="dflex ">
         <div w3-include-html="assets/templates/desktop_side_template.html"></div>
-        <div>
-            
+        <div class="board-container">
+            <div class="board-header">
+                <h1 class="headlines">Board</h1>
+
+                <div class="board-input"> 
+                    <input type="text">
+                    <img src="assets/img/search.png" alt="" class="board-input-img">
+                </div>
+
+                <button class="board-add-button pointer">
+                        Add task +       
+                </button>
+            </div>
+
+            <div class="board-content">
+                <div class="board-column">
+                    <div class="board-column-heading">
+                        <h4>To do</h4> 
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                    </div>
+                    <div class="board-pin-space" id="pinSpace-ToDo">
+
+                        <div class="small-card pointer">
+                            <span class="small-card-category"> Design</span>
+                            <h4>Website redesign</h4>
+                            <p class="small-card-description"> 
+                                Modify the contents of the main website...
+                            </p>
+                            <div class="progress-bar">
+                                <div class="bar-with-fill"></div>
+                                <p>1/2 Done</p>
+                            </div>
+                            <div class="small-card-bottom">
+                                <div class="small-card-members-container">
+                                    <div class="card-member">SM</div>
+                                    <div class="card-member">MV</div>
+                                    <div class="card-member">EF</div>
+                                </div>
+                               <img src="assets/img/priorityLow.png" alt="" class="small-card-priority">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="board-column">
+                    <div class="board-column-heading">
+                        <h4>In progress</h4>
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                    </div>
+                    <div class="board-pin-space" id="pinSpace-InProgress">
+
+                    </div>
+                </div>
+                <div class="board-column">
+                    <div class="board-column-heading">
+                        <h4>Awaiting Feedback</h4>
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                    </div>
+                    <div class="board-pin-space" id="pinSpace-AwaitingFeedback">
+
+                    </div>
+                </div>
+                <div class="board-column">
+                    <div class="board-column-heading">
+                        <h4>Done</h4>
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                    </div>
+                    <div class="board-pin-space" id="pinSpace-Done">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

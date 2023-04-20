@@ -15,6 +15,10 @@ body {
   color: #000000;
 }
 
+.pointer:hover{
+  cursor: pointer;
+}
+
 /* Header */
 
 .desktop-top {
@@ -23,6 +27,7 @@ body {
   height: 89px;
   left: 0px;
   top: 0px;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -301,4 +306,106 @@ body {
   color: #3dbdf3 !important;
   transform: scale(1.01);
   transition: transform 225ms ease-in-out;
+}
+
+
+/* BOARD */
+
+.board-container{
+width: 100%;
+position: relative;
+top: 25%;
+background-color: #F6F7F8;
+z-index: 0;
+}
+
+.board-header{
+  position: relative;
+  top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10% ;
+}
+
+.board-input{
+  display: flex;
+  align-items: center;
+}
+
+.board-content{
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  top: 2vh;
+}
+
+.board-column{
+  width: 250px;
+}
+
+.board-column-heading{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.board-column-heading h4{
+  font-size: 21px;
+  white-space:nowrap;
+}
+
+.board-pin-space{
+  height: 400px;
+  background-color: #c9cbce;
+}
+
+/* Cards - Small*/
+
+.small-card{
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding: 18px;
+}
+
+
+
+.small-card-description{
+  color: #A8A8A8;
+}
+
+.small-card-category{
+  background-color: orange;
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 4px 25px;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+}
+
+.small-card-bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.small-card .small-card-priority{
+  width: 32px;
+  height: 32px;
+}
+
+.small-card-members-container{
+  display: flex;
+}
+
+.card-member{
+  background-color: #A8A8A8;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;  
+
 }
