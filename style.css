@@ -7,6 +7,10 @@ body {
     display: flex;
 }
 
+.lightblue {
+    color: #29ABE2;
+}
+
 .gap10{
   gap: 10px;
 }
@@ -526,3 +530,46 @@ body {
   color: #ccc;
   cursor: pointer;
 } */
+
+
+/* SUMMARY */
+
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    top: 25%;
+    background-color: #F6F7F8;
+    z-index: 0;
+}
+
+.summary-header {
+    position: relative;
+    top: 10%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    height: 15%;
+    padding: 0 10%;
+}
+
+.summary-content {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: 10vh;
+    background-color: antiquewhite;
+    height: 75%;
+}
+
+.summary-content-left {
+    width: 50%;
+}
+
+.summary-content-right {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
