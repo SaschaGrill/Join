@@ -1,120 +1,154 @@
 body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-family: "Inter", sans-serif;
 }
+
+/* Header */
 
 .desktop-top {
-    width: 100vw;
-    background-color: black;
-    color: white;
+  position: absolute;
+  width: 100vw;
+  height: 89px;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 34px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
- /* Navbar */
+.desktop-kanban {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 21px;
+  padding-left: 350px;
+}
 
- .navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 25vw;
-    min-width: 200px;
-    height: 100vh;
-    z-index: 3;
-    background-color: #2A3647;
+.desktop-loginpic {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 26px;
+  width: 106px;
+  height: 49px;
+  margin-right: 50px;
+}
+
+.desktop-questionmark {
+  width: 31px;
+  height: 31px;
+}
+
+/* Navbar */
+
+.navbar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 300px;
+  max-width: 300px;
+  height: 100vh;
+  z-index: 3;
+  background-color: #2a3647;
 }
 
 .nav-text {
-    font-size: 16px;
-    color: #CDCDCD;
- }
+  font-size: 16px;
+  color: #cdcdcd;
+}
 
 .navbartop {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbartop img {
-    width: 100px;
-    height: 122px;
+  width: 100px;
+  height: 122px;
 }
 
 .navbarcenter {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .navbarcenter a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: #CDCDCD;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #cdcdcd;
+  width: 100%;
 }
-   
+
 .navbarcenter span {
-    font-weight: 400;
-    line-height: 120%;
-    margin-left: 0.5em;
+  font-weight: 400;
+  line-height: 120%;
+  margin-left: 0.5em;
 }
 
 .navbarcenter a:hover {
-    background-color: #091931;
-    margin-top: -2px;
-    margin-bottom: -2px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    width: 100%;
+  background-color: #091931;
+  margin-top: -2px;
+  margin-bottom: -2px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  width: 100%;
 }
 
 .nav-icon {
-    width: 24px;
-    margin-right: 24px; 
+  width: 24px;
+  margin-right: 24px;
 }
 
 .navbarbox {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 50px;
-    width: 232px;
-    gap: 8px;
-    height: 60px;
-    cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
+  width: 232px;
+  gap: 8px;
+  height: 60px;
+  cursor: pointer;
 }
 
 .navbarbottom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .navbarbottom a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .navbottom-icon {
-    width: 18px;
-    margin-right: 24px;
+  width: 18px;
+  margin-right: 24px;
 }
 
 .dflex {
-    display: flex;
+  display: flex;
 }
 
 .right-side {
-    width: 100vw;
-    position: relative;
+  width: 100vw;
+  position: relative;
 }
 
 .test2 {
-    background-color: lightcoral;
-    color: green;
-    width: 75vw;
-    height: 100vh;
+  background-color: lightcoral;
+  color: green;
+  width: 100vw;
+  height: 100vh;
 }
