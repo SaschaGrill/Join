@@ -7,8 +7,8 @@ body {
     display: flex;
 }
 
-.lightblue {
-    color: #29ABE2;
+.gap10{
+  gap: 10px;
 }
 
 .headlines {
@@ -315,26 +315,47 @@ body {
 
 /* BOARD */
 
-.board-container {
+.board-container{
     width: 100%;
-    position: relative;
-    top: 25%;
     background-color: #F6F7F8;
-    z-index: 0;
-}
+    }
+    
+    .board-header{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding-top: 100px;
+    }    
 
-.board-header {
-    position: relative;
-    top: 10%;
+.board-input{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 10%;
+    justify-content: space-around;
+    height: 50px;
+    width: 250px;
+    border: #A8A8A8 2px solid;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-size: 16px;
+  }
+
+.board-input input{
+  background-color: transparent;
+  border: none;
+
 }
 
-.board-input {
-    display: flex;
-    align-items: center;
+.board-input input:focus{
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.vertical-line{
+  height: 31px;
+  width: 1px;
+  background-color: #D1D1D1;
 }
 
 .board-content {
@@ -359,24 +380,22 @@ body {
     white-space: nowrap;
 }
 
-.board-pin-space {
+.board-pin-space{
     height: 400px;
-    background-color: #c9cbce;
-}
-
-/* Cards - Small*/
-
-.small-card {
-    background-color: #ffffff;
-    border-radius: 30px;
-    padding: 18px;
-}
-
-
-
-.small-card-description {
+    /* background-color: #c9cbce; */
+  }
+  
+  /* Cards - Small*/
+  
+  .small-card {
+      background-color: #ffffff;
+      border-radius: 30px;
+      padding: 18px;
+  }
+  
+  .small-card-description{
     color: #A8A8A8;
-}
+  }
 
 .small-card-category {
     background-color: orange;
@@ -414,45 +433,96 @@ body {
 
 }
 
+/* Add Task */
 
-/* SUMMARY */
-
-.summary-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-    top: 25%;
-    background-color: #F6F7F8;
-    z-index: 0;
+.add-task-container{
+  width: 60%;
+  padding: 30px;
+  border-radius: 30px;
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  z-index: 99;
+  background-color: #f5f5f5;
 }
 
-.summary-header {
-    position: relative;
-    top: 10%;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    height: 15%;
-    padding: 0 10%;
+.add-task-heading{
+  margin: 10px;
 }
 
-.summary-content {
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    top: 10vh;
-    background-color: antiquewhite;
-    height: 75%;
+.add-task-container .vertical-line{
+  height: 50%;
+  width: 1px;
+  background-color: #D1D1D1;
 }
 
-.summary-content-left {
-    width: 50%;
+
+.add-task-input-container .input-field{
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  border: #A8A8A8 2px solid;
+
+  height: 51px;
 }
 
-.summary-content-right {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.add-task-input-container .text-area-field{
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  border: #A8A8A8 2px solid;
+
+  height: 100px;
 }
+
+.add-task-input-container .input-field input{
+  outline: none;
+  border: none;
+  font-size: 21px;
+  width: 80%;
+  height: 100%;
+}
+
+.select-category{
+  outline: none;
+  border: none;
+  font-size: 21px;
+}
+
+.add-task-input-container .text-area-field textarea{
+  outline: none;
+  border: none;
+  resize:none;
+  font-size: 21px;
+
+  width: 80%;
+  height: 100%;
+}
+
+.prio-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  height: 50px;
+  border: 1px solid #f5f5f5;
+  padding: 0 10px;
+}
+
+
+
+/* input[type="date"]::-webkit-calendar-picker-indicator::before {
+  content: "\f073";
+  color: #ccc;
+  cursor: pointer;
+} */
