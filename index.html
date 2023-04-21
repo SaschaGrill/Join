@@ -12,25 +12,43 @@
 </head>
 
 <body>
-    <div class="login-section">
+    <div class="login-section ">
         <img class="login-join-img" src="assets/img/joinlogodark.png">
-        <div class="login-signup">
+        <div class="login-signup dnone">
             <span>Not a Join user?</span>
             <img src="assets/img/signupButton.svg">
         </div>
-        <div class="login-bars">
+        <!-- LOG IN SECTION -->
+        <div class="login-bars dnone">
             <span class="headlines">Log in</span>
-            <input type="email" id="email-login" class="login-bar bg-email" placeholder="Email">
-            <input type="password" id="password-login" class="login-bar bg-password" placeholder="Password">
-            <div class="login-remember">
+            <div class="login-head-borderline"></div>
+            <form>
+            <input type="email" id="email-login" class="login-bar bg-email margin-btm35 negative-margin" placeholder="Email">
+            <input type="password" id="password-login" class="login-bar bg-password margin-btm35" placeholder="Password">
+            <div class="login-remember margin-btm35">
                 <input type="checkbox" id="login-checkbox">
                 <span class="remember-text">Remember me</span>
                 <a href="#" class="forgot-password">Forgot my password</a>
             </div>
-            <div class="dflex login-btns">
+            <div class="dflex gap20 justify">
                 <button class="login-btn">Log in</button>
+            </form>
                 <button class="login-btn login-btn-guest">Guest Log in</button>
             </div>
+        </div>
+        <!-- SIGN UP SECTION -->
+        <div class="login-bars">
+            <img class="leftarrow pointer" src="assets/img/leftarrow.png">
+            <span class="headlines">Sign up</span>
+            <div class="login-head-borderline"></div>
+            <form>
+                <input required type="name" id="name-signup" class="login-bar bg-name margin-btm35 negative-margin" placeholder="Name">
+                <input required type="email" id="email-signup" class="login-bar bg-email margin-btm35" placeholder="Email">
+                <input required type="password" id="password-signup" class="login-bar bg-password margin-btm35" placeholder="Password">
+                <div class="dflex justify">
+                    <button class="login-btn">Sign up</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
