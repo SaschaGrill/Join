@@ -108,8 +108,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 232px;
+  max-width: 232px;
   height: 100vh;
   z-index: 3;
   background-color: #2a3647;
