@@ -959,7 +959,6 @@ body {
 
 .fiftyfiftybox {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 50%;
@@ -969,10 +968,20 @@ body {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 
-.threethirdsbox {
+.fiftyfiftyboxleft {
+  margin-right: 24px;
+}
+
+.fiftyfiftyboxright {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.threethirdsbox {
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   height: 170px;
@@ -1001,4 +1010,47 @@ body {
   margin-block-start: 0;
   margin-block-end: 0;
   padding: 0 12px 0px 12px;
+}
+
+.threethirdsboxleft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.threethirdsboxleftdetailsleft {
+  margin-right: 24px;
+}
+
+.threethirdsboxleftdetailsright {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.threethirdsboxleftdetailsright p{
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #2A3647;
+}
+
+.threethirdsboxleftdetailsright h2{
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 47px;
+  line-height: 120%;
+}
+
+.threethirdsboxcenter {
+  height: 102px;
+  width: 0px;
+  border: 2px solid #D1D1D1;
+  border-radius: 15px;
 }
