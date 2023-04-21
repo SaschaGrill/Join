@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <script src="js/login.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <title>Join - Login</title>
@@ -14,15 +15,15 @@
 <body>
     <div class="login-section">
         <img class="login-join-img" src="assets/img/joinlogodark.png">
-        <div class="login-signup">
+        <div class="login-signup dnone">
             <span>Not a Join user?</span>
             <button class="signup-btn">Sign up</button>
         </div>
         <!-- LOG IN SECTION -->
-        <div class="login-bars">
+        <div class="login-bars dnone">
             <span class="headlines">Log in</span>
             <div class="login-head-borderline"></div>
-            <form>
+            <form onsubmit="login()">
                 <input required type="email" id="email-login" class="login-bar bg-email margin-btm35 negative-margin"
                     placeholder="Email">
                 <input required type="password" id="password-login" class="login-bar bg-password margin-btm35"
@@ -39,18 +40,18 @@
         </div>
     </div>
     <!-- SIGN UP SECTION -->
-    <div class="login-bars dnone">
+    <div class="login-bars">
         <img class="leftarrow pointer" src="assets/img/leftarrow.png">
         <span class="headlines">Sign up</span>
         <div class="login-head-borderline"></div>
-        <form>
+        <form id="signup-form">
             <input required type="name" id="name-signup" class="login-bar bg-name margin-btm35 negative-margin"
                 placeholder="Name">
             <input required type="email" id="email-signup" class="login-bar bg-email margin-btm35" placeholder="Email">
             <input required type="password" id="password-signup" class="login-bar bg-password margin-btm35"
                 placeholder="Password">
             <div class="dflex justify">
-                <button class="login-btn">Sign up</button>
+                <button type="submit" class="login-btn">Sign up</button>
             </div>
         </form>
     </div>
