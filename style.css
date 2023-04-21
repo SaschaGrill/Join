@@ -925,6 +925,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 35px;
+  width: 100%;
 }
 
 .summary-content-left-center {
@@ -932,6 +933,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 35px;
+  width: 100%;
 }
 
 .summary-content-left-bottom {
@@ -939,6 +941,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 35px;
+  width: 100%;
 }
 
 .onethirdbox {
@@ -947,7 +950,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 170px;
+  width: 33%;
   height: 170px;
   background-color: white;
   border-radius: 30px;
@@ -959,7 +962,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 272px;
+  width: 50%;
   height: 170px;
   background-color: white;
   border-radius: 30px;
@@ -971,7 +974,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 580px;
+  width: 100%;
   height: 170px;
   background-color: white;
   border-radius: 30px;
@@ -997,4 +1000,5 @@ body {
   flex-wrap: wrap;
   margin-block-start: 0;
   margin-block-end: 0;
+  padding: 0 12px 0px 12px;
 }
