@@ -44,7 +44,7 @@ function login() {
   if(user) {
     email.value = '';
     password.value = '';
-    window.location.href = 'board.html';
+    window.location.href = 'summary.html';
   } else {
     alert('try again')
   }
