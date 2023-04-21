@@ -8,49 +8,66 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
-    <title>Join | Login</title>
+    <title>Join - Login</title>
 </head>
 
 <body>
-    <div class="login-section ">
+    <div class="login-section">
         <img class="login-join-img" src="assets/img/joinlogodark.png">
-        <div class="login-signup dnone">
+        <div class="login-signup">
             <span>Not a Join user?</span>
-            <img src="assets/img/signupButton.svg">
+            <img class="pointer" src="assets/img/signupButton.svg">
         </div>
         <!-- LOG IN SECTION -->
-        <div class="login-bars dnone">
+        <div class="login-bars">
             <span class="headlines">Log in</span>
             <div class="login-head-borderline"></div>
             <form>
-            <input type="email" id="email-login" class="login-bar bg-email margin-btm35 negative-margin" placeholder="Email">
-            <input type="password" id="password-login" class="login-bar bg-password margin-btm35" placeholder="Password">
-            <div class="login-remember margin-btm35">
-                <input type="checkbox" id="login-checkbox">
-                <span class="remember-text">Remember me</span>
-                <a href="#" class="forgot-password">Forgot my password</a>
-            </div>
-            <div class="dflex gap20 justify">
-                <button class="login-btn">Log in</button>
-            </form>
-                <button class="login-btn login-btn-guest">Guest Log in</button>
-            </div>
-        </div>
-        <!-- SIGN UP SECTION -->
-        <div class="login-bars">
-            <img class="leftarrow pointer" src="assets/img/leftarrow.png">
-            <span class="headlines">Sign up</span>
-            <div class="login-head-borderline"></div>
-            <form>
-                <input required type="name" id="name-signup" class="login-bar bg-name margin-btm35 negative-margin" placeholder="Name">
-                <input required type="email" id="email-signup" class="login-bar bg-email margin-btm35" placeholder="Email">
-                <input required type="password" id="password-signup" class="login-bar bg-password margin-btm35" placeholder="Password">
-                <div class="dflex justify">
-                    <button class="login-btn">Sign up</button>
+                <input required type="email" id="email-login" class="login-bar bg-email margin-btm35 negative-margin"
+                    placeholder="Email">
+                <input required type="password" id="password-login" class="login-bar bg-password margin-btm35"
+                    placeholder="Password">
+                <div class="login-remember margin-btm35">
+                    <input type="checkbox" id="login-checkbox">
+                    <span class="remember-text">Remember me</span>
+                    <a href="#" class="forgot-password">Forgot my password</a>
                 </div>
+                <div class="dflex gap20 justify">
+                    <button class="login-btn">Log in</button>
             </form>
+            <button class="login-btn login-btn-guest">Guest Log in</button>
         </div>
     </div>
+    <!-- SIGN UP SECTION -->
+    <div class="login-bars dnone">
+        <img class="leftarrow pointer" src="assets/img/leftarrow.png">
+        <span class="headlines">Sign up</span>
+        <div class="login-head-borderline"></div>
+        <form>
+            <input required type="name" id="name-signup" class="login-bar bg-name margin-btm35 negative-margin"
+                placeholder="Name">
+            <input required type="email" id="email-signup" class="login-bar bg-email margin-btm35" placeholder="Email">
+            <input required type="password" id="password-signup" class="login-bar bg-password margin-btm35"
+                placeholder="Password">
+            <div class="dflex justify">
+                <button class="login-btn">Sign up</button>
+            </div>
+        </form>
+    </div>
+    <!-- FORGOT PASSWORD SECTION -->
+    <div class="password-forget dnone">
+        <img class="leftarrow pointer" src="assets/img/leftarrow.png">
+        <span class="headlines">I forgot my password</span>
+        <div class="login-head-borderline"></div>
+        <span class="align-text negative-margin">Don't worry! We will send you an email with the instructions to<br> reset your password.</span>
+        <form>
+            <input required type="email" id="email-forgot" class="login-bar bg-email margin-btm35" placeholder="Email">
+            <div class="dflex justify">
+                <button class="forgot-btn">Send me the email</button>
+            </div>
+        </form>
+    </div>
+
 </body>
 
 </html>
