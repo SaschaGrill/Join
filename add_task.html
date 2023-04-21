@@ -1,8 +1,10 @@
-<head>
+<!-- <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <script src="js/addTask_script.js"></script>
+    <script src="js/contacts_script.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <title>Join | Add Task</title>
@@ -35,7 +37,7 @@
                 <div class="add-task-input-container">
                     <p>Category</p>
                     <div class="input-field">
-                        <select name="add-task-category-select" id="AddTaskCategory" class="select-category pointer" id="addTaskCategory" required>
+                        <select name="add-task-category-select" id="addTaskCategory" class="select-category pointer" id="addTaskCategory" required>
                             <option value="0">Select task Category</option>
                             <option value="Design">Design</option>
                             <option value="Sales">Sales</option>
@@ -49,18 +51,18 @@
                 <div class="add-task-input-container">
                     <p>Assigned to</p>
                     <div class="input-field">
-                        <select name="add-task-category-select" id="AddTaskCategory" class="select-category pointer" required>
-                            <option value="0">Select contacts to assign </option>
-                            <option value="Gloria">Gloria</option>
-                            <option value="Sascha">Sascha</option>
-                            <option value="Danny">Danny</option>
+                        <select name="add-task-category-select" id="addTaskSelection" class="select-category pointer" oninput="addMemberToTask()">
+                            <option value="-1">Select contacts to assign </option>
+                            <option value="${contacts[0]['firstName']}"></option>
+                            <option value="${contacts[1]['firstName']}"></option>
+                            <option value="${contacts[2]['firstName']}"></option> 
                         </select>
                     </div>
                 </div>
               </div>
-
+              TRENNUNG!!! 
               <span class="vertical-line"></span>
-              <!-- TRENNUNG!!! -->
+             TRENNUNG!!! 
               <div class="add-task-half">
                <div class="add-task-input-container">
                     <p>Due Date</p>
@@ -108,4 +110,4 @@
 
     </div>
 
-</body>
+</body> -->

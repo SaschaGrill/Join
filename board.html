@@ -3,7 +3,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <script src="js/contacts_script.js"></script>
     <script src="js/board_script.js"></script>
+    <script src="js/addTask_script.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <title>Join | Board</title>
@@ -14,7 +16,7 @@
     <div w3-include-html="assets/templates/desktop_template.html"></div>
     <div class="dflex ">
         <div w3-include-html="assets/templates/desktop_side_template.html"></div>
-        <div class="board-container">
+        <div class="board-container" id="boardContainer">
             <div class="board-header">
                 <h1 class="headlines">Board</h1>
 
@@ -28,10 +30,12 @@
                         Add task +       
                 </button>
             </div>
-            <div class="overlay dnone" id="addTaskOverlay"></div>
+            <div class="overlay dnone" id="Overlay"></div>
             <div class="board-content">
               
+                <div w3-include-html="assets/templates/big_toDo_card_template.html" class="" id="addTaskPopUp"></div>
                 <div w3-include-html="assets/templates/add_task_pop_up_template.html" class="dnone" id="addTaskPopUp"></div>
+
                 <div class="board-column">
                     <div class="board-column-heading">
                         <h4>To do</h4> 

@@ -1,3 +1,7 @@
+html{
+  background-color: #f6f7f8;
+}
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -11,12 +15,25 @@ body {
   --media-color: #ffc701;
 }
 
+.bold{
+  font-weight: 700;
+}
+
 .dflex {
   display: flex;
 }
 
+.dflex-col{
+  display: flex;
+  flex-direction: column;
+}
+
 .justify {
   justify-content: center;
+}
+
+.align-center{
+  align-items: center;
 }
 
 .align-text {
@@ -49,6 +66,10 @@ body {
   font-size: 61px;
   text-align: center;
   color: #000000;
+}
+
+.overflow-visible{
+  overflow: visible !important;
 }
 
 .pointer:hover {
@@ -108,8 +129,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 232px;
+  max-width: 232px;
   height: 100vh;
   z-index: 3;
   background-color: #2a3647;
@@ -476,7 +497,7 @@ body {
 
 .board-container {
   width: 100%;
-  background-color: #f6f7f8;
+  overflow: scroll;
 }
 
 .board-header {
@@ -540,7 +561,9 @@ body {
 
 .board-pin-space {
   height: 400px;
-  /* background-color: #c9cbce; */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 /* Cards - Small*/
@@ -619,21 +642,25 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 3;
+  z-index: 99;
 }
 
 .add-task-container-pop-up {
-  width: 60%;
+  width: 100%;
   padding: 30px;
   border-radius: 30px;
   font-size: 21px;
 
   position: absolute;
-  left: 50%;
+  left: 40%;
   top: 20%;
   transform: translateY(-50%) translateX(-50%);
   z-index: 99;
   background-color: #f5f5f5;
+}
+
+.add-task-container-pop-up p{
+  margin: 10px 0;
 }
 
 .add-task-content {
@@ -649,6 +676,12 @@ body {
 
 .add-task-half {
   height: 560px;
+}
+
+.add-task-container-pop-up .vertical-line {
+  height: 70vh;
+  width: 1px;
+  background-color: #d1d1d1;
 }
 
 .add-task-container .vertical-line {
@@ -714,6 +747,14 @@ body {
   padding: 0 10px;
 }
 
+.prio-container:hover {
+  border: 1px solid #999797;
+}
+
+.selected-prio-container{
+  border: 3px solid #07af07 !important;
+}
+
 .btn-container {
   position: absolute;
   bottom: 0px;
@@ -724,15 +765,44 @@ body {
 
 .clear-btn {
   height: 55px;
-  background-color: #f5f5f5;
+  background-color: #070606;
   color: #2a3647;
 }
 
-/* input[type="date"]::-webkit-calendar-picker-indicator::before {
-  content: "\f073";
-  color: #ccc;
-  cursor: pointer;
-} */
+.rectangle{
+  border: #a8a8a8 1px solid;
+  border-radius: 3px;
+  width: 16px;
+  height: 16px;
+}
+
+/* BIG CARD CONTAINER OVERLAY */
+.big-card-container{
+ width: 523px;
+
+  background-color: #ffffff;
+  border-radius: 30px;
+  border: black 1px solid;
+  position: absolute;
+  z-index: 98;
+  left: 50%; 
+  top: -250px;
+  padding: 0 50px;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+
+}
+
+.big-card-container h1{
+  text-align: left;
+}
+
+.big-card-container p{
+  font-size: 21px;
+  font-weight: 400;
+}
 
 /* SUMMARY */
 

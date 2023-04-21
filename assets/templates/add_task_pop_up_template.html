@@ -1,15 +1,5 @@
-<!-- <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../script.js"></script>
-    <script src="../../board_script.js"></script>
-    <link rel="stylesheet" href="../../style.css">
-</head> -->
-<!-- MUSS RAUSGENOMMEN WERDEN, DA SONST IDs NICHT ÜBERNOMMEN WERDEN -->
+
 <body>
-
-
     <div class="add-task-container-pop-up">
         <h1 class="add-task-heading headlines">Add Task</h1>
         <div class="add-task-content">
@@ -43,15 +33,16 @@
                 </div>
             </div>
 
-            <div class="add-task-input-container">
+            <div class="add-task-input-container dflex-col gap20">
                 <p>Assigned to</p>
                 <div class="input-field">
-                    <select name="add-task-category-select" id="AddTaskCategory" class="select-category pointer" required>
+                    <select name="add-task-category-select" id="addTaskSelection" class="select-category pointer" oninput="addMemberToTask()" required>
                         <option value="0">Select contacts to assign </option>
-                        <option value="Gloria">Gloria</option>
-                        <option value="Sascha">Sascha</option>
-                        <option value="Danny">Danny</option>
+
                     </select>
+                </div>
+                <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers">
+
                 </div>
             </div>
           </div>
@@ -69,17 +60,17 @@
            <div class="select-prio">
              <p>Prio</p>
              <div class="dflex gap10">
-                <div class="prio-container pointer">
+                <div class="prio-container pointer" id="prioButton_urgent" onclick="selectPrio('urgent')">
                     <div>Urgent</div>
                     <img src="assets/img/priorityUrgent.png" alt="">
                 </div>
                 
-                <div class="prio-container pointer">
+                <div class="prio-container pointer" id="prioButton_medium" onclick="selectPrio('medium')">
                     <div>Medium</div>
                     <img src="assets/img/priorityMedium.png" alt="">
                 </div>
                 
-                <div class="prio-container pointer">
+                <div class="prio-container pointer selected-prio-container" id="prioButton_low" onclick="selectPrio('low')">
                     <div>Low</div>
                     <img src="assets/img/priorityLow.png" alt="">
                 </div>
@@ -87,11 +78,17 @@
            </div>
            
             <div class="add-task-input-container">
-            <p>Subtasks</p>
-               <div class="input-field">
-                 <input type="text" placeholder="Add new subtask">
-                 <img src="assets/img/plusbutton.png" alt="" class="pointer">
-               </div>
+             <p>Subtasks</p>
+                <div class="input-field">
+                 <input type="text" placeholder="Add new subtask" id="subTaskInput">
+                 <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask()">
+                </div>
+                <div class="dflex-col" id="subTaskPreviewContainer">
+                 <div class="dflex align-center">
+                    <div class="rectangle"></div>
+                     TestTask1
+                </div>
+                </div>
             </div>
 
         </div>
