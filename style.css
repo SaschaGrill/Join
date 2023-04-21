@@ -16,7 +16,7 @@ body {
 }
 
 .bold{
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 .dflex {
@@ -642,7 +642,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 97;
 }
 
 .add-task-container-pop-up {
@@ -784,15 +784,14 @@ body {
   border-radius: 30px;
   border: black 1px solid;
   position: absolute;
-  z-index: 98;
+  z-index: 99;
   left: 50%; 
   top: -250px;
-  padding: 0 50px;
+  padding: 20px 50px;
   transform: translateX(-50%);
 
   display: flex;
   flex-direction: column;
-
 }
 
 .big-card-container h1{
@@ -802,6 +801,51 @@ body {
 .big-card-container p{
   font-size: 21px;
   font-weight: 400;
+  margin: 10px 0;
+}
+
+.assigned-to-field{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.assigned-to-item{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.big-card-button-container{
+  position: absolute;
+  right: 47px;
+  bottom: 61px;
+  display: flex;
+}
+
+.big-card-button-container button{
+  width: 50px;
+  height: 50px;
+  border:1px #2A3647 solid;
+}
+
+.big-card-button-container button:first-child{
+  background-color: #ffffff;
+  border-radius: 10px 0 0 10px;
+}
+
+.big-card-button-container button:last-child{
+  background-color: #2A3647;
+  border-radius: 0 10px 10px 0;
+}
+
+.big-card-close-button{
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 35px;
+  border: none;
 }
 
 /* SUMMARY */

@@ -88,7 +88,7 @@ function getRightPinSpace(status) {
 
 function smallCardHTML(toDo) {
     return /*html*/`
-<div class="small-card pointer">
+<div class="small-card pointer" onclick="openBigCard()">
         <span class="small-card-category" style="background-color: var(--${toDo["category"]}-color)"> ${toDo["category"]}</span>
         <h4>${toDo["title"]}</h4>
         <p class="small-card-description"> 
@@ -101,4 +101,18 @@ function smallCardHTML(toDo) {
         </div>
 </div>
 `
+}
+
+
+function openBigCard(card) {
+    showElement("bigCardPopUp");
+    showElement("Overlay");
+    updateAddTaskMemberSelection();
+    document.getElementById("boardContainer").classList.add("overflow-visible");
+}
+
+function closeBigCard() {
+    hideElement("bigCardPopUp");
+    hideElement("Overlay");
+    document.getElementById("boardContainer").classList.remove("overflow-visible");
 }
