@@ -341,6 +341,23 @@ body {
   cursor: pointer;
 }
 
+.signup-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 0px;
+  width: 100px;
+  height: 51px;
+  background: #2a3647;
+  border-radius: 8px;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 21px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
 .login-btn-guest {
   color: black !important;
   background: #ffffff !important;
@@ -358,6 +375,12 @@ body {
   transform: scale(1.01);
   transition: transform 225ms ease-in-out;
 }
+
+.signup-btn:hover {
+    background: #3dbdf3;
+    transform: scale(1.01);
+    transition: background 225ms ease-in-out, transform 225ms ease-in-out;
+  }
 
 /* SIGN UP */
 
@@ -445,8 +468,8 @@ body {
 }
 
 .change-password-btn {
-    width: 250px !important;
-    margin-top: 10px;
+  width: 250px !important;
+  margin-top: 10px;
 }
 
 /* BOARD */
