@@ -1,8 +1,3 @@
-window.onload = function() {
-    greet();
-    updateTaskCounts(toDoArray);
-}
-
 function getGreeting() {
     const currentHour = new Date().getHours();
     let greeting;
@@ -44,12 +39,3 @@ function getTaskCounts(toDoArray) {
   
     return taskCounts;
   }   
-
-function updateTaskCounts() {
-    const taskCounts = getTaskCounts(toDoArray);
-    document.querySelector(".summary-content-left-top .onethirdbox:nth-child(1) .summary-content-big-number").textContent = taskCounts.todo;
-    document.querySelector(".summary-content-left-top .onethirdbox:nth-child(2) .summary-content-big-number").textContent = taskCounts.inProgress;
-    document.querySelector(".summary-content-left-top .onethirdbox:nth-child(3) .summary-content-big-number").textContent = taskCounts.awaitingFeedback;
-    document.querySelector(".summary-content-left-bottom .fiftyfiftybox:nth-child(1) .summary-content-big-number").textContent = taskCounts.todo;
-    document.querySelector(".summary-content-left-bottom .fiftyfiftybox:nth-child(2) .summary-content-big-number").textContent = taskCounts.done;
-  }  
