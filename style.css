@@ -1094,9 +1094,21 @@ body {
   background-color: #2a3647;
   color: white;
   cursor: pointer;
+  transform: scale(1.1);
 }
 
 .fiftyfiftybox:hover img {
   filter: invert(1);
 }
+
+.threethirdsbox:hover p {
+  background-color: #2a3647;
+  color: white;
+}
+
+.threethirdsbox:hover h3 {
+  background-color: #2a3647;
+  color: white;
+}
+
 
