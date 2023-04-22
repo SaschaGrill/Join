@@ -1098,7 +1098,7 @@ body {
 }
 
 .fiftyfiftybox:hover img {
-  filter: invert(1);
+  filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
 }
 
 .threethirdsbox:hover p {
