@@ -116,3 +116,14 @@ function closeBigCard() {
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
 }
+
+// eingefügter Code von Gloria
+
+function updateTaskCounts(toDoArray) {
+    const taskCounts = getTaskCounts(toDoArray);
+    document.querySelector(".summary-content-left-top .onethirdbox:nth-child(1) .summary-content-big-number").textContent = taskCounts.todo;
+    document.querySelector(".summary-content-left-top .onethirdbox:nth-child(2) .summary-content-big-number").textContent = taskCounts.inProgress;
+    document.querySelector(".summary-content-left-top .onethirdbox:nth-child(3) .summary-content-big-number").textContent = taskCounts.awaitingFeedback;
+    document.querySelector(".summary-content-left-bottom .fiftyfiftybox:nth-child(1) .summary-content-big-number").textContent = taskCounts.todo;
+    document.querySelector(".summary-content-left-bottom .fiftyfiftybox:nth-child(2) .summary-content-big-number").textContent = taskCounts.done;
+}
