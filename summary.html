@@ -5,10 +5,12 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
+    <script src="js/summary.js"></script>
+    <script src="js/register.js"></script>
     <title>Join | Summary</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(); greet();">
 
     <div w3-include-html="assets/templates/desktop_template.html"></div>
     <div class="dflex ">
@@ -22,19 +24,19 @@
             <div class="summary-content">
                 <div class="summary-content-left">
                     <div class="summary-content-left-top">
-                        <div class="onethirdbox">
+                        <div class="onethirdbox" onclick="goToBoard()">
                             <div class="onethirdboxdetails">
                                 <p class="summary-content-big-number">5</p>
                                 <p class="summary-content-description">Tasks in Board</p>
                             </div>
                         </div>
-                        <div class="onethirdbox">
+                        <div class="onethirdbox" onclick="goToBoard()">
                             <div class="onethirdboxdetails">
                                 <p class="summary-content-big-number">2</p>
                                 <p class="summary-content-description">Tasks in Progress</p>
                             </div>
                         </div>
-                        <div class="onethirdbox">
+                        <div class="onethirdbox" onclick="goToBoard()">
                             <div class="onethirdboxdetails">
                                 <p class="summary-content-big-number">2</p>
                                 <p class="summary-content-description">Awaiting Feedback</p>
@@ -42,7 +44,7 @@
                         </div>
                     </div>
                     <div class="summary-content-left-center">
-                        <div class="threethirdsbox">
+                        <div class="threethirdsbox" onclick="goToBoard()">
                             <div class="threethirdsboxleft">
                                 <div class="threethirdsboxleftdetailsleft">
                                     <img src="assets/img/urgentFullcolor.png" alt="">
@@ -60,7 +62,7 @@
                         </div>
                     </div>
                     <div class="summary-content-left-bottom">
-                        <div class="fiftyfiftybox">
+                        <div class="fiftyfiftybox" onclick="goToBoard()">
                             <div class="fiftyfiftyboxleft">
                                 <img src="assets/img/todoFullcolor.png" alt="">
                             </div>
@@ -69,7 +71,7 @@
                                 <p class="summary-content-description">To-do</p>
                             </div>
                         </div>
-                        <div class="fiftyfiftybox">
+                        <div class="fiftyfiftybox" onclick="goToBoard()">
                             <div class="fiftyfiftyboxleft">
                                 <img src="assets/img/doneFullcolor.png" alt="">
                             </div>
@@ -81,7 +83,8 @@
                     </div>
                 </div>
                 <div class="summary-content-right">
-                    <h2>Good morning</h2>
+                    <h2 id="greeting">Good morning</h2>
+                    <h1 id="user">Guest</h1>
                 </div>
             </div>
         </div>
