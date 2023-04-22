@@ -1071,3 +1071,10 @@ body {
   color: #2A3647;
   margin-block-start: 0;
 }
+
+.onethirdbox:hover,
+.threethirdsbox:hover,
+.fiftyfiftybox:hover {
+  filter: invert(1);
+  cursor: pointer;
+}
