@@ -225,6 +225,28 @@ body {
   background: #f6f7f8;
 }
 
+
+.fullscreen-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 274px;
+  height: 334px;
+  top: 35%;
+  left: 40%;
+  z-index: 500;
+  background-color: #f6f7f8;
+  animation-name: movingJoin;
+  animation-duration: 500ms;
+  animation-delay: 200ms;
+}
+
+@keyframes movingJoin {
+  0%{top: 35%;left: 40%;width: 274px;height: 334px;}
+  100%{top: 10.33%;left: 5.35%;width: 100px;height: 122px;}
+}
+
 .login-join-img {
   position: absolute;
   left: 5.35%;
@@ -242,6 +264,10 @@ body {
   justify-content: flex-end;
   padding-top: 80px;
   padding-right: 150px;
+  opacity: 0%;
+  animation-name: opacity-login;
+  animation-duration: 500ms;
+  animation-delay:200ms;
 }
 
 .login-head-borderline {
@@ -276,6 +302,15 @@ body {
   background: #ffffff;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
   border-radius: 30px;
+  opacity: 0%;
+  animation-name: opacity-login;
+  animation-duration: 500ms;
+  animation-delay:200ms;
+}
+
+@keyframes opacity-login {
+  0%{opacity: 0%;}
+  100%{opacity: 100%;}
 }
 
 .login-bar {
@@ -826,7 +861,7 @@ body {
 .big-card-button-container button {
   width: 50px;
   height: 50px;
-  border: 1px #2A3647 solid;
+  border: 1px #2a3647 solid;
 }
 
 .big-card-button-container button:first-child {
@@ -835,7 +870,7 @@ body {
 }
 
 .big-card-button-container button:last-child {
-  background-color: #2A3647;
+  background-color: #2a3647;
   border-radius: 0 10px 10px 0;
 }
 
@@ -856,7 +891,7 @@ body {
   width: 100%;
   position: relative;
   top: 25%;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   z-index: 0;
 }
 
@@ -877,13 +912,13 @@ body {
 .summary-headline-line {
   height: 59px;
   width: 0px;
-  border: 3px solid #29ABE2;
+  border: 3px solid #29abe2;
   border-radius: 15px;
 }
 
 .summary-header p {
   font-size: 27px;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 .summary-content {
@@ -891,7 +926,7 @@ body {
   justify-content: space-around;
   position: relative;
   top: 10vh;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   height: 75%;
 }
 
@@ -926,12 +961,12 @@ body {
 }
 
 .summary-content-right h1 {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 64px;
-  line-height: 120%; 
-  color: #29ABE2;
+  line-height: 120%;
+  color: #29abe2;
   margin-block-start: 0;
   margin-block-end: 0;
 }
@@ -1045,17 +1080,17 @@ body {
   align-items: center;
 }
 
-.threethirdsboxleftdetailsright p{
+.threethirdsboxleftdetailsright p {
   margin-block-start: 0;
   margin-block-end: 0;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
-  color: #2A3647;
+  color: #2a3647;
 }
 
-.threethirdsboxleftdetailsright h2{
+.threethirdsboxleftdetailsright h2 {
   margin-block-start: 0;
   margin-block-end: 0;
   font-style: normal;
@@ -1067,7 +1102,7 @@ body {
 .threethirdsboxcenter {
   height: 102px;
   width: 0px;
-  border: 2px solid #D1D1D1;
+  border: 2px solid #d1d1d1;
   border-radius: 15px;
 }
 
@@ -1076,7 +1111,7 @@ body {
   font-weight: 700;
   font-size: 21px;
   line-height: 120%;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 .threethirdsboxright p {
@@ -1084,7 +1119,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
-  color: #2A3647;
+  color: #2a3647;
   margin-block-start: 0;
 }
 
@@ -1098,7 +1133,8 @@ body {
 }
 
 .fiftyfiftybox:hover img {
-  filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
+  filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg)
+    invert(100%) saturate(0%);
 }
 
 .threethirdsbox:hover p {
@@ -1110,5 +1146,3 @@ body {
   background-color: #2a3647;
   color: white;
 }
-
-

@@ -2,6 +2,7 @@ let users = [];
 let currentUser;
 
 function init() {
+  moveFullscreenImg()
   let email = document.getElementById("email-login");
   let password = document.getElementById("password-login");
   let checkbox = document.getElementById("login-checkbox");
@@ -17,6 +18,17 @@ function init() {
   }
 }
 
+function moveFullscreenImg() {
+  let img = document.getElementById('bigJoinLogo');
+  let login = document.getElementById('login-section');
+  let signup = document.getElementById('signup-btn');
+  setTimeout(() => {
+    img.classList.add('login-join-img');
+    img.classList.remove('fullscreen-img');
+    login.style.opacity = '100%';
+    signup.style.opacity = '100%';
+  }, 550);
+}
 
 async function loadUsers() {
   users = JSON.parse(await getItem('users'));
