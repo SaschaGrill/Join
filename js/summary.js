@@ -24,14 +24,10 @@ function getGreeting() {
 
 function greet() {
     const greetingElement = document.getElementById('greeting');
+    let currentUser = window.location.search.split('=')[1];
     greetingElement.innerHTML = getGreeting();
-
-    // Retrieve the user's name from localStorage
-    // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    // if (currentUser) {
-    //     const userElement = document.getElementById('user');
-    //     userElement.innerHTML = currentUser.name;
-    // }
+    let greetUser = document.getElementById('user');
+    greetUser.innerHTML = currentUser;
 }
 
 function goToBoard() {

@@ -1,8 +1,5 @@
 let users = [];
-
-async function init() {
-  loadUsers();
-}
+let currentUser;
 
 async function loadUsers() {
   users = JSON.parse(await getItem('users'));
@@ -36,18 +33,36 @@ function resetSignup(name, email, password) {
   registerBtn.disabled = false;
 }
 
-function login() {
+async function login() {
+  await loadUsers();
   let email = document.getElementById("email-login");
   let password = document.getElementById("password-login");
   let user = users.find( u => u.email == email.value && u.password == password.value);
-  console.log(user);
+  currentUser = user.name;
   if(user) {
     email.value = '';
     password.value = '';
-    window.location.href = 'summary.html';
+    window.location.href = `summary.html?user=${currentUser}`;
   } else {
     alert('try again')
   }
+  users = [];
+}
+
+async function loginGuest() {
+  await loadUsers();
+  let email = document.getElementById("email-login");
+  let password = document.getElementById("password-login");
+  email.value = "guest@guest.com";
+  password.value = "123456";
+  let user = users.find( u => u.email == email.value && u.password == password.value);
+  currentUser = user.name;
+  if(user) {
+    email.value = '';
+    password.value = '';
+    window.location.href = `summary.html?user=${currentUser}`;
+  }
+  users = [];
 }
 
 function signupButton() {
