@@ -1,15 +1,34 @@
 let users = [];
 let currentUser;
 
+function init() {
+  let email = document.getElementById("email-login");
+  let password = document.getElementById("password-login");
+  let checkbox = document.getElementById("login-checkbox");
+  let rememberMeChecked = localStorage.getItem("rememberMeChecked");
+  if (rememberMeChecked === "true") {
+    checkbox.checked = true;
+    email.value = localStorage.getItem("email");
+    password.value = localStorage.getItem("password");
+  } else {
+    checkbox.checked = false;
+    email.value = "";
+    password.value = "";
+  }
+}
+
+
 async function loadUsers() {
   users = JSON.parse(await getItem('users'));
 }
+
 
 function register() {
   document.getElementById('signup-btn').classList.remove('dnone');
   document.getElementById('login-section').classList.remove('dnone');
   document.getElementById('signup-section').classList.add('dnone');
 }
+
 
 async function signup() {
   registerBtn.disabled = true;
@@ -26,6 +45,7 @@ async function signup() {
   register();
 }
 
+
 function resetSignup(name, email, password) {
   name.value = "";
   email.value = "";
@@ -40,6 +60,7 @@ async function login() {
   let user = users.find( u => u.email == email.value && u.password == password.value);
   currentUser = user.name;
   if(user) {
+    rememberLogin(email.value, password.value);
     email.value = '';
     password.value = '';
     window.location.href = `summary.html?user=${currentUser}`;
@@ -48,6 +69,21 @@ async function login() {
   }
   users = [];
 }
+
+
+function rememberLogin(email, password) {
+  let checkbox = document.getElementById("login-checkbox");
+  if (checkbox.checked) {
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
+    localStorage.setItem("rememberMeChecked", "true");
+  } else {
+    localStorage.removeItem("email");
+    localStorage.removeItem("password");
+    localStorage.setItem("rememberMeChecked", "false");
+  }
+}
+
 
 async function loginGuest() {
   await loadUsers();
@@ -64,6 +100,7 @@ async function loginGuest() {
   }
   users = [];
 }
+
 
 function signupButton() {
   document.getElementById('signup-btn').classList.add('dnone');
