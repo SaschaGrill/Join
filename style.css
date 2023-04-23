@@ -385,20 +385,20 @@ body {
 }
 
 .login-btn:hover {
-  background: #3dbdf3;
+  background: #29aae1;
   transform: scale(1.01);
   transition: background 225ms ease-in-out, transform 225ms ease-in-out;
 }
 
 .login-btn-guest:hover {
-  border-color: #3dbdf3;
+  border-color: #29aae1;
   color: #3dbdf3 !important;
   transform: scale(1.01);
   transition: transform 225ms ease-in-out;
 }
 
 .signup-btn:hover {
-  background: #3dbdf3;
+  background: #29aae1;
   transform: scale(1.01);
   transition: background 225ms ease-in-out, transform 225ms ease-in-out;
 }
@@ -455,7 +455,7 @@ body {
 }
 
 .forgot-btn:hover {
-  background: #3dbdf3;
+  background: #29aae1;
   transform: scale(1.01);
   transition: background 225ms ease-in-out, transform 225ms ease-in-out;
 }
