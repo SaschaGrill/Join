@@ -239,7 +239,7 @@ body {
   background-color: #f6f7f8;
   animation-name: movingJoin;
   animation-duration: 500ms;
-  animation-delay: 200ms;
+  animation-delay: 500ms;
 }
 
 @keyframes movingJoin {
@@ -267,7 +267,7 @@ body {
   opacity: 0%;
   animation-name: opacity-login;
   animation-duration: 500ms;
-  animation-delay:200ms;
+  animation-delay:500ms;
 }
 
 .login-head-borderline {
@@ -305,7 +305,7 @@ body {
   opacity: 0%;
   animation-name: opacity-login;
   animation-duration: 500ms;
-  animation-delay:200ms;
+  animation-delay:500ms;
 }
 
 @keyframes opacity-login {

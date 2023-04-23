@@ -2,7 +2,11 @@ let users = [];
 let currentUser;
 
 function init() {
-  moveFullscreenImg()
+  moveFullscreenImg();
+  loadEmailPassword();
+}
+
+function loadEmailPassword() {
   let email = document.getElementById("email-login");
   let password = document.getElementById("password-login");
   let checkbox = document.getElementById("login-checkbox");
@@ -27,7 +31,7 @@ function moveFullscreenImg() {
     img.classList.remove('fullscreen-img');
     login.style.opacity = '100%';
     signup.style.opacity = '100%';
-  }, 550);
+  }, 850);
 }
 
 async function loadUsers() {
