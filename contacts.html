@@ -6,7 +6,7 @@
     <script src="js/board_script.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
-    <title>Join | Board</title>
+    <title>Join | Contacts</title>
 </head>
 
 <body onload="includeHTML()">
@@ -15,7 +15,54 @@
     <div class="dflex ">
         <div w3-include-html="assets/templates/desktop_side_template.html"></div>
         <div class="contacts-container">
-            
+            <div class="contacts-content">
+                <div class="contacts-content-left">
+                    <div class="contact-list" id="contact-list">
+                        <div class="contact-list-letter">
+                            <span>A</span>
+                        </div>
+                        <div class="contact" onclick="showContact()">
+                            <div class="contact-avatar">AA</div>
+                            <div class="contact-details">
+                                <span id="contact-list-name">${firstName} ${lastName}</span>
+                                <span id="contact-list-mail">${email}</span>
+                            </div>
+                        </div>
+                        <div class="contact-list-letter">
+                            <span>B</span>
+                        </div>
+                        <div class="contact" onclick="showContact()">
+                            <div class="contact-avatar">BB</div>
+                            <div class="contact-details">
+                                <span id="contact-list-name">${firstName} ${lastName}</span>
+                                <span id="contact-list-mail">${email}</span>
+                            </div>
+                        </div>
+                        <div class="contact-list-letter">
+                            <span>C</span>
+                        </div>
+                        <div class="contact" onclick="showContact()">
+                            <div class="contact-avatar">CC</div>
+                            <div class="contact-details">
+                                <span id="contact-list-name">${firstName} ${lastName}</span>
+                                <span id="contact-list-mail">${email}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts-content-right">
+                    <div class="contacts-header">
+                        <h1 class="headlines">Contacts</h1>
+                        <p class="contacts-headline-line"></p>
+                        <p>Better with a team</p>
+                    </div>
+                    <div class="new-contact-button">
+                        <button id="new-contact-button">New contact
+                            <img src="assets/img/newContact.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
