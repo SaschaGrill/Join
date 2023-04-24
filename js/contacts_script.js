@@ -15,9 +15,6 @@ let contacts = [{
     phone: "+49 123141 11 1",
 }]
 
-
-
-
 // von Gloria eingefügt
 
 // generiert zufällige Farbe
