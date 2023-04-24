@@ -41,7 +41,7 @@
                         <h4>To do</h4> 
                         <img src="assets/img/plusbutton.png" alt="" class ="pointer">
                     </div>
-                    <div class="board-pin-space" id="pinSpace-ToDo">
+                    <div class="board-pin-space" id="pinSpace-ToDo" ondrop="endDragCard(`to-do`); highlightDropZoneEnd('pinSpace-ToDo')" ondragover="allowDrop(event); highlightDropZone('pinSpace-ToDo') " ondragleave="highlightDropZoneEnd('pinSpace-ToDo')">
                         <!-- ENTER CARDS HERE -->
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         <h4>In progress</h4>
                         <img src="assets/img/plusbutton.png" alt="" class ="pointer">
                     </div>
-                    <div class="board-pin-space" id="pinSpace-InProgress">
+                    <div class="board-pin-space" id="pinSpace-InProgress" ondrop="endDragCard(`in-progress`); highlightDropZoneEnd('pinSpace-InProgress')" ondragover="allowDrop(event);highlightDropZone('pinSpace-InProgress')" ondragleave="highlightDropZoneEnd('pinSpace-InProgress')">
 
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         <h4>Awaiting Feedback</h4>
                         <img src="assets/img/plusbutton.png" alt="" class ="pointer">
                     </div>
-                    <div class="board-pin-space" id="pinSpace-AwaitingFeedback">
+                    <div class="board-pin-space" id="pinSpace-AwaitingFeedback" ondrop="endDragCard(`awaiting-feedback`); highlightDropZoneEnd('pinSpace-AwaitingFeedback')" ondragover="allowDrop(event);highlightDropZone('pinSpace-AwaitingFeedback')" ondragleave="highlightDropZoneEnd('pinSpace-AwaitingFeedback')">
 
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <h4>Done</h4>
                         <img src="assets/img/plusbutton.png" alt="" class ="pointer">
                     </div>
-                    <div class="board-pin-space" id="pinSpace-Done">
+                    <div class="board-pin-space" id="pinSpace-Done" ondrop="endDragCard(`done`); highlightDropZoneEnd('pinSpace-Done')" ondragover="allowDrop(event);highlightDropZone('pinSpace-Done')" ondragleave="highlightDropZoneEnd('pinSpace-Done')">
 
                     </div>
                 </div>

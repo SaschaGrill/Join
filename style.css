@@ -883,6 +883,11 @@ body {
   border: none;
 }
 
+.dropzone-highlight{
+  background-color: #caceca;
+  border-radius: 30px;
+}
+
 /* SUMMARY */
 
 .summary-container {

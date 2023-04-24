@@ -43,6 +43,8 @@ let pinSpaceArray = [
     "pinSpace-Done"
 ]
 
+let currentlyDraggedCardIndex = null;
+
 function initializeBoard() {
     includeHTML();
     renderToDos();
@@ -56,8 +58,8 @@ function renderToDos() {
 
     for (let i = 0; i < toDoArray.length; i++) {
         const toDo = toDoArray[i];
-        let pinSpaceToUse = getRightPinSpace(toDo["status"]);
-        pinSpaceToUse.innerHTML += smallCardHTML(toDo);
+        let pinSpaceToUse = getRightPinSpace(toDo["status"],i);
+        pinSpaceToUse.innerHTML += smallCardHTML(toDo, i);
     }
 }
 
@@ -86,9 +88,9 @@ function getRightPinSpace(status) {
     }
 }
 
-function smallCardHTML(toDo) {
+function smallCardHTML(toDo, index) {
     return /*html*/`
-<div class="small-card pointer" onclick="openBigCard()">
+<div class="small-card pointer" onclick="openBigCard()" draggable="true" ondragstart="startDragCard(${index})">
         <span class="small-card-category" style="background-color: var(--${toDo["category"]}-color)"> ${toDo["category"]}</span>
         <h4>${toDo["title"]}</h4>
         <p class="small-card-description"> 
@@ -103,6 +105,30 @@ function smallCardHTML(toDo) {
 `
 }
 
+function allowDrop(ev) {
+    ev.preventDefault();
+  }
+
+function highlightDropZone(id){
+    document.getElementById(id).classList.add("dropzone-highlight");
+}
+
+function highlightDropZoneEnd(id){
+    document.getElementById(id).classList.remove("dropzone-highlight");
+}
+
+function startDragCard(toDoIndexInArray){
+    console.log(toDoIndexInArray);
+    currentlyDraggedCardIndex = toDoIndexInArray;
+}
+
+function endDragCard(pinSpaceStatus){
+    if(currentlyDraggedCardIndex == -1) return;
+    
+    toDoArray[currentlyDraggedCardIndex].status = pinSpaceStatus;
+    renderToDos();
+    currentlyDraggedCardIndex = -1;
+}
 
 function openBigCard(card) {
     showElement("bigCardPopUp");
