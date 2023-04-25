@@ -19,3 +19,8 @@ function showElement(elementID) {
 function hideElement(elementID) {
     document.getElementById(elementID).classList.add("dnone");
 }
+
+
+function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

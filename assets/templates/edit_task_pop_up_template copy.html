@@ -1,0 +1,101 @@
+
+<body>
+    <div class="add-task-container-pop-up">
+        <h1 class="add-task-heading headlines">Edit Task</h1>
+        <div class="add-task-content">
+
+          <div class="add-task-half" >
+            <div class="add-task-input-container">
+                <p>Title</p>
+                <div class="input-field">
+                    <input type="text" placeholder="Enter a title" id="addTaskTitle" required>
+                </div>
+            </div>
+
+            <div class="add-task-input-container">
+                <p>Description</p>
+                <div class="text-area-field">
+                <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription"></textarea>
+                </div>
+            </div>
+
+            <div class="add-task-input-container">
+                <p>Category</p>
+                <div class="input-field">
+                    <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory" required>
+                        <option value="0">Select task Category</option>
+                        <option value="Design">Design</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Backoffice">Backoffice</option>
+                        <option value="Media">Media</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="add-task-input-container dflex-col gap20">
+                <p>Assigned to</p>
+                <div class="input-field">
+                    <select name="add-task-category-select" id="addTaskSelection" class="select-category pointer" oninput="addMemberToTask()" required>
+                        <option value="0">Select contacts to assign </option>
+
+                    </select>
+                </div>
+                <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers">
+
+                </div>
+            </div>
+          </div>
+
+          <span class="vertical-line"></span>
+          <!-- TRENNUNG!!! -->
+          <div class="add-task-half">
+           <div class="add-task-input-container">
+                <p>Due Date</p>
+                <div class="input-field">
+                    <input type="date" placeholder="dd/mm/yyyy"  class="pointer">
+                </div>
+           </div>
+
+           <div class="select-prio">
+             <p>Prio</p>
+             <div class="dflex gap10">
+                <div class="prio-container pointer" id="prioButton_urgent" onclick="selectPrio('urgent')">
+                    <div>Urgent</div>
+                    <img src="assets/img/priorityUrgent.png" alt="">
+                </div>
+                
+                <div class="prio-container pointer" id="prioButton_medium" onclick="selectPrio('medium')">
+                    <div>Medium</div>
+                    <img src="assets/img/priorityMedium.png" alt="">
+                </div>
+                
+                <div class="prio-container pointer selected-prio-container" id="prioButton_low" onclick="selectPrio('low')">
+                    <div>Low</div>
+                    <img src="assets/img/priorityLow.png" alt="">
+                </div>
+             </div>
+           </div>
+           
+            <div class="add-task-input-container">
+             <p>Subtasks</p>
+                <div class="input-field">
+                 <input type="text" placeholder="Add new subtask" id="subTaskInput">
+                 <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask()">
+                </div>
+                <div class="dflex-col" id="subTaskPreviewContainer">
+                 <!-- <div class="dflex align-center">
+                    <div class="rectangle"></div>
+                     TestTask1
+                </div> -->
+                </div>
+            </div>
+
+        </div>
+        <div class="btn-container">
+            <button class="login-btn clear-btn" onclick="closeAddTaskMenu()">Clear X</button>
+            <button type="submit" class="login-btn add-task-btn" onclick="addTask()">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
+        </div>
+    </div>
+    </div>
+</body>

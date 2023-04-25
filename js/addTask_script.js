@@ -111,11 +111,15 @@ function addMemberToTask() {
     if (contactsToAdd.includes(contacts[memberIndex])) return;
 
     contactsToAdd.push(contacts[memberIndex]);
-    let circleHTML = `<div class="card-member" style="background-color:${contacts[memberIndex]["color"]}">${contacts[memberIndex]["initials"]}</div>`
+    let circleHTML = memberCircleHTML(contacts[memberIndex]);
     let membersDiv = document.getElementById("addTaskAssignedMembers");
 
 
     membersDiv.innerHTML += circleHTML;
+}
+
+function memberCircleHTML(contact) {
+    return `<div class="card-member" style="background-color:${contact["color"]}">${contact["initials"]}</div>`
 }
 
 function addSubTask() {
@@ -146,4 +150,24 @@ function selectPrio(prio) {
     prioButton.classList.add("selected-prio-container")
 
     priorityToAdd = prio;
+}
+
+// EDIT TASK!!
+
+function addedMembersHTML(toDoIndex) {
+    let string = "";
+    for (let i = 0; i < toDoArray[toDoIndex].contactsInTask.length; i++) {
+        string += memberCircleHTML(toDoArray[toDoIndex].contactsInTask[i]);
+    }
+
+    return string;
+}
+
+function addedSubTasksHTML(toDoIndex) {
+    let string = "";
+    for (let i = 0; i < toDoArray[toDoIndex].subtasks.length; i++) {
+        string += subTaskPreviewHTML(toDoArray[toDoIndex].subtasks[i].title);
+    }
+
+    return string;
 }
