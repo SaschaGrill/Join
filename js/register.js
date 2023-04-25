@@ -1,8 +1,8 @@
 let users = [];
-let currentUser;
 
 function init() {
   loadEmailPassword();
+  loadUsers();
 }
 
 function loadEmailPassword() {
@@ -39,7 +39,7 @@ async function signup() {
   let name = document.getElementById("name-signup");
   let email = document.getElementById("email-signup");
   let password = document.getElementById("password-signup");
-  loadUsers();
+  await loadUsers();
   users.push({
     name: name.value,
     email: email.value,
@@ -63,12 +63,12 @@ async function login() {
   let email = document.getElementById("email-login");
   let password = document.getElementById("password-login");
   let user = users.find( u => u.email == email.value && u.password == password.value);
-  currentUser = user.name;
+  // let currentUser = user.name;
   if(user) {
     rememberLogin(email.value, password.value);
     email.value = '';
     password.value = '';
-    window.location.href = `summary.html`;
+    window.location.href = `summary.html?user=${user.name}`;
   } else {
     alert('try again')
   }
