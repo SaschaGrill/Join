@@ -2,7 +2,6 @@ let users = [];
 let currentUser;
 
 function init() {
-  moveFullscreenImg();
   loadEmailPassword();
 }
 
@@ -22,17 +21,6 @@ function loadEmailPassword() {
   }
 }
 
-function moveFullscreenImg() {
-  let img = document.getElementById('bigJoinLogo');
-  let login = document.getElementById('login-section');
-  let signup = document.getElementById('signup-btn');
-  setTimeout(() => {
-    img.classList.add('login-join-img');
-    img.classList.remove('fullscreen-img');
-    login.style.opacity = '100%';
-    signup.style.opacity = '100%';
-  }, 850);
-}
 
 async function loadUsers() {
   users = JSON.parse(await getItem('users'));
@@ -51,6 +39,7 @@ async function signup() {
   let name = document.getElementById("name-signup");
   let email = document.getElementById("email-signup");
   let password = document.getElementById("password-signup");
+  loadUsers();
   users.push({
     name: name.value,
     email: email.value,
@@ -79,7 +68,7 @@ async function login() {
     rememberLogin(email.value, password.value);
     email.value = '';
     password.value = '';
-    window.location.href = `summary.html?user=${currentUser}`;
+    window.location.href = `summary.html`;
   } else {
     alert('try again')
   }
