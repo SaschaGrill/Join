@@ -1,8 +1,9 @@
-function initSummary() {
+async function initSummary() {
     includeHTML();
     greet();
     setCurrentDate();
-    // updateTaskCounts(window.toDoArray);
+    await loadTasksOnline(); // Laden der Aufgaben
+    updateTaskCounts(toDoArray); // Aktualisieren der Anzeige der Aufgabenanzahl
 }
 
 function getGreeting() {
@@ -55,5 +56,31 @@ function setCurrentDate() {
 
 // muss Fall noch abfangen, falls keine Deadline
 
+function updateTaskCounts(toDoArray) {
+    let total = 0;
+    let inProgress = 0;
+    let awaitingFeedback = 0;
+    let toDo = 0;
+    let done = 0;
+
+    for (let task of toDoArray) {
+        total++;
+        if (task.status === 'in-progress') {
+            inProgress++;
+        } else if (task.status === 'awaiting-feedback') {
+            awaitingFeedback++;
+        } else if (task.status === 'to-do') {
+            toDo++;
+        } else if (task.status === 'done') {
+            done++;
+        }
+    }
+
+    document.getElementById('total').innerText = total;
+    document.getElementById('in-progress').innerText = inProgress;
+    document.getElementById('awaiting-feedback').innerText = awaitingFeedback;
+    document.getElementById('to-do').innerText = toDo;
+    document.getElementById('done').innerText = done;
+}
 
 

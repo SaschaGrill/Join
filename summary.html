@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="js/addTask_script.js"></script>
     <script src="js/board_script.js"></script>
-    <script src="js/summary.js"></script>   
     <script src="js/register.js"></script>
     <script src="js/storage.js"></script>
+    <script src="js/summary.js"></script>   
     <title>Join | Summary</title>
 </head>
 
@@ -29,19 +30,19 @@
                     <div class="summary-content-left-top">
                         <div class="onethirdbox" onclick="goToBoard()">
                             <div class="onethirdboxdetails">
-                                <p class="summary-content-big-number" data-task="total">0</p>
+                                <p class="summary-content-big-number" id="total">0</p>
                                 <p class="summary-content-description">Tasks in Board</p>
                             </div>
                         </div>
                         <div class="onethirdbox" onclick="goToBoard()">
                             <div class="onethirdboxdetails">
-                                <p class="summary-content-big-number" data-task="in-progress">0</p>
+                                <p class="summary-content-big-number" id="in-progress">0</p>
                                 <p class="summary-content-description">Tasks in Progress</p>
                             </div>
                         </div>
                         <div class="onethirdbox" onclick="goToBoard()">
                             <div class="onethirdboxdetails">
-                                <p class="summary-content-big-number" data-task="awaiting-feedback">0</p>
+                                <p class="summary-content-big-number" id="awaiting-feedback">0</p>
                                 <p class="summary-content-description">Awaiting Feedback</p>
                             </div>
                         </div>
@@ -70,7 +71,7 @@
                                 <img src="assets/img/todoFullcolor.svg" alt="">
                             </div>
                             <div class="fiftyfiftyboxright">
-                                <p class="summary-content-big-number" data-task="to-do">0</p>
+                                <p class="summary-content-big-number" id="to-do">0</p>
                                 <p class="summary-content-description">To-do</p>
                             </div>
                         </div>
@@ -79,7 +80,7 @@
                                 <img src="assets/img/doneFullcolor.svg" alt="">
                             </div>
                             <div class="fiftyfiftyboxright">
-                                <p class="summary-content-big-number" data-task="done">0</p>
+                                <p class="summary-content-big-number" id="done">0</p>
                                 <p class="summary-content-description">Done</p>
                             </div>
                         </div>
