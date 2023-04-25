@@ -1,6 +1,7 @@
 let contactsToAdd = [];
 let subTasksToAdd = [];
 let priorityToAdd = "low";
+let priorityToEdit = "low";
 
 
 
@@ -83,7 +84,7 @@ function addMemberHTML(index) {
     `;
 }
 
-function addTask() {
+async function addTask() {
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
     let categoryInput = document.getElementById("addTaskCategory");
@@ -101,7 +102,17 @@ function addTask() {
 
     toDoArray.push(JSON);
     closeAddTaskMenu();
+    await saveTasksOnline();
     renderToDos();
+
+}
+
+async function saveTasksOnline() {
+    await setItem("taskArray", JSON.stringify(toDoArray));
+}
+
+async function loadTasksOnline() {
+    toDoArray = JSON.parse(await getItem("taskArray"));
 }
 
 function addMemberToTask() {
@@ -152,6 +163,16 @@ function selectPrio(prio) {
     priorityToAdd = prio;
 }
 
+function selectPrioInEdit(prio) {
+    let currentSelectedPrio = document.getElementById(`prioButton_${priorityToEdit}_edit`);
+    let prioButton = document.getElementById(`prioButton_${prio}_edit`);
+
+    currentSelectedPrio.classList.remove("selected-prio-container");
+    prioButton.classList.add("selected-prio-container")
+
+    priorityToEdit = prio;
+}
+
 // EDIT TASK!!
 
 function addedMembersHTML(toDoIndex) {
@@ -170,4 +191,10 @@ function addedSubTasksHTML(toDoIndex) {
     }
 
     return string;
+}
+
+function highlightChosenPrio(toDoIndex) {
+    let prio = toDoArray[toDoIndex].priority;
+    priorityToEdit = prio;
+    document.getElementById(`prioButton_${prio}_edit`).classList.add("selected-prio-container");
 }

@@ -50,7 +50,8 @@ function initializeBoard() {
     renderToDos();
 }
 
-function renderToDos() {
+async function renderToDos() {
+    await loadTasksOnline();
     for (let i = 0; i < pinSpaceArray.length; i++) {
         const element = pinSpaceArray[i];
         document.getElementById(pinSpaceArray[i]).innerHTML = "";
@@ -118,15 +119,16 @@ function highlightDropZoneEnd(id){
 }
 
 function startDragCard(toDoIndexInArray){
-    console.log(toDoIndexInArray);
     currentlyDraggedCardIndex = toDoIndexInArray;
 }
 
-function endDragCard(pinSpaceStatus){
+async function endDragCard(pinSpaceStatus){
     if(currentlyDraggedCardIndex == -1) return;
-    
     toDoArray[currentlyDraggedCardIndex].status = pinSpaceStatus;
-    renderToDos();
+
+    await saveTasksOnline();
+
+   await  renderToDos();
     currentlyDraggedCardIndex = -1;
 }
 
@@ -163,14 +165,14 @@ function bigCardHTML(cardIndex){
                 <img src="assets/img/priority${toDoArray[cardIndex]["priority"]}.png">
             </div>
         </div>
-
+        
         <div  class="assigned-to-field">
             <p class="bold">Assigned To:</p>
              ${assignedToContent(toDoArray[cardIndex].contactsInTask)}
         </div>
         
         <div class="big-card-button-container">
-            <button class="pointer"><img src="assets/img/delete.png" alt=""></button>
+            <button class="pointer"><img src="assets/img/delete.png" alt="" onclick="deleteToDo(${cardIndex})"></button>
             <button class="pointer"><img src="assets/img/pen.png" alt="" onclick="openEditTaskPopUp(${cardIndex})"></button>
         </div>
     </div>
@@ -200,6 +202,8 @@ function openEditTaskPopUp(cardIndex){
     showElement("Overlay");
     updateAddTaskMemberSelection();
     document.getElementById("boardContainer").classList.add("overflow-visible");
+
+    highlightChosenPrio(cardIndex);
 }
 
 function closeEditTaskPopUp() {
@@ -271,17 +275,17 @@ function editTaskHTML(toDoIndex){
        <div class="select-prio">
          <p>Prio</p>
          <div class="dflex gap10">
-            <div class="prio-container pointer" id="prioButton_urgent" onclick="selectPrio('urgent')">
+            <div class="prio-container pointer" id="prioButton_urgent_edit" onclick="selectPrioInEdit('urgent')">
                 <div>Urgent</div>
                 <img src="assets/img/priorityUrgent.png" alt="">
             </div>
             
-            <div class="prio-container pointer" id="prioButton_medium" onclick="selectPrio('medium')">
+            <div class="prio-container pointer" id="prioButton_medium_edit" onclick="selectPrioInEdit('medium')">
                 <div>Medium</div>
                 <img src="assets/img/priorityMedium.png" alt="">
             </div>
             
-            <div class="prio-container pointer selected-prio-container" id="prioButton_low" onclick="selectPrio('low')">
+            <div class="prio-container pointer" id="prioButton_low_edit" onclick="selectPrioInEdit('low')">
                 <div>Low</div>
                 <img src="assets/img/priorityLow.png" alt="">
             </div>
@@ -308,7 +312,11 @@ function editTaskHTML(toDoIndex){
 </div>`;
 }
 
-  
+async function deleteToDo(cardIndex){
+    toDoArray.splice(cardIndex,1);
+    await saveTasksOnline();
+    renderToDos();
+}
 
 // von Gloria eingefügt
 
