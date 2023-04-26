@@ -64,6 +64,24 @@ async function renderToDos() {
     }
 }
 
+// function getTaskCounts() {
+//     let openTasks = 0;
+//     let closedTasks = 0;
+
+//     for (let task of toDoArray) {
+//         if (task.status === 'to-do' || task.status === 'in-progress' || task.status === 'awaiting-feedback') {
+//             openTasks++;
+//         } else if (task.status === 'done') {
+//             closedTasks++;
+//         }
+//     }
+
+//     return {
+//         openTasks: openTasks,
+//         closedTasks: closedTasks
+//     };
+// }
+
 function getRightPinSpace(status) {
     let pinSpace_ToDo = document.getElementById("pinSpace-ToDo");
     let pinSpace_InProgress = document.getElementById("pinSpace-InProgress");
@@ -196,3 +214,6 @@ function assignedToItemHTML(contact){
             </div>
     `;
 }
+
+
+
