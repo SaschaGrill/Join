@@ -32,7 +32,7 @@
                 <div class="login-remember margin-btm35">
                     <input type="checkbox" id="login-checkbox">
                     <span class="remember-text">Remember me</span>
-                    <a href="#" class="forgot-password">Forgot my password</a>
+                    <a href="#" onclick="forgotPassword()" class="forgot-password">Forgot my password</a>
                 </div>
                 <div class="dflex gap20 justify">
                     <button class="login-btn">Log in</button>
@@ -57,8 +57,8 @@
         </form>
     </div>
     <!-- FORGOT PASSWORD SECTION -->
-    <div class="password-forget dnone">
-        <img class="leftarrow pointer" src="assets/img/leftarrow.png">
+    <div id="forgot-password" class="password-forget dnone">
+        <img class="leftarrow pointer" src="assets/img/leftarrow.png" onclick="register()">
         <span class="headlines">I forgot my password</span>
         <div class="login-head-borderline"></div>
         <span class="align-text negative-margin">Don't worry! We will send you an email with the instructions to<br> reset your password.</span>

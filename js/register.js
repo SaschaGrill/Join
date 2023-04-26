@@ -31,6 +31,7 @@ function register() {
   document.getElementById('signup-btn').classList.remove('dnone');
   document.getElementById('login-section').classList.remove('dnone');
   document.getElementById('signup-section').classList.add('dnone');
+  document.getElementById('forgot-password').classList.add('dnone');
 }
 
 
@@ -109,6 +110,39 @@ async function loginGuest() {
 function signupButton() {
   document.getElementById('signup-btn').classList.add('dnone');
   document.getElementById('login-section').classList.add('dnone');
+  document.getElementById('forgot-password').classList.add('dnone');
   document.getElementById('signup-section').classList.remove('dnone');
+}
+
+
+function forgotPassword() {
+  document.getElementById('signup-btn').classList.add('dnone');
+  document.getElementById('login-section').classList.add('dnone');
+  document.getElementById('signup-section').classList.add('dnone');
+  document.getElementById('forgot-password').classList.remove('dnone');
+}
+
+
+function openLogout() {
+  document.getElementById('logout-btn').classList.remove('dnone');
+  setTimeout(() => {
+    document.addEventListener('click', checkLogout);
+  }, 0);
+  
+}
+
+function closeLogout() {
+  document.getElementById('logout-btn').classList.add('dnone');
+  document.removeEventListener('click', checkLogout);
+}
+
+function checkLogout(event) {
+  if (event.target.id !== 'logout-btn') {
+    closeLogout();
+  }
+}
+
+function logout() {
+  window.location.href = 'index.html';
 }
 
