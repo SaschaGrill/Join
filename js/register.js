@@ -63,7 +63,6 @@ async function login() {
   let email = document.getElementById("email-login");
   let password = document.getElementById("password-login");
   let user = users.find( u => u.email == email.value && u.password == password.value);
-  // let currentUser = user.name;
   if(user) {
     rememberLogin(email.value, password.value);
     email.value = '';

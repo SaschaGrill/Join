@@ -25,7 +25,7 @@ function getGreeting() {
 
 function greet() {
     const greetingElement = document.getElementById('greeting');
-    let currentUser = window.location.search.split('=')[1];
+    let currentUser = decodeURIComponent(window.location.search.split('=')[1]);
     greetingElement.innerHTML = getGreeting();
     let greetUser = document.getElementById('user');
     greetUser.innerHTML = currentUser;
