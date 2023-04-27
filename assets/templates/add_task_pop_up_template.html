@@ -36,12 +36,12 @@
             <div class="add-task-input-container dflex-col gap20">
                 <p>Assigned to</p>
                 <div class="input-field">
-                    <select name="add-task-category-select" id="addTaskSelection" class="select-category pointer" oninput="addMemberToTask()" required>
+                    <select name="add-task-category-select" id="addTaskSelection_popUp" class="select-category pointer" oninput="addMemberToTask()" required>
                         <option value="0">Select contacts to assign </option>
 
                     </select>
                 </div>
-                <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers">
+                <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_popUp">
 
                 </div>
             </div>
@@ -94,7 +94,7 @@
         </div>
         <div class="btn-container">
             <button class="login-btn clear-btn" onclick="closeAddTaskMenu()">Clear X</button>
-            <button type="submit" class="login-btn add-task-btn" onclick="addTask()">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
+            <button type="submit" class="login-btn add-task-btn" onclick="addTaskFromPopUp()">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
         </div>
     </div>
     </div>

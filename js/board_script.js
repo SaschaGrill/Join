@@ -50,18 +50,39 @@ function initializeBoard() {
     renderToDos();
 }
 
-async function renderToDos() {
+async function renderToDos(keyword = "") {
     await loadTasksOnline();
-    for (let i = 0; i < pinSpaceArray.length; i++) {
-        const element = pinSpaceArray[i];
-        document.getElementById(pinSpaceArray[i]).innerHTML = "";
-    }
+    emptyBoardHTML();
 
     for (let i = 0; i < toDoArray.length; i++) {
         const toDo = toDoArray[i];
-        let pinSpaceToUse = getRightPinSpace(toDo["status"],i);
-        pinSpaceToUse.innerHTML += smallCardHTML(toDo, i);
+        let pinSpaceToUse = getRightPinSpace(toDo["status"], i);
+
+        if (nameOrDescriptionContainsKeyword(i, keyword.toLowerCase()))
+            pinSpaceToUse.innerHTML += smallCardHTML(toDo, i);
     }
+}
+
+function searchForKeyword() {
+    let inputField = document.getElementById("searchbarInput");
+    renderToDos(inputField.value);
+}
+
+function emptyBoardHTML() {
+    for (let i = 0; i < pinSpaceArray.length; i++) {
+        document.getElementById(pinSpaceArray[i]).innerHTML = "";
+    }
+}
+
+function nameOrDescriptionContainsKeyword(cardIndex, keyword) {
+    let bool = false;
+    let title = toDoArray[cardIndex].title.toLowerCase();
+    let description = toDoArray[cardIndex].description.toLowerCase();
+
+    if (title.includes(keyword) || description.includes(keyword))
+        bool = true;
+
+    return bool;
 }
 
 // function getTaskCounts() {
@@ -126,27 +147,27 @@ function smallCardHTML(toDo, index) {
 
 function allowDrop(ev) {
     ev.preventDefault();
-  }
+}
 
-function highlightDropZone(id){
+function highlightDropZone(id) {
     document.getElementById(id).classList.add("dropzone-highlight");
 }
 
-function highlightDropZoneEnd(id){
+function highlightDropZoneEnd(id) {
     document.getElementById(id).classList.remove("dropzone-highlight");
 }
 
-function startDragCard(toDoIndexInArray){
+function startDragCard(toDoIndexInArray) {
     currentlyDraggedCardIndex = toDoIndexInArray;
 }
 
-async function endDragCard(pinSpaceStatus){
-    if(currentlyDraggedCardIndex == -1) return;
+async function endDragCard(pinSpaceStatus) {
+    if (currentlyDraggedCardIndex == -1) return;
     toDoArray[currentlyDraggedCardIndex].status = pinSpaceStatus;
 
     await saveTasksOnline();
 
-   await  renderToDos();
+    await renderToDos();
     currentlyDraggedCardIndex = -1;
 }
 
@@ -160,12 +181,12 @@ function openBigCard(cardIndex) {
 
 function closeBigCard() {
     // hideElement("bigCardPopUp");
-    document.getElementById("bigCardPopUp").innerHTML ="";
+    document.getElementById("bigCardPopUp").innerHTML = "";
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
 }
 
-function bigCardHTML(cardIndex){
+function bigCardHTML(cardIndex) {
     return /*html*/`
     <div class="big-card-Container">
         <button class="big-card-close-button pointer" onclick="closeBigCard()"> <img src="assets/img/cross.png" alt=""></button>
@@ -197,16 +218,15 @@ function bigCardHTML(cardIndex){
     `;
 }
 
-function assignedToContent(contacts){
+function assignedToContent(contacts) {
     let string = "";
     for (let i = 0; i < contacts.length; i++) {
         string += assignedToItemHTML(contacts[i]);
-        
     }
     return string;
 }
 
-function assignedToItemHTML(contact){
+function assignedToItemHTML(contact) {
     return /*html*/`
       <div class="assigned-to-item">
                 <div class="card-member" style="background-color: ${contact.color}">${contact.initials}</div>
@@ -214,6 +234,7 @@ function assignedToItemHTML(contact){
             </div>
     `;
 }
+
 
 
 

@@ -7,7 +7,13 @@ let subTasksToEdit = [];
 let priorityToAdd = "low";
 let priorityToEdit = "low";
 
+let currentChoosenCategoryToEdit = document.getElementById("category_edit_0");
 
+
+function initializeAddTaskSite() {
+    includeHTML();
+    updateAddTaskMemberSelection(popUp = false);
+}
 
 function subtaskHTML(toDo) {
     let totalTaskCount = toDo["subtasks"].length;
@@ -71,8 +77,8 @@ function closeAddTaskMenu() {
     document.getElementById("boardContainer").classList.remove("overflow-visible");
 }
 
-function updateAddTaskMemberSelection() {
-    let selection = document.getElementById("addTaskSelection");
+function updateAddTaskMemberSelection(fromPopUp = true) {
+    let selection = fromPopUp ? document.getElementById("addTaskSelection_popUp") : document.getElementById("addTaskSelection_site");
     selection.innerHTML = "";
     selection.innerHTML += `<option value="-1">Select contacts to assign </option>`;
 
@@ -88,7 +94,7 @@ function addMemberHTML(index) {
     `;
 }
 
-async function addTask() {
+async function addTaskFromPopUp() {
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
     let categoryInput = document.getElementById("addTaskCategory");
@@ -105,10 +111,32 @@ async function addTask() {
     }
 
     toDoArray.push(JSON);
+
     closeAddTaskMenu();
     await saveTasksOnline();
     renderToDos();
+}
 
+async function addTaskFromAddTaskSite() {
+    let titleInput = document.getElementById("addTaskTitle");
+    let descriptionInput = document.getElementById("addTaskDescription");
+    let categoryInput = document.getElementById("addTaskCategory");
+
+    let JSON = {
+        category: categoryInput.value.toLowerCase(),
+        title: titleInput.value,
+        description: descriptionInput.value,
+        subtasks: subTasksToAdd,
+        priority: priorityToAdd,
+        contactsInTask: contactsToAdd,
+        status: "to-do",
+        dueDate: "",
+    }
+
+    toDoArray.push(JSON);
+
+    await saveTasksOnline();
+    window.open("board.html");
 }
 
 async function saveTasksOnline() {
@@ -119,15 +147,15 @@ async function loadTasksOnline() {
     toDoArray = JSON.parse(await getItem("taskArray"));
 }
 
-function addMemberToTask() {
-    let inputField = document.getElementById("addTaskSelection");
+function addMemberToTask(popUp = true) {
+    let inputField = popUp ? document.getElementById("addTaskSelection_popUp") : document.getElementById("addTaskSelection_site");
     let memberIndex = inputField.value;
     if (memberIndex == -1) return;
     if (contactsToAdd.includes(contacts[memberIndex])) return;
 
     contactsToAdd.push(contacts[memberIndex]);
     let circleHTML = memberCircleHTML(contacts[memberIndex]);
-    let membersDiv = document.getElementById("addTaskAssignedMembers");
+    let membersDiv = popUp ? document.getElementById("addTaskAssignedMembers_popUp") : document.getElementById("addTaskAssignedMembers_site");
 
 
     membersDiv.innerHTML += circleHTML;
@@ -177,7 +205,7 @@ function selectPrioInEdit(prio) {
     priorityToEdit = prio;
 }
 
-// EDIT TASK!!
+// EDIT TASK!!//////////////////////////////////////////////////////////////
 
 function addedMembersHTML(toDoIndex) {
     let string = "";
@@ -242,6 +270,7 @@ function openEditTaskPopUp(cardIndex) {
     document.getElementById("boardContainer").classList.add("overflow-visible");
 
     highlightChosenPrio(cardIndex);
+    selectCurrentCategory(cardIndex);
 }
 
 function closeEditTaskPopUp() {
@@ -250,6 +279,14 @@ function closeEditTaskPopUp() {
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
 
+}
+
+function selectCurrentCategory(cardIndex) {
+    let categoryOfCard = toDoArray[cardIndex].category;
+    let categoryElement = document.getElementById(`category_edit_${categoryOfCard}`).setAttribute("selected", true);
+    // currentChoosenCategoryToEdit.setAttribute("selected", false);
+
+    // currentChoosenCategoryToEdit = categoryElement;
 }
 
 function editTaskHTML(toDoIndex) {
@@ -277,12 +314,12 @@ function editTaskHTML(toDoIndex) {
             <p>Category</p>
             <div class="input-field">
                 <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory_edit" required>
-                    <option value="0">Select task Category</option>
-                    <option value="Design">Design</option>
-                    <option value="Sales">Sales</option>
-                    <option value="Backoffice">Backoffice</option>
-                    <option value="Media">Media</option>
-                    <option value="Marketing">Marketing</option>
+                    <option value="0" id="category_edit_0">Select task Category</option>
+                    <option value="Design" id="category_edit_design">Design</option>
+                    <option value="Sales" id="category_edit_sales">Sales</option>
+                    <option value="Backoffice" id="category_edit_backoffice">Backoffice</option>
+                    <option value="Media" id="category_edit_media">Media</option>
+                    <option value="Marketing" id="category_edit_marketing">Marketing</option>
                 </select>
             </div>
         </div>
@@ -350,3 +387,4 @@ function editTaskHTML(toDoIndex) {
 </div>
 </div>`;
 }
+//////////////////////////////////////////////////
