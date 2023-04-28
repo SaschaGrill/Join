@@ -15,6 +15,36 @@ let contacts = [{
     phone: "+49 123141 11 1",
 }]
 
+function firstAndLastNameAsArray(fullName) {
+    const names = fullName.split(" ");
+    const firstName = names[0];
+    const lastName = names[names.length - 1];
+    return [firstName, lastName];
+}
+
+function getInitials(firstName, lastName) {
+    return [firstName[0], lastName[0]];
+}
+
+async function addContactForEveryUser() {
+    await loadUsers();
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        console.log(user);
+        let fullNameAsArray = firstAndLastNameAsArray(user.name);
+        let contact = {
+            firstName: fullNameAsArray[0],
+            lastName: fullNameAsArray[1],
+            color: getRandomColor(),
+            initials: getInitials(fullNameAsArray[0], fullNameAsArray[1]),
+            email: user.email,
+            phone: "to be added",
+        }
+        contacts.push(contact);
+    }
+
+
+}
 // von Gloria eingefügt
 
 // generiert zufällige Farbe
@@ -41,3 +71,5 @@ function getColorForInitials(initials) {
     }
     return colors[initials];
 }
+
+

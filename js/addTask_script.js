@@ -10,9 +10,10 @@ let priorityToEdit = "low";
 let currentChoosenCategoryToEdit = document.getElementById("category_edit_0");
 
 
-function initializeAddTaskSite() {
+async function initializeAddTaskSite() {
     includeHTML();
-    updateAddTaskMemberSelection(popUp = false);
+    updateAddTaskMemberSelection("popUp");
+    await addContactForEveryUser();
 }
 
 function subtaskHTML(toDo) {
@@ -67,7 +68,7 @@ function contacsHTML(toDo) {
 function openAddTaskMenu() {
     showElement("addTaskPopUp");
     showElement("Overlay");
-    updateAddTaskMemberSelection();
+    updateAddTaskMemberSelection("addTaskMenu");
     document.getElementById("boardContainer").classList.add("overflow-visible");
 }
 
@@ -77,8 +78,12 @@ function closeAddTaskMenu() {
     document.getElementById("boardContainer").classList.remove("overflow-visible");
 }
 
-function updateAddTaskMemberSelection(fromPopUp = true) {
-    let selection = fromPopUp ? document.getElementById("addTaskSelection_popUp") : document.getElementById("addTaskSelection_site");
+function updateAddTaskMemberSelection(openedFromString) {
+    let selection;
+    if (openedFromString == "popUp") selection = document.getElementById("addTaskSelection_popUp");
+    else if (openedFromString == "addTaskSite") selection = document.getElementById("addTaskSelection_site");
+    else if (openedFromString == "editTask") selection = document.getElementById("addTaskSelection_edit");
+
     selection.innerHTML = "";
     selection.innerHTML += `<option value="-1">Select contacts to assign </option>`;
 
@@ -179,7 +184,7 @@ function addSubTask() {
 
 function subTaskPreviewHTML(subTaskName) {
     return/*html*/`
-    <div class="dflex align-center">
+    <div class="dflex align-center gap10">
         <div class="rectangle"></div>
         ${subTaskName}
     </div>`
@@ -266,7 +271,7 @@ async function deleteToDo(cardIndex) {
 function openEditTaskPopUp(cardIndex) {
     document.getElementById("editCardPopUp").innerHTML += editTaskHTML(cardIndex);
     showElement("Overlay");
-    updateAddTaskMemberSelection();
+    updateAddTaskMemberSelection("editTask");
     document.getElementById("boardContainer").classList.add("overflow-visible");
 
     highlightChosenPrio(cardIndex);
@@ -374,7 +379,7 @@ function editTaskHTML(toDoIndex) {
              <input type="text" placeholder="Add new subtask" id="subTaskInput_edit">
              <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask()">
             </div>
-            <div class="dflex-col" id="subTaskPreviewContainer_edit">
+            <div class="dflex-col gap10" id="subTaskPreviewContainer_edit">
              ${addedSubTasksHTML(toDoIndex)}
             </div>
         </div>

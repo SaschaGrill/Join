@@ -45,9 +45,10 @@ let pinSpaceArray = [
 
 let currentlyDraggedCardIndex = null;
 
-function initializeBoard() {
+async function initializeBoard() {
     includeHTML();
     renderToDos();
+    await addContactForEveryUser();
 }
 
 async function renderToDos(keyword = "") {
@@ -175,7 +176,7 @@ function openBigCard(cardIndex) {
     // showElement("bigCardPopUp");
     document.getElementById("bigCardPopUp").innerHTML += bigCardHTML(cardIndex);
     showElement("Overlay");
-    updateAddTaskMemberSelection();
+    // updateAddTaskMemberSelection();
     document.getElementById("boardContainer").classList.add("overflow-visible");
 }
 

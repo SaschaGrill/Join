@@ -744,6 +744,12 @@ body {
   background-color: #d1d1d1;
 }
 
+.add-task-input-container{
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
 .add-task-input-container .input-field {
   background-color: #ffffff;
   display: flex;
@@ -819,7 +825,7 @@ body {
 
 .clear-btn {
   height: 55px;
-  background-color: #070606;
+  background-color: transparent;
   color: #2a3647;
 }
 
