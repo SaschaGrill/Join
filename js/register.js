@@ -165,7 +165,7 @@ async function resetPassword(event) {
 
 
 function action(formData) {
-  const input = 'https://gruppe-544.developerakademie.net/Join/send-mail.php';
+  const input = 'https://gruppe-544.developerakademie.net/Join/send_mail.php';
   const requestInit = {
     method: 'post',
     body: formData
