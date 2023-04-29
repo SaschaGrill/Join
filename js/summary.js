@@ -60,12 +60,9 @@ function getUrgentAndUpcomingDeadline() {
     for (let task of toDoArray) {
         if (task.priority === 'urgent') {
             urgentTasks++;
-        }
 
-        if (task.dueDate) {
-            const taskDueDate = new Date(task.dueDate);
-            if (upcomingDeadline === null || taskDueDate < upcomingDeadline) {
-                upcomingDeadline = taskDueDate;
+            if (task.dueDate && (!upcomingDeadline || new Date(task.dueDate) < new Date(upcomingDeadline))) {
+                upcomingDeadline = task.dueDate;
             }
         }
     }
