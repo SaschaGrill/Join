@@ -55,8 +55,6 @@ function setCurrentDate() {
     document.getElementById('currentDate').innerHTML = fullDate;
 }
 
-// muss Fall noch abfangen, falls keine Deadline
-
 function updateTaskCounts(taskCounts) {
     document.getElementById('to-do').innerText = taskCounts.openTasks;
     document.getElementById('done').innerText = taskCounts.closedTasks;
