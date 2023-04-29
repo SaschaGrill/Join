@@ -89,20 +89,30 @@ function nameOrDescriptionContainsKeyword(cardIndex, keyword) {
 function getTaskCounts() {
     let openTasks = 0;
     let closedTasks = 0;
+    let inProgressTasks = 0;
+    let awaitingFeedbackTasks = 0;
 
     for (let task of toDoArray) {
-        if (task.status === 'to-do' || task.status === 'in-progress' || task.status === 'awaiting-feedback') {
+        if (task.status === 'to-do') {
             openTasks++;
         } else if (task.status === 'done') {
             closedTasks++;
+        } else if (task.status === 'in-progress') {
+            inProgressTasks++;
+        } else if (task.status === 'awaiting-feedback') {
+            awaitingFeedbackTasks++;
         }
     }
 
     return {
         openTasks: openTasks,
-        closedTasks: closedTasks
+        closedTasks: closedTasks,
+        inProgress: inProgressTasks,
+        awaitingFeedback: awaitingFeedbackTasks,
+        total: openTasks + closedTasks + inProgressTasks + awaitingFeedbackTasks
     };
 }
+
 
 function getRightPinSpace(status) {
     let pinSpace_ToDo = document.getElementById("pinSpace-ToDo");
