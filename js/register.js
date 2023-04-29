@@ -5,6 +5,7 @@ function init() {
   loadUsers();
 }
 
+
 function loadEmailPassword() {
   let email = document.getElementById("email-login");
   let password = document.getElementById("password-login");
@@ -58,6 +59,7 @@ function resetSignup(name, email, password) {
   password.value = "";
   registerBtn.disabled = false;
 }
+
 
 async function login() {
   await loadUsers();
@@ -131,10 +133,12 @@ function openLogout() {
   
 }
 
+
 function closeLogout() {
   document.getElementById('logout-btn').classList.add('dnone');
   document.removeEventListener('click', checkLogout);
 }
+
 
 function checkLogout(event) {
   if (event.target.id !== 'logout-btn') {
@@ -142,7 +146,47 @@ function checkLogout(event) {
   }
 }
 
+
 function logout() {
   window.location.href = 'index.html';
 }
 
+
+async function resetPassword(event) {
+  event.preventDefault();
+  let formData = new FormData(event.target);
+  let response = await action(formData);
+  if(response.ok) {
+    alert('E-Mail has beend sent!');
+  } else {
+    alert('E-Mail was not sent!');
+  }
+}
+
+
+function action(formData) {
+  const input = 'https://gruppe-544.developerakademie.net/Join/send-mail.php';
+  const requestInit = {
+    method: 'post',
+    body: formData
+  };
+
+  return fetch(
+    input,
+    requestInit
+  );
+}
+
+
+function onPageLoad() {
+  email = getEmailUrl();
+  loadUsers();
+}
+
+
+function getEmailUrl() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const email = urlParams.get('email');
+  return email;
+}

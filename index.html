@@ -62,8 +62,8 @@
         <span class="headlines">I forgot my password</span>
         <div class="login-head-borderline"></div>
         <span class="align-text negative-margin">Don't worry! We will send you an email with the instructions to<br> reset your password.</span>
-        <form>
-            <input required type="email" id="email-forgot" class="login-bar bg-email margin-btm35" placeholder="Email">
+        <form onsubmit="resetPassword(event)">
+            <input required type="email" id="email-forgot" class="login-bar bg-email margin-btm35" placeholder="Email" name="email">
             <div class="dflex justify">
                 <button class="forgot-btn">Send me the email</button>
             </div>
