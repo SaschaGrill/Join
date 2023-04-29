@@ -1,10 +1,11 @@
 async function initSummary() {
     includeHTML();
     greet();
-    setCurrentDate();
-    await loadTasksOnline(); // Laden der Aufgaben
+    await loadTasksOnline();
     const taskCounts = getTaskCounts();
-    updateTaskCounts(taskCounts); // Aktualisieren der Anzeige der Aufgabenanzahl
+    updateTaskCounts(taskCounts); 
+    const urgentAndDeadlineInfo = getUrgentAndUpcomingDeadline();
+    updateUrgentAndUpcomingDeadline(urgentAndDeadlineInfo);
 }
 
 function getGreeting() {
@@ -44,17 +45,6 @@ function getMonthName(monthIndex) {
     return monthNames[monthIndex];
 }
 
-function setCurrentDate() {
-    const date = new Date();
-
-    let day = date.getDate();
-    let month = getMonthName(date.getMonth());
-    let year = date.getFullYear();
-
-    let fullDate = `${month} ${day}, ${year}`;
-    document.getElementById('currentDate').innerHTML = fullDate;
-}
-
 function updateTaskCounts(taskCounts) {
     document.getElementById('to-do').innerText = taskCounts.openTasks;
     document.getElementById('done').innerText = taskCounts.closedTasks;
@@ -62,6 +52,41 @@ function updateTaskCounts(taskCounts) {
     document.getElementById('in-progress').innerText = taskCounts.inProgress;
     document.getElementById('awaiting-feedback').innerText = taskCounts.awaitingFeedback;
 }
+
+function getUrgentAndUpcomingDeadline() {
+    let urgentTasks = 0;
+    let upcomingDeadline = null;
+
+    for (let task of toDoArray) {
+        if (task.priority === 'urgent') {
+            urgentTasks++;
+        }
+
+        if (task.dueDate) {
+            const taskDueDate = new Date(task.dueDate);
+            if (upcomingDeadline === null || taskDueDate < upcomingDeadline) {
+                upcomingDeadline = taskDueDate;
+            }
+        }
+    }
+
+    return {
+        urgentTasks: urgentTasks,
+        upcomingDeadline: upcomingDeadline
+    };
+}
+
+function updateUrgentAndUpcomingDeadline(info) {
+    document.getElementById('urgentTasks').innerText = info.urgentTasks;
+    if (info.upcomingDeadline !== null) {
+        const formattedDate = `${getMonthName(info.upcomingDeadline.getMonth())} ${info.upcomingDeadline.getDate()}, ${info.upcomingDeadline.getFullYear()}`;
+        document.getElementById('upcomingDeadline').innerText = formattedDate;
+    } else {
+        document.getElementById('upcomingDeadline').innerText = 'No deadlines';
+    }
+}
+
+
 
 
 
