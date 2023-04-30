@@ -41,16 +41,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $email = $_POST['email'];
 
-        $message = "Hello JOIN-User, \n
-        \nWe're sorry to hear that you've forgotten your JOIN password for your " . $email . " 
-        \nBut don't worry, we can help you reset it quickly and easily.
-        \nTo reset your password, simply click on the following link:\n
-        \nhttps://gruppe-544.developerakademie.net/Join/reset_password.html?email=" . $email . "\n
-        \nYou'll be asked to create a new password. Please enter your new password twice to confirm.
-        \nOnce you've created your new password, you'll be able to log in to your account immediately.\n
-        \nIf you have any issues or questions, please feel free to contact us. We're always here to help.\n
-        \nBest regards,
-        \nYour JOIN-TEAM"
+        $message = "Hello JOIN-User, \n".
+        "\nWe're sorry to hear that you've forgotten your JOIN password for your " . $email . " ".
+        "\nBut don't worry, we can help you reset it quickly and easily.".
+        "\nTo reset your password, simply click on the following link:\n".
+        "\nhttps://gruppe-544.developerakademie.net/Join/reset_password.html?email=" . $email . "\n".
+        "\nYou'll be asked to create a new password. Please enter your new password twice to confirm.".
+        "\nOnce you've created your new password, you'll be able to log in to your account immediately.\n".
+        "\nIf you have any issues or questions, please feel free to contact us. We're always here to help.\n".
+        "\nBest regards,".
+        "\nYour JOIN-TEAM";
 
         $recipient = $email;
         $subject = "Reset your password for JOIN App";
