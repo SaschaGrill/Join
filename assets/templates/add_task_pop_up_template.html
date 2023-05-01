@@ -52,8 +52,9 @@
           <div class="add-task-half">
            <div class="add-task-input-container">
                 <p>Due Date</p>
-                <div class="input-field">
-                    <input type="date" placeholder="dd/mm/yyyy"  class="pointer">
+                <div class="input-field date-input" >
+                    <input type="datetime" placeholder="dd/mm/yyyy" class="pointer" id="dueDateInput_addTaskPopUp">
+                    <img src="assets/img/calendar.png" alt="">
                 </div>
            </div>
 
@@ -80,10 +81,10 @@
             <div class="add-task-input-container">
              <p>Subtasks</p>
                 <div class="input-field">
-                 <input type="text" placeholder="Add new subtask" id="subTaskInput">
-                 <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask()">
+                 <input type="text" placeholder="Add new subtask" id="subTaskInput_popUp">
+                 <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask(`popUp`)">
                 </div>
-                <div class="dflex-col" id="subTaskPreviewContainer">
+                <div class="dflex-col" id="subTaskPreviewContainer_popUp">
                  <!-- <div class="dflex align-center">
                     <div class="rectangle"></div>
                      TestTask1

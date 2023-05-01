@@ -195,12 +195,14 @@ function closeBigCard() {
     document.getElementById("bigCardPopUp").innerHTML = "";
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
+    renderToDos();
 }
 
 function bigCardHTML(cardIndex) {
     return /*html*/`
     <div class="big-card-Container">
-        <button class="big-card-close-button pointer" onclick="closeBigCard()"> <img src="assets/img/cross.png" alt=""></button>
+        <button class="big-card-close-button pointer" onclick="closeBigCard()"> <img src="assets/img/cross.png" alt="">
+        </button>
         <h1 class="headlines">${toDoArray[cardIndex]["title"]}</h1>
         <p>${toDoArray[cardIndex]["description"]}</p>
         <div class="dflex align-center gap20">
@@ -220,12 +222,18 @@ function bigCardHTML(cardIndex) {
             <p class="bold">Assigned To:</p>
              ${assignedToContent(toDoArray[cardIndex].contactsInTask)}
         </div>
-        
+
+        <div >
+            <p class="bold">Subtasks:</p>
+            <br>
+            ${subtaskBigCardHTML(cardIndex)} 
+        </div >
+       
         <div class="big-card-button-container">
-            <button class="pointer"><img src="assets/img/delete.png" alt="" onclick="deleteToDo(${cardIndex})"></button>
-            <button class="pointer"><img src="assets/img/pen.png" alt="" onclick="openEditTaskPopUp(${cardIndex})"></button>
+          <button class="pointer"><img src="assets/img/delete.png" alt="" onclick="deleteToDo(${cardIndex})"></button>
+          <button class="pointer"><img src="assets/img/pen.png" alt="" onclick="openEditTaskPopUp(${cardIndex})"></button>
         </div>
-    </div>
+    </div >
     `;
 }
 
@@ -239,13 +247,55 @@ function assignedToContent(contacts) {
 
 function assignedToItemHTML(contact) {
     return /*html*/`
-      <div class="assigned-to-item">
-                <div class="card-member" style="background-color: ${contact.color}">${contact.initials}</div>
+    <div class="assigned-to-item" >
+        <div class="card-member" style="background-color: ${contact.color}">${contact.initials}</div>
                 ${contact.firstName} ${contact.lastName}
-            </div>
+            </div >
     `;
 }
 
+function subtaskBigCardHTML(cardIndex) {
+    let subtasks = toDoArray[cardIndex].subtasks;
+    let string = "";
+    console.log(subtasks);
+
+    for (let i = 0; i < subtasks.length; i++) {
+        string += /*html*/`
+        <div class="dflex align-center gap10" >
+        ${getRightRectangleColor(cardIndex, i)}
+        ${subtasks[i].title}
+        <img src="assets/img/cross.png" alt="" class="subTask-delete-button" id="subTaskDelete_${i}" onclick="checkSubTaskUndone(${cardIndex}, ${i})">
+        <img src="assets/img/doneFullcolorInverted.png" alt="" class="subTask-done-button" id="subTaskDone_${i}" onclick="checkSubTaskDone(${cardIndex}, ${i})">
+        </div > `;
+    }
+
+    return string;
+}
+
+function getRightRectangleColor(cardIndex, subTaskIndex) {
+    let done = toDoArray[cardIndex].subtasks[subTaskIndex].done;
+    if (!done) return `<div class="rectangle"></div>`;
+    else if (done) return `<div class="rectangle-done"></div>`
+}
+// onclick="deleteSubTask(${cardIndex}, ${i})"
+
+function deleteSubTask(cardIndex, subTaskIndex) {
+    toDoArray[cardIndex].subtasks.splice(subTaskIndex, 1);
+    openBigCard(cardIndex);
+    saveTasksOnline();
+}
+
+function checkSubTaskDone(cardIndex, subTaskIndex) {
+    toDoArray[cardIndex].subtasks[subTaskIndex].done = true;
+    openBigCard(cardIndex);
+    saveTasksOnline();
+}
+
+function checkSubTaskUndone(cardIndex, subTaskIndex) {
+    toDoArray[cardIndex].subtasks[subTaskIndex].done = false;
+    openBigCard(cardIndex);
+    saveTasksOnline();
+}
 
 
 

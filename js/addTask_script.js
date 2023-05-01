@@ -12,8 +12,8 @@ let currentChoosenCategoryToEdit = document.getElementById("category_edit_0");
 
 async function initializeAddTaskSite() {
     includeHTML();
-    updateAddTaskMemberSelection("popUp");
     await addContactForEveryUser();
+    updateAddTaskMemberSelection("addTaskSite");
 }
 
 function subtaskHTML(toDo) {
@@ -68,7 +68,7 @@ function contacsHTML(toDo) {
 function openAddTaskMenu() {
     showElement("addTaskPopUp");
     showElement("Overlay");
-    updateAddTaskMemberSelection("addTaskMenu");
+    updateAddTaskMemberSelection("popUp");
     document.getElementById("boardContainer").classList.add("overflow-visible");
 }
 
@@ -83,6 +83,7 @@ function updateAddTaskMemberSelection(openedFromString) {
     if (openedFromString == "popUp") selection = document.getElementById("addTaskSelection_popUp");
     else if (openedFromString == "addTaskSite") selection = document.getElementById("addTaskSelection_site");
     else if (openedFromString == "editTask") selection = document.getElementById("addTaskSelection_edit");
+    else console.log(openedFromString);
 
     selection.innerHTML = "";
     selection.innerHTML += `<option value="-1">Select contacts to assign </option>`;
@@ -112,7 +113,7 @@ async function addTaskFromPopUp() {
         priority: priorityToAdd,
         contactsInTask: contactsToAdd,
         status: "to-do",
-        dueDate: "",
+        dueDate: getDateAsString("addTaskPopUp"),
     }
 
     toDoArray.push(JSON);
@@ -135,7 +136,7 @@ async function addTaskFromAddTaskSite() {
         priority: priorityToAdd,
         contactsInTask: contactsToAdd,
         status: "to-do",
-        dueDate: "",
+        dueDate: getDateAsString("addTaskSite"),
     }
 
     toDoArray.push(JSON);
@@ -170,23 +171,31 @@ function memberCircleHTML(contact) {
     return `<div class="card-member" style="background-color:${contact["color"]}">${contact["initials"]}</div>`
 }
 
-function addSubTask() {
-    let addSubTaskInputField = document.getElementById("subTaskInput");
+function addSubTask(source = "popUp", cardIndex) {
+    let addSubTaskInputField = document.getElementById(`subTaskInput_${source}`);
     let subTaskToAdd = { title: addSubTaskInputField.value, done: false };
-    subTasksToAdd.push(subTaskToAdd);
 
+    pushSubTask(source, subTaskToAdd);
 
-    let subTaskPreviewContainer = document.getElementById("subTaskPreviewContainer");
-    subTaskPreviewContainer.innerHTML += subTaskPreviewHTML(addSubTaskInputField.value);
+    let subTaskPreviewContainer = document.getElementById(`subTaskPreviewContainer_${source}`);
+    subTaskPreviewContainer.innerHTML += subTaskPreviewHTML(addSubTaskInputField.value, cardIndex);
 
     addSubTaskInputField.value = "";
 }
 
-function subTaskPreviewHTML(subTaskName) {
+function pushSubTask(source, subTaskToAdd) {
+    if (source != "edit")
+        subTasksToAdd.push(subTaskToAdd);
+    else if (source == "edit")
+        subTasksToEdit.push(subTaskToAdd);
+}
+
+function subTaskPreviewHTML(subTaskName, cardIndex, subtaskIndex) {
     return/*html*/`
     <div class="dflex align-center gap10">
         <div class="rectangle"></div>
         ${subTaskName}
+        <img src="assets/img/delete.png" alt="" onclick="deleteSubTask(${cardIndex},${subtaskIndex})">
     </div>`
 }
 
@@ -209,6 +218,26 @@ function selectPrioInEdit(prio) {
 
     priorityToEdit = prio;
 }
+
+function getDateAsString(source = "addTaskSite") {
+    let dateInputField = document.getElementById(`dueDateInput_${source}`);
+
+    // Zuerst das Format des Eingabestrings überprüfen
+    if (!dateInputField) console.error("ungültige ID für DateInput");
+    //ich liebe ChatGPT
+    const datePattern = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+    if (!datePattern.test(dateInputField.value)) {
+        throw new Error("Das Datumsformat ist ungültig. Bitte verwenden Sie das Format 'dd/mm/yyyy'.");
+    }
+
+    // Wenn das Format gültig ist, das Datum in das gewünschte Format umwandeln
+    const dateParts = dateInputField.value.split("/");
+    const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
+
+    return formattedDate;
+
+}
+
 
 // EDIT TASK!!//////////////////////////////////////////////////////////////
 
@@ -245,11 +274,11 @@ async function EditTask(cardIndex) {
         category: categoryInput.value.toLowerCase(),
         title: titleInput.value,
         description: descriptionInput.value,
-        subtasks: subTasksToEdit,
+        subtasks: getNewSubTaskArray(cardIndex),
         priority: priorityToEdit,
         contactsInTask: contactsToAdd,
         status: toDoArray[cardIndex].status,
-        dueDate: "",
+        dueDate: getDateAsString("edit"),
     }
 
     toDoArray.splice(cardIndex, 1);
@@ -266,6 +295,19 @@ async function deleteToDo(cardIndex) {
     renderToDos();
     closeBigCard();
 
+}
+
+function getNewSubTaskArray(cardIndex) {
+    let newArray = [];
+    for (let i = 0; i < toDoArray[cardIndex].subtasks.length; i++) {
+        newArray.push(toDoArray[cardIndex].subtasks[i]);
+    }
+
+    for (let i = 0; i < subTasksToEdit.length; i++) {
+        newArray.push(subTasksToEdit[i]);
+    }
+
+    return newArray;
 }
 
 function openEditTaskPopUp(cardIndex) {
@@ -348,9 +390,10 @@ function editTaskHTML(toDoIndex) {
       <div class="add-task-half">
        <div class="add-task-input-container">
             <p>Due Date</p>
-            <div class="input-field">
-                <input type="date" placeholder="dd/mm/yyyy"  class="pointer">
-            </div>
+            <div class="input-field date-input" >
+                    <input type="datetime" placeholder="dd/mm/yyyy" class="pointer" id="dueDateInput_edit">
+                    <img src="assets/img/calendar.png" alt="">
+                </div>
        </div>
 
        <div class="select-prio">
@@ -377,7 +420,7 @@ function editTaskHTML(toDoIndex) {
          <p>Subtasks</p>
             <div class="input-field">
              <input type="text" placeholder="Add new subtask" id="subTaskInput_edit">
-             <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask()">
+             <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('edit')">
             </div>
             <div class="dflex-col gap10" id="subTaskPreviewContainer_edit">
              ${addedSubTasksHTML(toDoIndex)}
@@ -392,4 +435,6 @@ function editTaskHTML(toDoIndex) {
 </div>
 </div>`;
 }
+
+// function
 //////////////////////////////////////////////////
