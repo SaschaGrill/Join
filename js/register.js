@@ -227,6 +227,7 @@ async function finalPasswordReset(event) {
   let confirmPassword = document.getElementById("reset-password2");
   users = users.filter(u => u.email !== email);
   if(password.value === confirmPassword.value) {
+    resettedPassword();
     saveUser(name, password, email);
     await setItem('users', JSON.stringify(users));
     setTimeout(() => {
@@ -244,4 +245,22 @@ async function saveUser(name, password, email) {
     email: email,
     password: password.value,
   });
+}
+
+
+function resettedPassword() {
+  let continueBtn = document.querySelector('.change-password-btn')
+  let resetPassword = document.getElementById('resetted-password');
+  let gray = document.querySelector('.login-section');
+  let gray2 = document.querySelector('.login-join-img');
+  continueBtn.classList.add('disabled');
+  resetPassword.classList.add('sendemailiframe');
+  gray.style.background ='lightgray';
+  gray2.style.backgroundColor ='lightgray';
+    setTimeout(() => {
+      resetPassword.classList.remove('sendemailiframe');
+      gray.style.background = '#f6f7f8';
+      gray2.style.backgroundColor = '#f6f7f8';
+      continueBtn.classList.remove('disabled');
+    }, 2500);
 }
