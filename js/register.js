@@ -159,10 +159,28 @@ async function resetPassword(event) {
   let formData = new FormData(event.target);
   let response = await action(formData);
   if(response.ok) {
-    alert('E-Mail has beend sent!');
+    confirmEmailBanner();
   } else {
     alert('E-Mail was not sent!');
   }
+}
+
+
+function confirmEmailBanner() {
+  let forgotBtn = document.querySelector('.forgot-btn')
+  let sendEmail = document.getElementById('confirmemail');
+  let gray = document.querySelector('.login-section');
+  let gray2 = document.querySelector('.fullscreen-img');
+  forgotBtn.classList.add('disabled');
+  sendEmail.classList.add('sendemailiframe');
+  gray.style.background ='lightgray';
+  gray2.style.backgroundColor ='lightgray';
+    setTimeout(() => {
+      sendEmail.classList.remove('sendemailiframe');
+      gray.style.background = '#f6f7f8';
+      gray2.style.backgroundColor = '#f6f7f8';
+      forgotBtn.classList.remove('disabled');
+    }, 2500);
 }
 
 

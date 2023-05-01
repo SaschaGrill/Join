@@ -14,7 +14,7 @@
 </head>
 
 <body onload="init()">
-    <div class="login-section">
+    <div class="login-section" id="forconfirm">
         <img class="fullscreen-img" id="bigJoinLogo" src="assets/img/bigJoinLogo.svg">
         <div class="login-signup" id="signup-btn">
             <div>Not a Join user?</div>
@@ -65,10 +65,11 @@
         <form onsubmit="resetPassword(event)">
             <input required type="email" id="email-forgot" class="login-bar bg-email margin-btm35" placeholder="Email" name="email">
             <div class="dflex justify">
-                <button class="forgot-btn">Send me the email</button>
+                <button class="forgot-btn" id="forgotBtn">Send me the email</button>
             </div>
         </form>
     </div>
+    <img src="assets/img/confirmsentemail.svg" class="sendemail" id="confirmemail">
 
 </body>
 
