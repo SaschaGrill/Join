@@ -1,4 +1,6 @@
 let users = [];
+let email;
+let user;
 
 function init() {
   loadEmailPassword();
@@ -178,9 +180,10 @@ function action(formData) {
 }
 
 
-function onPageLoad() {
+async function onPageLoad() {
+  await loadUsers();
   email = getEmailUrl();
-  loadUsers();
+  user = await getPasswordResetUser();
 }
 
 
@@ -189,4 +192,38 @@ function getEmailUrl() {
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('email');
   return email;
+}
+
+
+async function getPasswordResetUser() {
+  await loadUsers(); 
+  let user = users.find(u => u.email == email);
+  return user;
+}
+
+
+async function finalPasswordReset(event) {
+  event.preventDefault();
+  let name = user.name;
+  let password = document.getElementById("reset-password");
+  let confirmPassword = document.getElementById("reset-password2");
+  users = users.filter(u => u.email !== email);
+  if(password.value === confirmPassword.value) {
+    saveUser(name, password, email);
+    await setItem('users', JSON.stringify(users));
+    setTimeout(() => {
+      window.location.href = 'https://gruppe-544.developerakademie.net/Join/index.html';
+    }, 2000);
+  } else {
+    alert('Passwort stimmt nicht überein!');
+  }
+}
+
+
+async function saveUser(name, password, email) {
+  return users.push({
+    name: name,
+    email: email,
+    password: password.value,
+  });
 }
