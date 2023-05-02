@@ -697,6 +697,28 @@ body {
   border-radius: 50px;
 }
 
+.delete-btn-member {
+  position: absolute;
+  background-color: rgba(211, 211, 211, 0.479);
+  height: 35px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  top: 50%;
+  left: 50%;
+  font-size: 25px;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease-in-out;
+}
+
+.delete-btn-member:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
 .progress-bar {
   display: flex;
   align-items: center;
@@ -898,6 +920,7 @@ body {
 /* BIG CARD CONTAINER OVERLAY */
 .big-card-container {
   width: 523px;
+  height: 600px;
   overflow-y: scroll;
   background-color: #ffffff;
   border-radius: 30px;
@@ -952,6 +975,8 @@ body {
   align-items: center;
   gap: 20px;
 }
+
+
 
 .big-card-button-container {
   position: absolute;

@@ -184,15 +184,12 @@ async function endDragCard(pinSpaceStatus) {
 }
 
 function openBigCard(cardIndex) {
-    // showElement("bigCardPopUp");
     document.getElementById("bigCardPopUp").innerHTML += bigCardHTML(cardIndex);
     showElement("Overlay");
-    // updateAddTaskMemberSelection();
     document.getElementById("boardContainer").classList.add("overflow-visible");
 }
 
 function closeBigCard() {
-    // hideElement("bigCardPopUp");
     document.getElementById("bigCardPopUp").innerHTML = "";
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
@@ -221,7 +218,7 @@ function bigCardHTML(cardIndex) {
         
         <div  class="assigned-to-field">
             <p class="bold">Assigned To:</p>
-             ${assignedToContent(toDoArray[cardIndex].contactsInTask)}
+             ${assignedToContentBigCard(toDoArray[cardIndex].contactsInTask)}
         </div>
 
         <div >
@@ -238,27 +235,26 @@ function bigCardHTML(cardIndex) {
     `;
 }
 
-function assignedToContent(contacts) {
+function assignedToContentBigCard(contacts) {
     let string = "";
     for (let i = 0; i < contacts.length; i++) {
-        string += assignedToItemHTML(contacts[i]);
+        string += contactCircleHTML(contacts[i]);
     }
     return string;
 }
 
-function assignedToItemHTML(contact) {
-    return /*html*/`
-    <div class="assigned-to-item" >
-        <div class="card-member" style="background-color: ${contact.color}">${contact.initials}</div>
-                ${contact.firstName} ${contact.lastName}
-            </div >
-    `;
-}
+// function assignedToItemHTML(contact) {
+//     return /*html*/`
+//     <div class="assigned-to-item" >
+//         <div class="card-member" style="background-color: ${contact.color}">${contact.initials}</div>
+//                 ${contact.firstName} ${contact.lastName}
+//             </div >
+//     `;
+// }
 
 function subtaskBigCardHTML(cardIndex) {
     let subtasks = toDoArray[cardIndex].subtasks;
     let string = "";
-    console.log(subtasks);
 
     for (let i = 0; i < subtasks.length; i++) {
         string += /*html*/`

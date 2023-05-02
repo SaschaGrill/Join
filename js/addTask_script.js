@@ -56,7 +56,7 @@ function contacsHTML(toDo) {
     let string = "";
     for (let i = 0; i < members.length; i++) {
         let member = members[i];
-        string += `<div class="card-member" style="background-color:${member["color"]}">${member["initials"]}</div>`
+        string += contactCircleHTML(member);
     }
 
     return /*html*/`
@@ -64,6 +64,15 @@ function contacsHTML(toDo) {
         ${string}
     </div>
     `
+}
+
+function contactCircleHTML(member) {
+    return /*html*/`
+    <div class="pos-rel">
+       <span class="delete-btn-member">X</span>
+        <div class="card-member" style="background-color:${member["color"]}">${member["initials"]}</div>
+    </div>
+        `
 }
 
 function openAddTaskMenu() {
@@ -161,22 +170,21 @@ function addMemberToTask(popUp = true) {
     if (contactsToAdd.includes(contacts[memberIndex])) return;
 
     contactsToAdd.push(contacts[memberIndex]);
-    let circleHTML = memberCircleHTML(contacts[memberIndex]);
+    let circleHTML = contactCircleHTML(contacts[memberIndex]);
     let membersDiv = popUp ? document.getElementById("addTaskAssignedMembers_popUp") : document.getElementById("addTaskAssignedMembers_site");
 
 
     membersDiv.innerHTML += circleHTML;
 }
 
-function memberCircleHTML(contact) {
-    return `<div class="card-member" style="background-color:${contact["color"]}">${contact["initials"]}</div>`
-}
 
 function addSubTask(source = "popUp", cardIndex) {
     let addSubTaskInputField = document.getElementById(`subTaskInput_${source}`);
+
     let subTaskToAdd = { title: addSubTaskInputField.value, done: false };
 
     pushSubTask(source, subTaskToAdd);
+
 
     let subTaskPreviewContainer = document.getElementById(`subTaskPreviewContainer_${source}`);
     subTaskPreviewContainer.innerHTML += subTaskPreviewHTML(addSubTaskInputField.value, cardIndex);
@@ -191,13 +199,28 @@ function pushSubTask(source, subTaskToAdd) {
         subTasksToEdit.push(subTaskToAdd);
 }
 
-function subTaskPreviewHTML(subTaskName, cardIndex, subtaskIndex) {
+function subTaskPreviewHTML(subTaskTitle, cardIndex, source = "addTask") {
     return/*html*/`
-    <div class="dflex align-center gap10">
+    <div class="dflex align-center gap10" id="subTaskPreview_${cardIndex}_${subTaskTitle}">
         <div class="rectangle"></div>
-        ${subTaskName}
-        <img src="assets/img/delete.png" alt="" onclick="deleteSubTask(${cardIndex},${subtaskIndex})">
+        ${subTaskTitle}
+        <img src="assets/img/delete.png" alt="" class="pointer" onclick="deleteSubTask(${cardIndex},'${subTaskTitle}','${source}')">
     </div>`
+}
+
+function deleteSubTask(cardIndex, subTaskTitle, source = "addTask") {
+    let previewDiv = document.getElementById(`subTaskPreview_${cardIndex}_${subTaskTitle}`);
+    previewDiv.remove();
+
+    if (source == "edit") {
+        let subTaskIndex = subTasksToEdit.findIndex(obj => obj.title === subTaskTitle);
+        subTasksToEdit.splice(subTaskIndex, 1);
+    }
+    else if (source == "addTask") {
+        let subTaskIndex = subTasksToAdd.findIndex(obj => obj.title === subTaskTitle);
+        subTasksToEdit.splice(subTaskIndex, 1);
+    }
+    else console.error("ungültige source:", source);
 }
 
 function selectPrio(prio) {
@@ -242,10 +265,10 @@ function getDateAsString(source = "addTaskSite") {
 
 // EDIT TASK!!//////////////////////////////////////////////////////////////
 
-function addedMembersHTML(toDoIndex) {
+function addedMembersHTMLBigCard(toDoIndex) {
     let string = "";
     for (let i = 0; i < toDoArray[toDoIndex].contactsInTask.length; i++) {
-        string += memberCircleHTML(toDoArray[toDoIndex].contactsInTask[i]);
+        string += contactCircleHTML(toDoArray[toDoIndex].contactsInTask[i]);
     }
 
     return string;
@@ -254,7 +277,7 @@ function addedMembersHTML(toDoIndex) {
 function addedSubTasksHTML(toDoIndex) {
     let string = "";
     for (let i = 0; i < toDoArray[toDoIndex].subtasks.length; i++) {
-        string += subTaskPreviewHTML(toDoArray[toDoIndex].subtasks[i].title);
+        string += subTaskPreviewHTML(toDoArray[toDoIndex].subtasks[i].title, toDoIndex, "edit");
     }
 
     return string;
@@ -271,11 +294,12 @@ async function EditTask(cardIndex) {
     let descriptionInput = document.getElementById("addTaskDescription_edit");
     let categoryInput = document.getElementById("addTaskCategory_edit");
 
+
     let JSON = {
         category: categoryInput.value.toLowerCase(),
         title: titleInput.value,
         description: descriptionInput.value,
-        subtasks: getNewSubTaskArray(cardIndex),
+        subtasks: subTasksToEdit,
         priority: priorityToEdit,
         contactsInTask: contactsToAdd,
         status: toDoArray[cardIndex].status,
@@ -298,18 +322,25 @@ async function deleteToDo(cardIndex) {
 
 }
 
-function getNewSubTaskArray(cardIndex) {
-    let newArray = [];
-    for (let i = 0; i < toDoArray[cardIndex].subtasks.length; i++) {
-        newArray.push(toDoArray[cardIndex].subtasks[i]);
-    }
-
-    for (let i = 0; i < subTasksToEdit.length; i++) {
-        newArray.push(subTasksToEdit[i]);
-    }
-
-    return newArray;
+function getDateString_Edit(cardIndex) {
+    let dateStringFormatted = toDoArray[cardIndex].dueDate;
+    console.log(dateStringFormatted);
+    const outputString = dateStringFormatted.replace(/-/g, "/");
+    return outputString;
 }
+
+// function getNewSubTaskArray(cardIndex) {
+//     let newArray = [];
+//     for (let i = 0; i < toDoArray[cardIndex].subtasks.length; i++) {
+//         newArray.push(toDoArray[cardIndex].subtasks[i]);
+//     }
+
+//     for (let i = 0; i < subTasksToEdit.length; i++) {
+//         newArray.push(subTasksToEdit[i]);
+//     }
+
+//     return newArray;
+// }
 
 function openEditTaskPopUp(cardIndex) {
     document.getElementById("editCardPopUp").innerHTML += editTaskHTML(cardIndex);
@@ -319,6 +350,14 @@ function openEditTaskPopUp(cardIndex) {
 
     highlightChosenPrio(cardIndex);
     selectCurrentCategory(cardIndex);
+    integrateOldSubTasksToEditArray(cardIndex);
+}
+
+function integrateOldSubTasksToEditArray(cardIndex) {
+    subTasksToEdit = [];
+    for (let i = 0; i < toDoArray[cardIndex].subtasks.length; i++) {
+        subTasksToEdit.push(toDoArray[cardIndex].subtasks[i]);
+    }
 }
 
 function closeEditTaskPopUp() {
@@ -332,9 +371,6 @@ function closeEditTaskPopUp() {
 function selectCurrentCategory(cardIndex) {
     let categoryOfCard = toDoArray[cardIndex].category;
     let categoryElement = document.getElementById(`category_edit_${categoryOfCard}`).setAttribute("selected", true);
-    // currentChoosenCategoryToEdit.setAttribute("selected", false);
-
-    // currentChoosenCategoryToEdit = categoryElement;
 }
 
 function editTaskHTML(toDoIndex) {
@@ -381,7 +417,7 @@ function editTaskHTML(toDoIndex) {
                 </select>
             </div>
             <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_edit">
-                ${addedMembersHTML(toDoIndex)}
+                ${addedMembersHTMLBigCard(toDoIndex)}
             </div>
         </div>
       </div>
@@ -392,10 +428,10 @@ function editTaskHTML(toDoIndex) {
        <div class="add-task-input-container">
             <p>Due Date</p>
             <div class="input-field date-input" >
-                    <input type="datetime" placeholder="dd/mm/yyyy" class="pointer" id="dueDateInput_edit">
-                    <img src="assets/img/calendar.png" alt="">
-                </div>
-       </div>
+                    <input type="datetime" placeholder="dd/mm/yyy" class="pointer" id="dueDateInput_edit" value="${getDateString_Edit(toDoIndex)}">
+    <img src="assets/img/calendar.png" alt="">
+    </div>
+       </div >
 
        <div class="select-prio">
          <p>Prio</p>
@@ -433,8 +469,8 @@ function editTaskHTML(toDoIndex) {
         <button class="login-btn clear-btn" onclick="closeEditTaskPopUp()">Clear X</button>
         <button type="submit" class="login-btn add-task-btn" onclick="EditTask(${toDoIndex})">Edit Task <img src="assets/img/plusbutton.png" alt=""></button>
     </div>
-</div>
-</div>`;
+</div >
+</div > `;
 }
 
 // function
