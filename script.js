@@ -24,3 +24,16 @@ function hideElement(elementID) {
 function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+
+function saveUrlVariable() {
+    let currentUser = decodeURIComponent(window.location.search.split('=')[1]);
+    return currentUser;
+}
+
+
+function addUrlVariable(id) {
+    let currentUrl = window.location.href = id;
+    let newUrl = currentUrl + '?user=' + saveUrlVariable();
+    window.location.href = newUrl;
+}

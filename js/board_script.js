@@ -49,6 +49,7 @@ async function initializeBoard() {
     includeHTML();
     renderToDos();
     await addContactForEveryUser();
+    saveUrlVariable();
 }
 
 async function renderToDos(keyword = "") {

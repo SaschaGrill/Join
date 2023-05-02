@@ -14,6 +14,7 @@ async function initializeAddTaskSite() {
     includeHTML();
     await addContactForEveryUser();
     updateAddTaskMemberSelection("addTaskSite");
+    saveUrlVariable();
 }
 
 function subtaskHTML(toDo) {

@@ -6,6 +6,7 @@ async function initSummary() {
     updateTaskCounts(taskCounts); 
     const urgentAndDeadlineInfo = getUrgentAndUpcomingDeadline();
     updateUrgentAndUpcomingDeadline(urgentAndDeadlineInfo);
+    saveUrlVariable();
 }
 
 function getGreeting() {
