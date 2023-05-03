@@ -1,5 +1,5 @@
 async function initSummary() {
-    await includeHTML();
+    includeHTML();
     greet();
     await loadTasksOnline();
     const taskCounts = getTaskCounts();

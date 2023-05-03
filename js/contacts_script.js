@@ -52,7 +52,6 @@ async function initializeContact() {
     renderContactsList();
     saveUrlVariable();
 }
-// von Gloria eingefügt
 
 // generiert zufällige Farbe
 function getRandomColor() {
