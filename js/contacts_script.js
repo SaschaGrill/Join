@@ -45,6 +45,13 @@ async function addContactForEveryUser() {
 
 
 }
+
+async function initializeContact() {
+    includeHTML();
+    await addContactForEveryUser();
+    renderContactsList();
+    saveUrlVariable();
+}
 // von Gloria eingefügt
 
 // generiert zufällige Farbe
@@ -70,6 +77,49 @@ function getColorForInitials(initials) {
         colors[initials] = getRandomColor();
     }
     return colors[initials];
+}
+
+function renderContactsList() {
+    var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    for (let i = 0; i < alphabet.length; i++) {
+        const letter = alphabet[i];
+        let contactsIncludingLetter = [];
+        for (let j = 0; j < contacts.length; j++) {
+            const contact = contacts[j];
+            if (contact.firstName[0].toLowerCase() == letter)
+                contactsIncludingLetter.push(contact);
+        }
+
+        let contactList = document.getElementById("contact-list");
+
+        if (contactsIncludingLetter.length > 0)
+            contactList.innerHTML += contactListLetterHTML(letter.toUpperCase());
+
+        for (let k = 0; k < contactsIncludingLetter.length; k++) {
+            const contactToAdd = contactsIncludingLetter[k];
+            contactList.innerHTML += contactInListHTML(contactToAdd);
+        }
+
+    }
+}
+
+function contactListLetterHTML(letter = "no Letter") {
+    return /*html*/`
+    <div class="contact-list-letter">
+    <span>${letter}</span>
+    </div>`;
+}
+
+function contactInListHTML(contact) {
+    return /*html*/`
+    <div class="contact" onclick="showContact()">
+        ${contactCircleHTML(contact, false)}
+        <div class="contact-details">
+            <span class="contact-list-name">${contact.firstName} ${contact.lastName}</span>
+            <span class="contact-list-mail pointer">${contact.email}</span>
+        </div>
+    </div>
+    `;
 }
 
 

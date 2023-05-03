@@ -66,13 +66,18 @@ function contacsHTML(toDo) {
     `
 }
 
-function contactCircleHTML(member) {
-    return /*html*/`
+function contactCircleHTML(member, deletable = true) {
+    if (deletable) return /*html*/`
     <div class="pos-rel">
        <span class="delete-btn-member">X</span>
-        <div class="card-member" style="background-color:${member["color"]}">${member["initials"]}</div>
+        <div class="card-member" style="background-color:${member["color"]}">${member["initials"][0]}${member["initials"][1]}</div>
     </div>
-        `
+        `;
+
+    else return /*html*/`
+        <div class="pos-rel">
+            <div class="card-member" style="background-color:${member["color"]}">${member["initials"][0]}${member["initials"][1]}</div>
+        </div>`;
 }
 
 function openAddTaskMenu() {
