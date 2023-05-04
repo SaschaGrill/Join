@@ -151,7 +151,7 @@ function smallCardHTML(toDo, index) {
         ${subtaskHTML(toDo)}
         <div class="small-card-bottom">
           ${contactsHTML(toDo)} 
-            <img src="assets/img/priority${toDo["priority"]}.png" alt="" class="small-card-priority">
+            <img src="assets/img/priority${capitalizeFirstLetter(toDo["priority"])}.png" alt="" class="small-card-priority">
         </div>
 </div>
 `
@@ -211,8 +211,8 @@ function bigCardHTML(cardIndex) {
         <div  class=" dflex align-center gap20">
             <p class="bold">Priority:</p>
             <div class="prio-container dflex align-center pointer">
-                ${capitalizeFirstLetter(toDoArray[cardIndex]["priority"])} 
-                <img src="assets/img/priority${toDoArray[cardIndex]["priority"]}.png">
+                ${(toDoArray[cardIndex]["priority"])} 
+                <img src="assets/img/priority${capitalizeFirstLetter.toDoArray[cardIndex]["priority"]}.png">
             </div>
         </div>
         
