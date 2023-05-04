@@ -30,7 +30,6 @@ async function addContactForEveryUser() {
     await loadUsers();
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
-        console.log(user);
         let fullNameAsArray = firstAndLastNameAsArray(user.name);
         let contact = {
             firstName: fullNameAsArray[0],
@@ -51,6 +50,7 @@ async function initializeContact() {
     await addContactForEveryUser();
     renderContactsList();
     saveUrlVariable();
+    renderContactBig(contacts[0]);
 }
 
 // generiert zufällige Farbe
@@ -78,15 +78,15 @@ function getColorForInitials(initials) {
     return colors[initials];
 }
 
+//rendert die Liste Aller Kontakte am Linken Rand
 function renderContactsList() {
     var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     for (let i = 0; i < alphabet.length; i++) {
         const letter = alphabet[i];
         let contactsIncludingLetter = [];
         for (let j = 0; j < contacts.length; j++) {
-            const contact = contacts[j];
-            if (contact.firstName[0].toLowerCase() == letter)
-                contactsIncludingLetter.push(contact);
+            if (contacts[j].firstName[0].toLowerCase() == letter)
+                contactsIncludingLetter.push(contacts[j]);
         }
 
         let contactList = document.getElementById("contact-list");
@@ -95,10 +95,8 @@ function renderContactsList() {
             contactList.innerHTML += contactListLetterHTML(letter.toUpperCase());
 
         for (let k = 0; k < contactsIncludingLetter.length; k++) {
-            const contactToAdd = contactsIncludingLetter[k];
-            contactList.innerHTML += contactInListHTML(contactToAdd);
+            contactList.innerHTML += contactInListHTML(contactsIncludingLetter[k]);
         }
-
     }
 }
 
@@ -110,14 +108,75 @@ function contactListLetterHTML(letter = "no Letter") {
 }
 
 function contactInListHTML(contact) {
+    let contactIndex = contacts.indexOf(contact);
     return /*html*/`
-    <div class="contact" onclick="showContact()">
+    <div class="contact" onclick="renderContactBig(contacts[${contactIndex}])">
         ${contactCircleHTML(contact, false)}
         <div class="contact-details">
             <span class="contact-list-name">${contact.firstName} ${contact.lastName}</span>
             <span class="contact-list-mail pointer">${contact.email}</span>
         </div>
     </div>
+    `;
+}
+
+//rendert einen Kontakt in der großen Anzeige
+function renderContactBig(contact) {
+    document.getElementById("contactBigContainer").innerHTML = "";
+    document.getElementById("contactBigContainer").innerHTML += contactsBigHTML(contact);
+}
+
+function openAddTaskSiteWithContact(contactIndex) {
+    window.open(`add_task.html?contactToAddIndex=${contactIndex}`, "_self");
+}
+
+function contactsBigHTML(contact) {
+    let contactIndex = contacts.indexOf(contact);
+    return /*html*/`
+    <div class="contacts-header">
+                        <h1 class="headlines">Contacts</h1>
+                        <p class="contacts-headline-line"></p>
+                        <p>Better with a team</p>
+                    </div>
+
+                    <div class="contact-name-container-big">
+                        <div class="contacts-big-circle" style="background-color: ${contact.color}">
+                            ${contact.initials}
+                        </div>
+                        <div>
+                           ${contact.firstName}  ${contact.lastName}
+                            <div class="contact-add-task" onclick="openAddTaskSiteWithContact(${contactIndex})">+ Add Task</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-information padding-bt10">
+                        <span>Contact Information</span>
+                        <span class="edit-task-contact"><img src="assets/img/pen_black.png" alt="">Edit Contact</span>
+                    </div>
+
+                    <div class="dflex-col gap10 padding-bt10">
+                        <span class="bold">
+                        Email
+                        </span>
+                        <span class="contact-list-mail pointer">
+                        ${contact.email}
+                        </span>
+                    </div>
+
+                    <div class="dflex-col gap10 padding-bt10">
+                        <span class="bold">
+                        Phone
+                        </span>
+                        <span>
+                        ${contact.phone}
+                        </span>
+                    </div>
+
+                    <div class="new-contact-button">
+                        <button id="new-contact-button">New contact
+                            <img src="assets/img/newContact.svg" alt="">
+                        </button>
+                    </div>
     `;
 }
 

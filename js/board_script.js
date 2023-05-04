@@ -150,7 +150,7 @@ function smallCardHTML(toDo, index) {
         </p>
         ${subtaskHTML(toDo)}
         <div class="small-card-bottom">
-          ${contacsHTML(toDo)} 
+          ${contactsHTML(toDo)} 
             <img src="assets/img/priority${toDo["priority"]}.png" alt="" class="small-card-priority">
         </div>
 </div>

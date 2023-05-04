@@ -15,6 +15,14 @@ async function initializeAddTaskSite() {
     await addContactForEveryUser();
     updateAddTaskMemberSelection("addTaskSite");
     saveUrlVariable();
+    addMemberToTask(getUserToAddFromURL());
+}
+
+function getUserToAddFromURL() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const userIndex = urlParams.get('contactToAddIndex');
+    return Number(userIndex);
 }
 
 function subtaskHTML(toDo) {
@@ -51,7 +59,7 @@ function calculateFillPercentage(subTaskArray) {
     return percentage * 100;
 }
 
-function contacsHTML(toDo) {
+function contactsHTML(toDo) {
     let members = toDo["contactsInTask"];
     let string = "";
     for (let i = 0; i < members.length; i++) {
@@ -176,6 +184,17 @@ function addMemberToTask(popUp = true) {
 
     contactsToAdd.push(contacts[memberIndex]);
     let circleHTML = contactCircleHTML(contacts[memberIndex]);
+    let membersDiv = popUp ? document.getElementById("addTaskAssignedMembers_popUp") : document.getElementById("addTaskAssignedMembers_site");
+
+
+    membersDiv.innerHTML += circleHTML;
+}
+
+function addMemberToTask(contactIndex, popUp = false) {
+    if (contactsToAdd.includes(contacts[contactIndex])) return;
+
+    contactsToAdd.push(contacts[contactIndex]);
+    let circleHTML = contactCircleHTML(contacts[contactIndex]);
     let membersDiv = popUp ? document.getElementById("addTaskAssignedMembers_popUp") : document.getElementById("addTaskAssignedMembers_site");
 
 
