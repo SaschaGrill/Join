@@ -110,7 +110,7 @@ function contactListLetterHTML(letter = "no Letter") {
 function contactInListHTML(contact) {
     let contactIndex = contacts.indexOf(contact);
     return /*html*/`
-    <div class="contact" onclick="renderContactBig(contacts[${contactIndex}])">
+    <div class="contact pointer" onclick="renderContactBig(contacts[${contactIndex}])">
         ${contactCircleHTML(contact, false)}
         <div class="contact-details">
             <span class="contact-list-name">${contact.firstName} ${contact.lastName}</span>

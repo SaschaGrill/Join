@@ -1385,6 +1385,8 @@ body {
   line-height: 120%;
   color: #ffffff;
   cursor: pointer;
+  position: relative;
+  bottom: 50px;
 }
 
 #new-contact-button img {
@@ -1397,7 +1399,7 @@ body {
   font-size: 21px;
   display: flex;
   justify-content: flex-start;
-  width: 85%;
+  /* width: 85%; */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 20px;
 }
@@ -1406,11 +1408,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 350px;
+  /* max-width: 350px; */
   gap: 30px;
   padding-top: 15px;
   padding-bottom: 15px;
   border-radius: 10px;
+  padding-left: 10px;
+}
+
+.contact:hover{
+  background-color: lightgray;
 }
 
 .contact-list-name{
@@ -1436,7 +1443,7 @@ body {
   align-items: center;
   font-size: 47px;
   height: 88px;
-  min-width: 460px;
+  /* min-width: 460px; */
   gap: 50px;
   padding: 30px 0;
 }
@@ -1454,6 +1461,15 @@ body {
 .contact-add-task{
   color: #007CEE;
   font-size: 16px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 90px;
+  text-align: start;
+}
+
+.contact-add-task:hover{
+  cursor: pointer;
+  background-color: lightgray;
 }
 
 .contact-information{
@@ -1469,6 +1485,13 @@ body {
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.edit-task-contact:hover{
+  cursor: pointer;
+  background-color: lightgray;
 }
 
 /* LEGAL NOTICE */
