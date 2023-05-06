@@ -270,4 +270,3 @@ function editContact(contactIndex) {
     contacts[contactIndex].initials = getInitials(firstName, lastName);
     contacts[contactIndex].email = email;
 }
-
