@@ -81,6 +81,11 @@ function getColorForInitials(initials) {
 //rendert die Liste Aller Kontakte am Linken Rand
 function renderContactsList() {
     var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+    // Kontaktliste leeren
+    let contactList = document.getElementById("contact-list");
+    contactList.innerHTML = "";
+
     for (let i = 0; i < alphabet.length; i++) {
         const letter = alphabet[i];
         let contactsIncludingLetter = [];
@@ -151,7 +156,9 @@ function contactsBigHTML(contact) {
 
                     <div class="contact-information padding-bt10">
                         <span>Contact Information</span>
-                        <span class="edit-task-contact"><img src="assets/img/pen_black.png" alt="">Edit Contact</span>
+                        <span class="edit-task-contact" onclick="openEditContactForm(contacts[${contactIndex}])">
+                            <img src="assets/img/pen_black.png" alt="">Edit Contact
+                        </span>
                     </div>
 
                     <div class="dflex-col gap10 padding-bt10">
@@ -173,11 +180,94 @@ function contactsBigHTML(contact) {
                     </div>
 
                     <div class="new-contact-button">
-                        <button id="new-contact-button">New contact
+                        <button id="new-contact-button" onclick="openAddContactForm()">New contact
                             <img src="assets/img/newContact.svg" alt="">
                         </button>
                     </div>
     `;
 }
 
+// von Gloria eingefügt
+
+// Öffnet das Formular zum Hinzufügen eines neuen Kontakts
+function openAddContactForm() {
+    const formHTML = `
+    <div class="overlay" onclick="closeOverlay(event)">
+        <div class="overlay-contact-form">
+            <h2>Add New Contact</h2>
+            <label>First Name: <input type="text" id="add-first-name"></label>
+            <label>Last Name: <input type="text" id="add-last-name"></label>
+            <label>Email: <input type="email" id="add-email"></label>
+            <label>Phone: <input type="text" id="add-phone"></label>
+            <button onclick="addNewContact()">Save</button>
+        </div>
+    </div>
+    `;
+    const overlayDiv = document.createElement('div');
+    overlayDiv.id = 'overlay-container';
+    overlayDiv.innerHTML = formHTML;
+    document.body.appendChild(overlayDiv);
+}
+
+// Fügt einen neuen Kontakt zum contacts Array hinzu
+function addNewContact() {
+    const firstName = document.getElementById('add-first-name').value;
+    const lastName = document.getElementById('add-last-name').value;
+    const email = document.getElementById('add-email').value;
+    const phone = document.getElementById('add-phone').value;
+
+    const contact = {
+        firstName,
+        lastName,
+        color: getRandomColor(),
+        initials: getInitials(firstName, lastName),
+        email,
+        phone,
+    };
+
+    contacts.push(contact);
+    renderContactsList();
+}
+
+// Öffnet das Formular zum Bearbeiten eines Kontakts
+function openEditContactForm(contact) {
+    const contactIndex = contacts.indexOf(contact);
+    const formHTML = `
+        <div class="overlay" onclick="closeOverlay(event)">
+            <div class="overlay-contact-form">
+                <h2>Edit Contact</h2>
+                <label>First Name: <input type="text" id="edit-first-name" value="${contact.firstName}"></label>
+                <label>Last Name: <input type="text" id="edit-last-name" value="${contact.lastName}"></label>
+                <label>Email: <input type="email" id="edit-email" value="${contact.email}"></label>
+                <label>Phone: <input type="text" id="edit-phone" value="${contact.phone}"></label>
+                <button onclick="editContact(${contactIndex})">Save</button>
+            </div>
+        </div>
+    `;
+    const overlayDiv = document.createElement('div');
+    overlayDiv.id = 'overlay-container';
+    overlayDiv.innerHTML = formHTML;
+    document.body.appendChild(overlayDiv);
+}
+
+// Schließt das Overlay, wenn außerhalb des Formulars geklickt wird
+function closeOverlay(event) {
+    if (event.target.matches('.overlay')) {
+        const overlayContainer = document.getElementById('overlay-container');
+        document.body.removeChild(overlayContainer);
+    }
+}
+
+// Bearbeitet einen Kontakt im contacts Array
+function editContact(contactIndex) {
+    const firstName = document.getElementById('edit-first-name').value;
+    const lastName = document.getElementById('edit-last-name').value;
+    const email = document.getElementById('edit-email').value;
+    const phone = document.getElementById('edit-phone').value;
+
+    contacts[contactIndex].firstName = firstName;
+    contacts[contactIndex].lastName = lastName;
+    contacts[contactIndex].initials = getInitials(firstName, lastName);
+    contacts[contactIndex].email = email;
+}
 
