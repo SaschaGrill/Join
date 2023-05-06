@@ -1,19 +1,4 @@
-let contacts = [{
-    firstName: "Anton",
-    lastName: "Mayer",
-    color: "var(--design-color)",
-    initials: "AM",
-    email: "antom@gmail.com",
-    phone: "+49 1111 111 11 1",
-},
-{
-    firstName: "Danny",
-    lastName: "Simsek",
-    color: "var(--sales-color)",
-    initials: "DS",
-    email: "simsek95@yahoo.de",
-    phone: "+49 123141 11 1",
-}]
+let contacts = [];
 
 function firstAndLastNameAsArray(fullName) {
     const names = fullName.split(" ");
@@ -47,11 +32,17 @@ async function addContactForEveryUser() {
 
 async function initializeContact() {
     includeHTML();
+    await loadContacts();
     await addContactForEveryUser();
     renderContactsList();
     saveUrlVariable();
-    renderContactBig(contacts[0]);
+    renderContactBig(contacts[0])
 }
+
+async function loadContacts() {
+    contacts = [];
+    contacts = JSON.parse(await getItem('contacts'));
+  }
 
 // generiert zufällige Farbe
 function getRandomColor() {
@@ -210,7 +201,7 @@ function openAddContactForm() {
 }
 
 // Fügt einen neuen Kontakt zum contacts Array hinzu
-function addNewContact() {
+async function addNewContact() {
     const firstName = document.getElementById('add-first-name').value;
     const lastName = document.getElementById('add-last-name').value;
     const email = document.getElementById('add-email').value;
@@ -226,6 +217,7 @@ function addNewContact() {
     };
 
     contacts.push(contact);
+    await setItem('contacts', JSON.stringify(contacts));
     renderContactsList();
 }
 
