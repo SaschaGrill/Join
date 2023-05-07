@@ -183,15 +183,27 @@ function contactsBigHTML(contact) {
 // Öffnet das Formular zum Hinzufügen eines neuen Kontakts
 function openAddContactForm() {
     const formHTML = `
-    <div class="overlay" onclick="closeOverlay(event)">
+    <div class="overlay-contacts" onclick="closeOverlay(event)">
         <div class="overlay-contact-form">
-            <h2>Add New Contact</h2>
-            <label>First Name: <input type="text" id="add-first-name"></label>
-            <label>Last Name: <input type="text" id="add-last-name"></label>
-            <label>Email: <input type="email" id="add-email"></label>
-            <label>Phone: <input type="text" id="add-phone"></label>
-            <button onclick="addNewContact()">Save</button>
-        </div>
+            <div class="newContactLeft">
+                <img src="assets/img/joinlogobright.svg">
+                <h1>Add Contact</h1>
+                <p>Tasks are better with a team!</p>
+            </div>
+            <div class="newContactRight">
+                <div class="newContactImg">
+                    <img src="assets/img/newContactGrey.svg">
+                </div>
+                <div class="newContactInput">    
+                    <input type="text" id="add-name" placeholder="Name">
+                    <input type="email" id="add-email" placeholder="Email">
+                    <input type="text" id="add-phone" placeholder="Phone">
+                    <div class="addContactButtons">
+                        <button onclick="closeOverlay(event)">Cancel</button>
+                        <button onclick="addNewContact()">Create Contact</button>
+                    </div>
+                </div>
+            </div>
     </div>
     `;
     const overlayDiv = document.createElement('div');
@@ -202,8 +214,8 @@ function openAddContactForm() {
 
 // Fügt einen neuen Kontakt zum contacts Array hinzu
 async function addNewContact() {
-    const firstName = document.getElementById('add-first-name').value;
-    const lastName = document.getElementById('add-last-name').value;
+    const name = document.getElementById('add-name').value;
+    const [firstName, lastName] = firstAndLastNameAsArray(name);
     const email = document.getElementById('add-email').value;
     const phone = document.getElementById('add-phone').value;
 
@@ -225,13 +237,12 @@ async function addNewContact() {
 function openEditContactForm(contact) {
     const contactIndex = contacts.indexOf(contact);
     const formHTML = `
-        <div class="overlay" onclick="closeOverlay(event)">
+        <div class="overlay-contacts" onclick="closeOverlay(event)">
             <div class="overlay-contact-form">
                 <h2>Edit Contact</h2>
-                <label>First Name: <input type="text" id="edit-first-name" value="${contact.firstName}"></label>
-                <label>Last Name: <input type="text" id="edit-last-name" value="${contact.lastName}"></label>
-                <label>Email: <input type="email" id="edit-email" value="${contact.email}"></label>
-                <label>Phone: <input type="text" id="edit-phone" value="${contact.phone}"></label>
+                <input type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
+                <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
+                <input type="text" id="edit-phone" value="${contact.phone}" placeholder="Phone">
                 <button onclick="editContact(${contactIndex})">Save</button>
             </div>
         </div>
@@ -244,7 +255,7 @@ function openEditContactForm(contact) {
 
 // Schließt das Overlay, wenn außerhalb des Formulars geklickt wird
 function closeOverlay(event) {
-    if (event.target.matches('.overlay')) {
+    if (event.target.matches('.overlay-contacts')) {
         const overlayContainer = document.getElementById('overlay-container');
         document.body.removeChild(overlayContainer);
     }
@@ -252,8 +263,8 @@ function closeOverlay(event) {
 
 // Bearbeitet einen Kontakt im contacts Array
 function editContact(contactIndex) {
-    const firstName = document.getElementById('edit-first-name').value;
-    const lastName = document.getElementById('edit-last-name').value;
+    const name = document.getElementById('edit-name').value;
+    const [firstName, lastName] = firstAndLastNameAsArray(name);
     const email = document.getElementById('edit-email').value;
     const phone = document.getElementById('edit-phone').value;
 

@@ -29,7 +29,7 @@ body {
   flex-direction: column;
 }
 
-.pos-rel{
+.pos-rel {
   position: relative;
 }
 
@@ -61,7 +61,7 @@ body {
   gap: 20px;
 }
 
-.padding-bt10{
+.padding-bt10 {
   padding: 10px 0;
 }
 
@@ -252,8 +252,19 @@ body {
 }
 
 @keyframes movingJoin {
-  0%{top: 35%;left: 40%;width: 274px;height: 334px;}
-  100%{top: 10.33%;left: 5.35%;width: 100px;height: 122px;}
+  0% {
+    top: 35%;
+    left: 40%;
+    width: 274px;
+    height: 334px;
+  }
+
+  100% {
+    top: 10.33%;
+    left: 5.35%;
+    width: 100px;
+    height: 122px;
+  }
 }
 
 .login-join-img {
@@ -321,8 +332,13 @@ body {
 }
 
 @keyframes opacity-login {
-  0%{opacity: 0%;}
-  100%{opacity: 100%;}
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
 }
 
 .login-bar {
@@ -576,8 +592,15 @@ body {
 }
 
 @keyframes comeIn {
-  0% { opacity: 1; top: 120%; }
-  100% { opacity: 1; top: 50%; }
+  0% {
+    opacity: 1;
+    top: 120%;
+  }
+
+  100% {
+    opacity: 1;
+    top: 50%;
+  }
 }
 
 
@@ -755,7 +778,7 @@ body {
   z-index: 97;
 }
 
-.add-task-container{
+.add-task-container {
   width: 100%;
 }
 
@@ -804,7 +827,7 @@ body {
   background-color: #d1d1d1;
 }
 
-.add-task-input-container{
+.add-task-input-container {
   gap: 10px;
   display: flex;
   flex-direction: column;
@@ -900,24 +923,26 @@ body {
   background-color: #2a3647;
 }
 
-.rectangle-done{
+.rectangle-done {
   border: #a8a8a8 1px solid;
   border-radius: 10px;
   width: 8px;
   height: 8px;
   position: relative;
- background-color:#07af07 ;
+  background-color: #07af07;
 }
 
-.subTask-done-button, .subTask-delete-button{
+.subTask-done-button,
+.subTask-delete-button {
   max-height: 40px;
   max-width: 40px;
   border-radius: 8px;
 }
 
-.subTask-done-button:hover, .subTask-delete-button:hover{
- cursor: pointer;
- background-color: lightgray;
+.subTask-done-button:hover,
+.subTask-delete-button:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }
 
 
@@ -1014,7 +1039,7 @@ body {
   border: none;
 }
 
-.dropzone-highlight{
+.dropzone-highlight {
   background-color: #caceca;
   border-radius: 30px;
 }
@@ -1269,8 +1294,7 @@ body {
 }
 
 .fiftyfiftybox:hover img {
-  filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg)
-    invert(100%) saturate(0%);
+  filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
 }
 
 .threethirdsbox:hover p {
@@ -1375,7 +1399,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding:15px 14px;
+  padding: 15px 14px;
   width: 198px;
   height: 53px;
   background: #2a3647;
@@ -1416,20 +1440,20 @@ body {
   padding-left: 10px;
 }
 
-.contact:hover{
+.contact:hover {
   background-color: lightgray;
 }
 
-.contact-list-name{
+.contact-list-name {
   font-size: 21px;
 }
 
-.contact-list-mail{
+.contact-list-mail {
   font-size: 16px;
   color: #007CEE;
 }
 
-.contact-list-mail:hover{
+.contact-list-mail:hover {
   text-decoration: underline;
 }
 
@@ -1438,7 +1462,7 @@ body {
   flex-direction: column;
 }
 
-.contact-name-container-big{
+.contact-name-container-big {
   display: flex;
   align-items: center;
   font-size: 47px;
@@ -1448,7 +1472,7 @@ body {
   padding: 30px 0;
 }
 
-.contacts-big-circle{
+.contacts-big-circle {
   width: 120px;
   height: 120px;
   background-color: #07af07;
@@ -1458,7 +1482,7 @@ body {
   align-items: center;
 }
 
-.contact-add-task{
+.contact-add-task {
   color: #007CEE;
   font-size: 16px;
   padding: 10px;
@@ -1467,12 +1491,12 @@ body {
   text-align: start;
 }
 
-.contact-add-task:hover{
+.contact-add-task:hover {
   cursor: pointer;
   background-color: lightgray;
 }
 
-.contact-information{
+.contact-information {
   width: 80%;
   display: flex;
   align-items: center;
@@ -1480,7 +1504,7 @@ body {
   font-size: 21px;
 }
 
-.edit-task-contact{
+.edit-task-contact {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1489,7 +1513,7 @@ body {
   border-radius: 10px;
 }
 
-.edit-task-contact:hover{
+.edit-task-contact:hover {
   cursor: pointer;
   background-color: lightgray;
 }
@@ -1516,7 +1540,7 @@ body {
 
 /* CONTACT FORM */
 
-.overlay {
+.overlay-contacts {
   position: fixed;
   top: 0;
   left: 0;
@@ -1531,10 +1555,72 @@ body {
 
 .overlay-contact-form {
   background-color: white;
-  padding: 20px;
+  display: flex;
   border-radius: 5px;
-  width: 100%;
-  max-width: 500px;
+  width: 1212px;
+  height: 594px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.overlay-contact-form input {
+  width: 422px;
+  height: 51px;
+  padding: 2px;
+  border-color: #D1D1D1;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  margin-bottom: 50px;
+}
+
+.newContactLeft {
+  background-color: #2a3647;
+  width: 463px;
+  display: flex;
+  padding: 46px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+}
+
+.newContactLeft h1 {
+  font-size: 46px;
+  margin-block-start: 0.3em;
+  margin-block-end: 0.3em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.newContactLeft p {
+  font-size: 21px;
+  font-weight: 200;
+  margin-block-start: 0;
+  margin-block-end: 1em;
+}
+
+.newContactLeft img {
+  width: 55px;
+  height: 66px;
+}
+
+.newContactRight {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 51px;
+}
+
+.newContactImg img {
+  height: 120px;
+  width: 120px;
+  padding-right: 50px;
+}
+
+.newContactInput {
+  display: flex;
+  flex-direction: column;
+}
