@@ -608,7 +608,7 @@ body {
 
 .board-container {
   width: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .board-header {
@@ -651,8 +651,23 @@ body {
 .board-content {
   display: flex;
   justify-content: space-around;
-  position: relative;
-  top: 2vh;
+  /* position: relative; */
+  /* top: 2vh; */
+}
+
+@media (max-width:1100px) {
+  .board-content {
+    display: flex;
+    justify-content: space-around;
+    /* position: relative; */
+    flex-direction: column;
+    /* overflow: scroll; */
+    /* top: 2vh; */
+  }
+
+  .board-header .headlines{
+    font-size: 41px;
+  }
 }
 
 .board-column {
@@ -671,9 +686,10 @@ body {
 }
 
 .board-pin-space {
-  height: 400px;
+  min-height:200px;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
   gap: 20px;
 }
 

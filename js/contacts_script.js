@@ -13,7 +13,6 @@ function getInitials(firstName, lastName) {
 
 async function addContactForEveryUser() {
     await loadUsers();
-    console.log("load Users");
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         let fullNameAsArray = firstAndLastNameAsArray(user.name);
