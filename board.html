@@ -16,9 +16,9 @@
 
 <body onload="initializeBoard()">
 
-    <div w3-include-html="assets/templates/desktop_template.html"></div>
-    <div class="dflex ">
-        <div w3-include-html="assets/templates/desktop_side_template.html"></div>
+    <div w3-include-html="assets/templates/desktop_template.html" class="navbar-board-top"></div>
+    <div class="dflex width-100">
+        <div w3-include-html="assets/templates/desktop_side_template.html" class="navbar-board"></div>
         <div class="board-container" id="boardContainer">
             <div class="board-header">
                 <h1 class="headlines">Board</h1>
@@ -33,6 +33,27 @@
                         Add task +       
                 </button>
             </div>
+
+            <div class="board-header-mobile">
+                <p>Kanban Project Management Tool</p>
+                <div class="board-header-mobile-wrapper-1">
+
+                    <h1 class="headlines">Board</h1>
+                    <button class="login-btn pointer add-task-button" onclick="openAddTaskMenu()">
+                       +       
+                    </button>
+                </div>
+
+                <div class="board-input"> 
+                    <input type="text" placeholder="Find Task" id="searchbarInput" onkeyup="searchForKeyword()">
+                    <span class="vertical-line"></span>
+                    <img src="assets/img/search.png" alt="" class="board-input-img">
+                </div>
+
+                
+            </div>
+
+
             <div class="overlay dnone" id="Overlay"></div>
             <div class="board-content">
               
@@ -40,7 +61,8 @@
                 <div id="bigCardPopUp"></div>
                 <div id="editCardPopUp"></div>
                 <div w3-include-html="assets/templates/add_task_pop_up_template.html" class="dnone" id="addTaskPopUp"></div>
-
+            
+             <div class="board-column-wrapper">
                 <div class="board-column">
                     <div class="board-column-heading">
                         <h4>To do</h4> 
@@ -77,6 +99,7 @@
 
                     </div>
                 </div>
+             </div>
             </div>
 
         </div>
