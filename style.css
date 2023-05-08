@@ -692,7 +692,7 @@ body {
   }
 }
 
-@media (max-width:740px) {
+@media (max-width:800px) {
   body{
    overflow: auto;
   }
@@ -732,6 +732,7 @@ body {
  }
 
 .board-header-mobile{
+  display: block !important;
   padding-top: 100px;
   padding-left: 30px;
   padding-right: 30px;
