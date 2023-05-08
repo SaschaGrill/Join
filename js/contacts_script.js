@@ -255,7 +255,7 @@ function openEditContactForm(contact) {
                     <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
                     <input type="text" id="edit-phone" value="${contact.phone}" placeholder="Phone">
                     <div class="addContactButtons">
-                        <button class="delete" onclick="delete()">Delete</button>
+                        <button class="delete" onclick="deleteContacts()">Delete</button>
                         <button class="save" onclick="editContact(${contactIndex})">Save</button>
                     </div>
                 </div>
@@ -287,4 +287,25 @@ function editContact(contactIndex) {
     contacts[contactIndex].lastName = lastName;
     contacts[contactIndex].initials = getInitials(firstName, lastName);
     contacts[contactIndex].email = email;
+}
+
+// Löscht einen Kontakt aus dem contacts Array
+async function deleteContact(contactIndex) {
+    contacts.splice(contactIndex, 1);
+    await setItem('contacts', JSON.stringify(contacts));
+    renderContactsList();
+}
+
+// Löscht einen Kontakt, wenn der "Delete"-Button im Bearbeitungsformular geklickt wird
+function deleteContacts() {
+    const name = document.getElementById('edit-name').value;
+    const [firstName, lastName] = firstAndLastNameAsArray(name);
+
+    for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].firstName === firstName && contacts[i].lastName === lastName) {
+            deleteContact(i);
+            break;
+        }
+    }
+    closeOverlay(event);
 }
