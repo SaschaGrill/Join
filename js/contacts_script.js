@@ -81,14 +81,17 @@ function renderContactsList() {
         const letter = alphabet[i];
         let contactsIncludingLetter = [];
         for (let j = 0; j < contacts.length; j++) {
-            if (contacts[j].firstName[0].toLowerCase() == letter)
+            // Überprüfen, ob contacts[j].firstName definiert ist
+            if (contacts[j].firstName && contacts[j].firstName[0].toLowerCase() == letter) {
                 contactsIncludingLetter.push(contacts[j]);
+            }
         }
 
         let contactList = document.getElementById("contact-list");
 
-        if (contactsIncludingLetter.length > 0)
+        if (contactsIncludingLetter.length > 0) {
             contactList.innerHTML += contactListLetterHTML(letter.toUpperCase());
+        }
 
         for (let k = 0; k < contactsIncludingLetter.length; k++) {
             contactList.innerHTML += contactInListHTML(contactsIncludingLetter[k]);
