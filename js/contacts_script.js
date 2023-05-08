@@ -13,6 +13,7 @@ function getInitials(firstName, lastName) {
 
 async function addContactForEveryUser() {
     await loadUsers();
+    console.log("load Users");
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         let fullNameAsArray = firstAndLastNameAsArray(user.name);
@@ -26,8 +27,6 @@ async function addContactForEveryUser() {
         }
         contacts.push(contact);
     }
-
-
 }
 
 async function initializeContact() {
@@ -42,7 +41,7 @@ async function initializeContact() {
 async function loadContacts() {
     contacts = [];
     contacts = JSON.parse(await getItem('contacts'));
-  }
+}
 
 // generiert zufällige Farbe
 function getRandomColor() {
@@ -123,7 +122,7 @@ function renderContactBig(contact) {
 }
 
 function openAddTaskSiteWithContact(contactIndex) {
-    window.open(`add_task.html?contactToAddIndex=${contactIndex}`, "_self");
+    window.open(`add_task.html?contactToAddIndex=${contactIndex}&user=${saveUrlVariable()}`, "_self");
 }
 
 function contactsBigHTML(contact) {

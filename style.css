@@ -970,18 +970,18 @@ body {
 
 }
 
-.big-card-container::-webkit-scrollbar-track {
+/* .big-card-container::-webkit-scrollbar-track {
   /* background-color: #f1f1f1; */
-}
+/* } */ */
 
 .big-card-container::-webkit-scrollbar-thumb {
   /* background-color: #888; */
   border-radius: 5px;
 }
 
-.big-card-container::-webkit-scrollbar-thumb:hover {
+/* .big-card-container::-webkit-scrollbar-thumb:hover {
   /* background-color: #555; */
-}
+/* } */ */
 
 .big-card-container h1 {
   text-align: left;
@@ -1361,9 +1361,20 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 40px;
-  padding: 48px 48px;
+  padding: 23px 48px;
   background-color: white;
   box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.08);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.contacts-content-left::-webkit-scrollbar {
+  width: 8px;
+
+}
+.contacts-content-left::-webkit-scrollbar-thumb {
+  /* background-color: #888; */
+  border-radius: 5px;
 }
 
 .contacts-content-right {

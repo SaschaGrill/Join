@@ -12,10 +12,14 @@ let currentChoosenCategoryToEdit = document.getElementById("category_edit_0");
 
 async function initializeAddTaskSite() {
     includeHTML();
+    await loadContacts();
     await addContactForEveryUser();
     updateAddTaskMemberSelection("addTaskSite");
     saveUrlVariable();
-    addMemberToTask(getUserToAddFromURL());
+    if (getUserToAddFromURL() == null) console.log("null");
+
+    if (getUserToAddFromURL() != -1)
+        addMemberToTaskWithIndex(getUserToAddFromURL());
 }
 
 function getUserToAddFromURL() {
@@ -59,12 +63,13 @@ function calculateFillPercentage(subTaskArray) {
     return percentage * 100;
 }
 
-function contactsHTML(toDo) {
+function contactsHTML(toDo, deletable = true) {
     let members = toDo["contactsInTask"];
     let string = "";
     for (let i = 0; i < members.length; i++) {
         let member = members[i];
-        string += contactCircleHTML(member);
+        if (member == null) return;
+        string += contactCircleHTML(member, deletable);
     }
 
     return /*html*/`
@@ -88,11 +93,12 @@ function contactCircleHTML(member, deletable = true) {
         </div>`;
 }
 
-function openAddTaskMenu() {
+function openAddTaskMenu(status = "to-do") {
     showElement("addTaskPopUp");
     showElement("Overlay");
     updateAddTaskMemberSelection("popUp");
     document.getElementById("boardContainer").classList.add("overflow-visible");
+    document.getElementById("addTaskButton_popUp").onclick = function () { addTaskFromPopUp(status) };
 }
 
 function closeAddTaskMenu() {
@@ -123,10 +129,12 @@ function addMemberHTML(index) {
     `;
 }
 
-async function addTaskFromPopUp() {
+async function addTaskFromPopUp(status = "to-do") {
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
     let categoryInput = document.getElementById("addTaskCategory");
+
+    if (!dateIsNotInPast("addTaskPopUp")) return;
 
     let JSON = {
         category: categoryInput.value.toLowerCase(),
@@ -135,7 +143,7 @@ async function addTaskFromPopUp() {
         subtasks: subTasksToAdd,
         priority: priorityToAdd,
         contactsInTask: contactsToAdd,
-        status: "to-do",
+        status: status,
         dueDate: getDateAsString("addTaskPopUp"),
     }
 
@@ -144,12 +152,32 @@ async function addTaskFromPopUp() {
     closeAddTaskMenu();
     await saveTasksOnline();
     renderToDos();
+
+    emptyPopUpInputs();
+}
+
+function emptyPopUpInputs() {
+    let titleInput = document.getElementById("addTaskTitle");
+    let descriptionInput = document.getElementById("addTaskDescription");
+    let categoryInput = document.getElementById("addTaskCategory");
+
+    titleInput.value = "";
+    descriptionInput.value = "";
+    categoryInput.selectedIndex = 0;
+
+    document.getElementById("addTaskAssignedMembers_popUp").innerHTML = "";
+    document.getElementById(`dueDateInput_addTaskPopUp`).value = "";
+    document.getElementById(`subTaskInput_popUp`).value = "";
+    document.getElementById(`subTaskPreviewContainer_popUp`).innerHTML = "";
+    contactsToAdd = [];
 }
 
 async function addTaskFromAddTaskSite() {
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
     let categoryInput = document.getElementById("addTaskCategory");
+
+    if (!dateIsNotInPast()) return;
 
     let JSON = {
         category: categoryInput.value.toLowerCase(),
@@ -161,11 +189,12 @@ async function addTaskFromAddTaskSite() {
         status: "to-do",
         dueDate: getDateAsString("addTaskSite"),
     }
-
+    await loadTasksOnline()
     toDoArray.push(JSON);
-
     await saveTasksOnline();
-    window.open("board.html");
+
+    // window.open("board.html");
+    addUrlVariable("board.html")
 }
 
 async function saveTasksOnline() {
@@ -186,14 +215,14 @@ function addMemberToTask(popUp = true) {
     let circleHTML = contactCircleHTML(contacts[memberIndex]);
     let membersDiv = popUp ? document.getElementById("addTaskAssignedMembers_popUp") : document.getElementById("addTaskAssignedMembers_site");
 
-
     membersDiv.innerHTML += circleHTML;
 }
 
-function addMemberToTask(contactIndex, popUp = false) {
+function addMemberToTaskWithIndex(contactIndex, popUp = false) {
     if (contactsToAdd.includes(contacts[contactIndex])) return;
 
     contactsToAdd.push(contacts[contactIndex]);
+    console.log(contacts[contactIndex]);
     let circleHTML = contactCircleHTML(contacts[contactIndex]);
     let membersDiv = popUp ? document.getElementById("addTaskAssignedMembers_popUp") : document.getElementById("addTaskAssignedMembers_site");
 
@@ -201,14 +230,12 @@ function addMemberToTask(contactIndex, popUp = false) {
     membersDiv.innerHTML += circleHTML;
 }
 
-
 function addSubTask(source = "popUp", cardIndex) {
     let addSubTaskInputField = document.getElementById(`subTaskInput_${source}`);
 
     let subTaskToAdd = { title: addSubTaskInputField.value, done: false };
 
     pushSubTask(source, subTaskToAdd);
-
 
     let subTaskPreviewContainer = document.getElementById(`subTaskPreviewContainer_${source}`);
     subTaskPreviewContainer.innerHTML += subTaskPreviewHTML(addSubTaskInputField.value, cardIndex);
@@ -283,9 +310,29 @@ function getDateAsString(source = "addTaskSite") {
     const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
 
     return formattedDate;
-
 }
 
+function dateIsNotInPast(source = "addTaskSite") {
+    let dateInputField = document.getElementById(`dueDateInput_${source}`);
+
+    if (!dateInputField) console.error("ungültige ID für DateInput");
+    const dateString = dateInputField.value;
+    const dateParts = dateString.split("/");
+
+    const day = dateParts[0];
+    const month = dateParts[1] - 1; // Monate in JavaScript beginnen bei 0 (Januar) und enden bei 11 (Dezember)
+    const year = dateParts[2];
+
+    const currentDate = new Date();
+    const dateToCheck = new Date(year, month, day);
+
+    // Wenn das Datum in der Vergangenheit liegt, wird ein Fehler ausgelöst
+    if (dateToCheck < currentDate) {
+        alert("Das ausgewählte Datum liegt in der Vergangenheit.");
+        return false;
+    }
+    else return true;
+}
 
 // EDIT TASK!!//////////////////////////////////////////////////////////////
 
@@ -318,6 +365,7 @@ async function EditTask(cardIndex) {
     let descriptionInput = document.getElementById("addTaskDescription_edit");
     let categoryInput = document.getElementById("addTaskCategory_edit");
 
+    if (!dateIsNotInPast("edit")) return;
 
     let JSON = {
         category: categoryInput.value.toLowerCase(),

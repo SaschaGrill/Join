@@ -47,9 +47,10 @@ let currentlyDraggedCardIndex = null;
 
 async function initializeBoard() {
     includeHTML();
-    renderToDos();
+    await loadContacts();
     await addContactForEveryUser();
     saveUrlVariable();
+    renderToDos();
 }
 
 async function renderToDos(keyword = "") {
@@ -150,7 +151,7 @@ function smallCardHTML(toDo, index) {
         </p>
         ${subtaskHTML(toDo)}
         <div class="small-card-bottom">
-          ${contactsHTML(toDo)} 
+          ${contactsHTML(toDo, false)} 
             <img src="assets/img/priority${capitalizeFirstLetter(toDo["priority"])}.png" alt="" class="small-card-priority">
         </div>
 </div>
@@ -211,8 +212,8 @@ function bigCardHTML(cardIndex) {
         <div  class=" dflex align-center gap20">
             <p class="bold">Priority:</p>
             <div class="prio-container dflex align-center pointer">
-                ${(toDoArray[cardIndex]["priority"])} 
-                <img src="assets/img/priority${capitalizeFirstLetter.toDoArray[cardIndex]["priority"]}.png">
+                ${capitalizeFirstLetter((toDoArray[cardIndex]["priority"]))} 
+                <img src="assets/img/priority${toDoArray[cardIndex]["priority"]}.png">
             </div>
         </div>
         
@@ -242,15 +243,6 @@ function assignedToContentBigCard(contacts) {
     }
     return string;
 }
-
-// function assignedToItemHTML(contact) {
-//     return /*html*/`
-//     <div class="assigned-to-item" >
-//         <div class="card-member" style="background-color: ${contact.color}">${contact.initials}</div>
-//                 ${contact.firstName} ${contact.lastName}
-//             </div >
-//     `;
-// }
 
 function subtaskBigCardHTML(cardIndex) {
     let subtasks = toDoArray[cardIndex].subtasks;

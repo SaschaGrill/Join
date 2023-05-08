@@ -25,9 +25,16 @@ function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function getCurrentUserVariable() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('user');
+    return user;
+}
 
 function saveUrlVariable() {
-    let currentUser = decodeURIComponent(window.location.search.split('=')[1]);
+    // let currentUser = decodeURIComponent(window.location.search.split('=')[1]);
+    let currentUser = getCurrentUserVariable();
     return currentUser;
 }
 
@@ -36,4 +43,8 @@ function addUrlVariable(id) {
     let currentUrl = window.location.href = id;
     let newUrl = currentUrl + '?user=' + saveUrlVariable();
     window.location.href = newUrl;
+}
+
+function openAddTaskSiteWithoutContact() {
+    window.open(`add_task.html?contactToAddIndex=-1&user=${saveUrlVariable()}`, "_self");
 }

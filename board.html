@@ -44,7 +44,7 @@
                 <div class="board-column">
                     <div class="board-column-heading">
                         <h4>To do</h4> 
-                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer" onclick="openAddTaskMenu('to-do')">
                     </div>
                     <div class="board-pin-space" id="pinSpace-ToDo" ondrop="endDragCard(`to-do`); highlightDropZoneEnd('pinSpace-ToDo')" ondragover="allowDrop(event); highlightDropZone('pinSpace-ToDo') " ondragleave="highlightDropZoneEnd('pinSpace-ToDo')">
                         <!-- ENTER CARDS HERE -->
@@ -53,7 +53,7 @@
                 <div class="board-column">
                     <div class="board-column-heading">
                         <h4>In progress</h4>
-                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer" onclick="openAddTaskMenu('in-progress')">
                     </div>
                     <div class="board-pin-space" id="pinSpace-InProgress" ondrop="endDragCard(`in-progress`); highlightDropZoneEnd('pinSpace-InProgress')" ondragover="allowDrop(event);highlightDropZone('pinSpace-InProgress')" ondragleave="highlightDropZoneEnd('pinSpace-InProgress')">
 
@@ -62,7 +62,7 @@
                 <div class="board-column">
                     <div class="board-column-heading">
                         <h4>Awaiting Feedback</h4>
-                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer" onclick="openAddTaskMenu('awaiting-feedback')">
                     </div>
                     <div class="board-pin-space" id="pinSpace-AwaitingFeedback" ondrop="endDragCard(`awaiting-feedback`); highlightDropZoneEnd('pinSpace-AwaitingFeedback')" ondragover="allowDrop(event);highlightDropZone('pinSpace-AwaitingFeedback')" ondragleave="highlightDropZoneEnd('pinSpace-AwaitingFeedback')">
 
@@ -71,7 +71,7 @@
                 <div class="board-column">
                     <div class="board-column-heading">
                         <h4>Done</h4>
-                        <img src="assets/img/plusbutton.png" alt="" class ="pointer">
+                        <img src="assets/img/plusbutton.png" alt="" class ="pointer" onclick="openAddTaskMenu('done')">
                     </div>
                     <div class="board-pin-space" id="pinSpace-Done" ondrop="endDragCard(`done`); highlightDropZoneEnd('pinSpace-Done')" ondragover="allowDrop(event);highlightDropZone('pinSpace-Done')" ondragleave="highlightDropZoneEnd('pinSpace-Done')">
 
