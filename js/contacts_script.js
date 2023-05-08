@@ -26,8 +26,6 @@ async function addContactForEveryUser() {
         }
         contacts.push(contact);
     }
-
-
 }
 
 async function initializeContact() {
@@ -202,8 +200,8 @@ function openAddContactForm() {
                     <input type="email" id="add-email" placeholder="Email">
                     <input type="text" id="add-phone" placeholder="Phone">
                     <div class="addContactButtons">
-                        <button class="cancel" onclick="closeOverlay(event)">Cancel</button>
-                        <button class="createContact" onclick="addNewContact()">Create Contact</button>
+                        <button class="cancel" onclick="closeOverlay(event)">Cancel<img src="assets/img/cancel.svg"></button>
+                        <button class="createContact" onclick="addNewContact()">Create Contact<img src="assets/img/apply.svg"</button>
                     </div>
                 </div>
             </div>
@@ -241,25 +239,27 @@ function openEditContactForm(contact) {
     const contactIndex = contacts.indexOf(contact);
     const formHTML = `
         <div class="overlay-contacts" onclick="closeOverlay(event)">
-            <div class="editContactLeft">
-                <img src="assets/img/joinlogobright.svg">
-                <h1>Edit Contact</h1>
-                <p>Tasks are better with a team!</p>
-            </div>
-            <div class="editContactRight">
-                <div class="newContactImg">
-                    <img src="assets/img/newContactGrey.svg">
+            <div class="overlay-contact-form">    
+                <div class="editContactLeft">
+                    <img src="assets/img/joinlogobright.svg">
+                    <h1>Edit Contact</h1>
+                    <p>Tasks are better with a team!</p>
+                </div>
+                <div class="editContactRight">
+                    <div class="contacts-big-circle margin-right" style="background-color: ${contact.color}">
+                    ${contact.initials}
                 </div>
                 <div class="editContactInput"> 
                     <input type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
                     <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
                     <input type="text" id="edit-phone" value="${contact.phone}" placeholder="Phone">
-                    <div class="editContactButtons">
-                    <button onclick="closeOverlay(event)">Delete</button>
-                    <button onclick="editContact(${contactIndex})">Save</button>
+                    <div class="addContactButtons">
+                        <button class="delete" onclick="delete()">Delete</button>
+                        <button class="save" onclick="editContact(${contactIndex})">Save</button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div> 
+        </div>       
     `;
     const overlayDiv = document.createElement('div');
     overlayDiv.id = 'overlay-container';
