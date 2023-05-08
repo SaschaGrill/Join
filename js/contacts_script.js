@@ -158,18 +158,18 @@ function contactsBigHTML(contact) {
                         <span class="bold">
                         Email
                         </span>
-                        <span class="contact-list-mail pointer">
+                        <a href='mailto:${contact.email}' class="contact-list-link pointer">
                         ${contact.email}
-                        </span>
+                        </a>
                     </div>
 
                     <div class="dflex-col gap10 padding-bt10">
                         <span class="bold">
                         Phone
                         </span>
-                        <span>
+                        <a href='tel:${contact.phone}' class="contact-list-link pointer">
                         ${contact.phone}
-                        </span>
+                        </a>
                     </div>
 
                     <div class="new-contact-button">
