@@ -1,0 +1,123 @@
+@media(max-width: 1000px) {
+    
+    .responsive-fullscreen-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100px !important;
+        height: 100px !important;
+        top: 5% !important;
+        left: 40%;
+        z-index: 500;
+        background-color: #f6f7f8;
+        animation-name: movingJoin;
+        animation-duration: 750ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+    }
+
+    .login-section {
+        scale: 0.85;
+        overflow: hidden;
+    }
+}
+
+@media(max-width: 600px) {
+    .responsive-fullscreen-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 500;
+        background-color: #f6f7f8;
+        animation-name: movingJoin;
+        animation-duration: 750ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+        padding: 0px;
+        gap: 10px;
+
+        position: absolute;
+        width: 64px !important;
+        height: 78.03px !important;
+        left: 10% !important;
+        top: 5% !important;
+    }
+
+    .login-section {
+        scale: 1;
+        overflow: visible;
+    }
+
+    @media(max-height: 844px) {
+        .login-section {
+            scale: 1;
+            overflow: hidden;
+        }
+    }
+
+    @media(max-height: 675px) {
+        .login-section {
+            scale: 1;
+            overflow: visible;
+        }
+    }
+
+    .responsive-login-signup {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 35px;
+        
+        position: absolute !important;
+        width: 305px;
+        height: 51px;
+        left: 82px;
+        top: 685px;
+        font-size: 21px;
+        margin-left: -50px;
+    }
+
+    .responsive-login-bars {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 35px 0px;
+        gap: 35px;
+
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+        border-radius: 30px;
+        opacity: 0%;
+        animation-name: opacity-login;
+        animation-duration: 500ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+        position: absolute;
+        width: 372px;
+        height: 470px;
+        left: 164px;
+        top: 365px;
+        scale: 0.85;
+    }
+
+    .responsive-login-bar {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 13px 21px;
+        gap: 10px;
+        width: 325px;
+        height: 51px;
+        background: #ffffff;
+        border: 1px solid #d1d1d1;
+        border-radius: 10px;
+        font-family: "Inter";
+        font-size: 21px;
+        cursor: pointer;
+    }
+}

@@ -10,25 +10,26 @@
     <script src="js/register.js"></script>
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="icon" type="image/x-icon" href="assets/img/bigJoinLogo.svg">
     <title>Join - Login</title>
 </head>
 
 <body onload="init()">
     <div class="login-section" id="forconfirm">
-        <img class="fullscreen-img" id="bigJoinLogo" src="assets/img/bigJoinLogo.svg">
-        <div class="login-signup" id="signup-btn">
+        <img class="fullscreen-img responsive-fullscreen-img" id="bigJoinLogo" src="assets/img/bigJoinLogo.svg">
+        <div class="login-signup responsive-login-signup" id="signup-btn">
             <div>Not a Join user?</div>
             <button class="signup-btn" onclick="signupButton()">Sign up</button>
         </div>
         <!-- LOG IN SECTION -->
-        <div class="login-bars" id="login-section">
+        <div class="login-bars responsive-login-bars" id="login-section">
             <span class="headlines">Log in</span>
             <div class="login-head-borderline"></div>
             <form onsubmit="login(); return false;">
-                <input required type="email" id="email-login" class="login-bar bg-email margin-btm35 negative-margin"
+                <input required type="email" id="email-login" class="login-bar bg-email margin-btm35 negative-margin responsive-login-bar"
                     placeholder="Email">
-                <input required type="password" id="password-login" class="login-bar bg-password margin-btm35"
+                <input required type="password" id="password-login" class="login-bar bg-password margin-btm35 responsive-login-bar"
                     placeholder="Password">
                 <div class="login-remember margin-btm35">
                     <input type="checkbox" id="login-checkbox">

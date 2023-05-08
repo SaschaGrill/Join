@@ -252,7 +252,7 @@ body {
   z-index: 500;
   background-color: #f6f7f8;
   animation-name: movingJoin;
-  animation-duration: 500ms;
+  animation-duration: 750ms;
   animation-delay: 225ms;
   animation-fill-mode: forwards;
 }
