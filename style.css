@@ -1639,18 +1639,19 @@ body {
 .legal_notice-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 232px);
+  height: calc(100% - 89px);
   position: relative;
-  top: 25%;
+  top: 89px;
+  left: 232px;
   background-color: #f5f5f5;
   z-index: 0;
   overflow-y: scroll;
   align-content: flex-start;
   justify-content: flex-start;
   align-items: flex-start;
-  height: calc(100vh - 100px) !important;
-  padding-left: 120px;
-  padding-right: 120px;
+  padding-left: 123px;
+  padding-right: 123px;
   padding-top: 100px;
 }
 
