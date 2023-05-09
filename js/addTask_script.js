@@ -445,6 +445,7 @@ function closeEditTaskPopUp() {
     document.getElementById("editCardPopUp").innerHTML = "";
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
+    closeBigCard();
 
 }
 
