@@ -26,21 +26,30 @@ async function addContactForEveryUser() {
         }
         contacts.push(contact);
     }
+    // Speichert die aktualisierte Liste der Kontakte online
+    await setItem('contacts', JSON.stringify(contacts));
 }
 
 async function initializeContact() {
     includeHTML();
     await loadContacts();
-    await addContactForEveryUser();
+    if (contacts.length === 0) {
+        await addContactForEveryUser();
+    }
     renderContactsList();
     saveUrlVariable();
     renderContactBig(contacts[0])
 }
 
 async function loadContacts() {
-    contacts = [];
-    contacts = JSON.parse(await getItem('contacts'));
+    console.log("Loading contacts");
+    const storedContacts = JSON.parse(await getItem('contacts'));
+    if (storedContacts && storedContacts.length > 0) {
+        contacts = storedContacts;
+    }
+    console.log("Contacts loaded:", contacts);
 }
+
 
 // generiert zufällige Farbe
 function getRandomColor() {
@@ -186,7 +195,7 @@ function contactsBigHTML(contact) {
 // Öffnet das Formular zum Hinzufügen eines neuen Kontakts
 function openAddContactForm() {
     const formHTML = `
-    <div class="overlay-contacts" onclick="closeOverlay(event)">
+    <div class="overlay-contacts">
         <div class="overlay-contact-form">
             <div class="newContactLeft">
                 <img src="assets/img/joinlogobright.svg">
@@ -198,12 +207,12 @@ function openAddContactForm() {
                     <img src="assets/img/newContactGrey.svg">
                 </div>
                 <div class="newContactInput">    
-                    <input type="text" id="add-name" placeholder="Name">
-                    <input type="email" id="add-email" placeholder="Email">
-                    <input type="text" id="add-phone" placeholder="Phone">
+                    <input type="text" id="add-name" placeholder="Name" required>
+                    <input type="email" id="add-email" placeholder="Email" required>
+                    <input type="text" id="add-phone" placeholder="Phone" required>
                     <div class="addContactButtons">
                         <button class="cancel" onclick="closeOverlay(event)">Cancel<img src="assets/img/cancel.svg"></button>
-                        <button class="createContact" onclick="addNewContact()">Create Contact<img src="assets/img/apply.svg"</button>
+                        <button class="createContact" onclick="addNewContact(event)">Create Contact<img src="assets/img/apply.svg"</button>
                     </div>
                 </div>
             </div>
@@ -216,7 +225,7 @@ function openAddContactForm() {
 }
 
 // Fügt einen neuen Kontakt zum contacts Array hinzu
-async function addNewContact() {
+async function addNewContact(event) {
     const name = document.getElementById('add-name').value;
     const [firstName, lastName] = firstAndLastNameAsArray(name);
     const email = document.getElementById('add-email').value;
@@ -231,16 +240,18 @@ async function addNewContact() {
         phone,
     };
 
-    contacts.push(contact);
-    await setItem('contacts', JSON.stringify(contacts));
+    contacts.push(contact); // Hinzufügen des neuen Kontakts zum Array
+    await setItem('contacts', JSON.stringify(contacts)); // Speichern des aktualisierten Arrays online
+    console.log("Contact added");
     renderContactsList();
+    closeOverlay(event);
 }
 
 // Öffnet das Formular zum Bearbeiten eines Kontakts
 function openEditContactForm(contact) {
     const contactIndex = contacts.indexOf(contact);
     const formHTML = `
-        <div class="overlay-contacts" onclick="closeOverlay(event)">
+        <div class="overlay-contacts">
             <div class="overlay-contact-form">    
                 <div class="editContactLeft">
                     <img src="assets/img/joinlogobright.svg">
@@ -256,8 +267,8 @@ function openEditContactForm(contact) {
                     <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
                     <input type="text" id="edit-phone" value="${contact.phone}" placeholder="Phone">
                     <div class="addContactButtons">
-                        <button class="delete" onclick="deleteContacts()">Delete</button>
-                        <button class="save" onclick="editContact(${contactIndex})">Save</button>
+                    <button class="delete" onclick="deleteContact(${contactIndex}, event); closeOverlay(event)">Delete</button>
+                        <button class="save" onclick="editContact(${contactIndex}); closeOverlay(event)">Save</button>
                     </div>
                 </div>
             </div> 
@@ -270,15 +281,15 @@ function openEditContactForm(contact) {
 }
 
 // Schließt das Overlay, wenn außerhalb des Formulars geklickt wird
-function closeOverlay(event) {
-    if (event.target.matches('.overlay-contacts')) {
-        const overlayContainer = document.getElementById('overlay-container');
-        document.body.removeChild(overlayContainer);
+function closeOverlay() {
+    const overlayContainer = document.getElementById('overlay-container');
+    if (overlayContainer.parentElement === document.body) {
+      document.body.removeChild(overlayContainer);
     }
-}
+  }  
 
 // Bearbeitet einen Kontakt im contacts Array
-function editContact(contactIndex) {
+async function editContact(contactIndex, event) {
     const name = document.getElementById('edit-name').value;
     const [firstName, lastName] = firstAndLastNameAsArray(name);
     const email = document.getElementById('edit-email').value;
@@ -288,25 +299,18 @@ function editContact(contactIndex) {
     contacts[contactIndex].lastName = lastName;
     contacts[contactIndex].initials = getInitials(firstName, lastName);
     contacts[contactIndex].email = email;
+    contacts[contactIndex].phone = phone;
+    await setItem('contacts', JSON.stringify(contacts));
+    renderContactsList();
+    closeOverlay(event);
 }
 
-// Löscht einen Kontakt aus dem contacts Array
-async function deleteContact(contactIndex) {
+// Löscht einen Kontakt aus dem "contacts"-Array, aktualisiert das localStorage und schließt das Overlay
+async function deleteContact(contactIndex, event) {
     contacts.splice(contactIndex, 1);
     await setItem('contacts', JSON.stringify(contacts));
     renderContactsList();
+    if (event) closeOverlay(event);
 }
 
-// Löscht einen Kontakt, wenn der "Delete"-Button im Bearbeitungsformular geklickt wird
-function deleteContacts() {
-    const name = document.getElementById('edit-name').value;
-    const [firstName, lastName] = firstAndLastNameAsArray(name);
 
-    for (let i = 0; i < contacts.length; i++) {
-        if (contacts[i].firstName === firstName && contacts[i].lastName === lastName) {
-            deleteContact(i);
-            break;
-        }
-    }
-    closeOverlay(event);
-}

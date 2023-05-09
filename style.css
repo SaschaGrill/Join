@@ -2061,6 +2061,7 @@ body {
   font-size: 21px;
   margin-right: 50px;
   cursor: pointer;
+  z-index: 200;
 }
 
 .createContact {
@@ -2078,6 +2079,7 @@ body {
   font-size: 21px;
   color: white;
   cursor: pointer;
+  z-index: 200;
 }
 
 .createContact:hover {
@@ -2167,6 +2169,7 @@ body {
   font-size: 21px;
   margin-right: 50px;
   cursor: pointer;
+  z-index: 200;
 }
 
 .save {
@@ -2184,6 +2187,7 @@ body {
   font-size: 21px;
   color: white;
   cursor: pointer;
+  z-index: 200;
 }
 
 .save:hover {
