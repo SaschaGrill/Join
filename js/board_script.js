@@ -203,7 +203,6 @@ async function endDragCard(pinSpaceStatus) {
 
 function openBigCard(cardIndex) {
     if (!(window.innerWidth < 1000)) {
-        console.log(window.innerWidth);
         document.getElementById("bigCardPopUp").innerHTML += bigCardHTML(cardIndex);
         showElement("Overlay");
         document.getElementById("boardContainer").classList.add("overflow-visible");
@@ -216,10 +215,18 @@ function openBigCard(cardIndex) {
 }
 
 function closeBigCard() {
-    document.getElementById("bigCardPopUp").innerHTML = "";
-    hideElement("Overlay");
-    document.getElementById("boardContainer").classList.remove("overflow-visible");
-    renderToDos();
+    if ((window.innerWidth > 1000)) {
+        document.getElementById("bigCardPopUp").innerHTML = "";
+        hideElement("Overlay");
+        document.getElementById("boardContainer").classList.remove("overflow-visible");
+        renderToDos();
+    }
+    else {
+        //öffne AddTaskPage, sobald weniger als 1000px breite
+        // openAddTaskSiteWithoutContact();
+        console.log("GOTOBOARD");
+    }
+
 }
 
 function bigCardHTML(cardIndex) {
@@ -244,7 +251,7 @@ function bigCardHTML(cardIndex) {
 
         <div  class="assigned-to-field">
             <p class="bold">Assigned To:</p>
-             ${assignedToContentBigCard(toDoArray[cardIndex].contactsInTask)}
+             ${assignedToContentBigCardHTML(cardIndex)}
         </div>
 
         <div >
@@ -261,28 +268,23 @@ function bigCardHTML(cardIndex) {
     `;
 }
 
-function assignedToContentBigCard(contacts) {
-    let string = "";
-    for (let i = 0; i < contacts.length; i++) {
-        string += contactCircleHTML(contacts[i]);
-        string += `<p>${contacts[i].firstName} ${contacts[i].lastName}</p>`;
-    }
-    return string;
-}
 
 function assignedToContentBigCardHTML(toDoIndex) {
+
     let string = "";
     for (let i = 0; i < toDoArray[toDoIndex].contactsInTask.length; i++) {
-        string += bigCardContactHTML(i);
+        string += bigCardContactHTML(toDoIndex, i);
     }
     return string;
 }
 
-function bigCardContactHTML(contactIndex) {
+function bigCardContactHTML(toDoIndex, contactIndex) {
+    console.log(toDoArray[toDoIndex].contactsInTask[contactIndex]);
+    let contact = toDoArray[toDoIndex].contactsInTask[contactIndex];
     return /*html*/`
     <div class="big-card-contact">
-        ${contactCircleHTML(contacts[contactIndex], false)}
-        <p>${contacts[contactIndex].firstName} ${contacts[contactIndex].lastName}</p>
+        ${contactCircleHTML(contact, false)}
+        <p>${contact.firstName} ${contact.lastName}</p>
     </div>
     `;
 }
