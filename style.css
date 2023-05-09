@@ -1166,17 +1166,38 @@ body {
   height: 100%;
 }
 
-.prio-container {
+.prio-container-big-card {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: white;
   border-radius: 10px;
-  height: 50px;
+  gap: 10px;
+  padding: 4px 18px;
   border: 1px solid #f5f5f5;
-  padding: 0 10px;
+  color: rgb(14, 14, 14);
+  /* background-color: #FF3D00; */
 }
 
+.prio-container-big-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  gap: 10px;
+  padding: 4px 18px;
+  /* border: 1px solid #f5f5f5; */
+  color: rgb(5, 5, 5);
+  /* background-color: #FF3D00; */
+}
+
+.big-card-contact{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 
 .prio-container:hover {
@@ -1351,6 +1372,54 @@ body {
 .dropzone-highlight {
   background-color: #caceca;
   border-radius: 30px;
+}
+
+/* BIG CARD MOBILE */
+.big-card-container-mobile{
+  position: relative;
+  top: 140px;
+  padding-left: 33px;
+  padding-right: 33px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.big-card-container-mobile .headlines{
+  text-align: left;
+}
+
+.big-card-container-mobile .small-card-category{
+  width: 33px;
+  padding: 4px 37px;
+  font-size: 21px;
+  display: flex;
+  justify-content: center;
+}
+
+.big-card-button-container-mobile {
+  position: absolute;
+  right: 47px;
+  bottom: 61px;
+  display: flex;
+  flex-direction: column;
+ align-items: flex-end;
+  gap:20px;
+}
+
+.big-card-button-container-mobile .delete-button{
+  border-radius: 10px;
+  border: 1px solid #2A3647;
+  width: 40px;
+  height: 40px;
+}
+
+.big-card-button-container-mobile .edit-button{
+  border-radius: 10px;
+  border: 1px solid #2A3647;
+  width: 50px;
+  height: 50px;
+  background-color: #2a3647;
 }
 
 /* SUMMARY */
