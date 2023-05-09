@@ -179,6 +179,8 @@ function contactsBigHTML(contact) {
     `;
 }
 
+
+
 // von Gloria eingefügt
 
 // Öffnet das Formular zum Hinzufügen eines neuen Kontakts

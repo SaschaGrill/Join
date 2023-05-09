@@ -63,7 +63,7 @@ function calculateFillPercentage(subTaskArray) {
     return percentage * 100;
 }
 
-function contactsHTML(toDo, deletable = true) {
+function contactsHTMLsmallCard(toDo, deletable = true) {
     let members = toDo["contactsInTask"];
     let string = "";
     for (let i = 0; i < members.length; i++) {

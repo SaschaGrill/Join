@@ -14,22 +14,23 @@
     <title>Join | Board</title>
 </head>
 
-<body onload="initializeBoard()">
+<body onload="initializeBigCardMobile()">
 
     <div w3-include-html="assets/templates/desktop_template.html" class="navbar-board-top"></div>
     
     
 <body>
-    <div class="big-card-Container-mobile">
-        <button class="big-card-close-button pointer" onclick="closeBigCard()"> <img src="assets/img/cross.png" alt=""></button>
-        <h1 class="headlines">Call potential clients</h1>
-        <p>Make the product presentation to prospective buyers</p>
+    <div class="big-card-container-mobile">
+        <button class="big-card-close-button pointer" onclick="closeBigCard()"> <img src="assets/img/backArrow.png" alt=""></button>
+        <span class="small-card-category" id="bigCardCategoryMobile" style="background-color: var(--sales-color)"> Sales</span>
+        <h1 class="headlines" id="bigCardTitel">Call potential clients</h1>
+        <p id="bigCardDescription">Make the product presentation to prospective buyers</p>
         <div class="dflex align-center gap20">
            <p class="bold">Due date:</p>
-           <p>05-08-2022</p>
+           <p id="bigCardDueDate">05-08-2022</p>
         </div>
 
-        <div  class=" dflex align-center gap20">
+        <div  class=" dflex align-center gap20" id="bigCardPrio">
             <p class="bold">Priority:</p>
             <div class="prio-container dflex align-center pointer">
                 Urgent
@@ -37,32 +38,14 @@
             </div>
         </div>
 
-        <div  class="assigned-to-field">
+        <div  class="assigned-to-field" id="assignedToFieldMobile">
             <p class="bold">Assigned To:</p>
-            <div class="assigned-to-item">
-                <div class="card-member">DS</div>
-                Danny Simsek
-            </div>
-
-            <div class="assigned-to-item">
-                <div class="card-member">DS</div>
-                Danny Simsek
-            </div>
-
-            <div class="assigned-to-item">
-                <div class="card-member">DS</div>
-                Danny Simsek
-            </div>
-
-            <div class="assigned-to-item">
-                <div class="card-member">DS</div>
-                Danny Simsek
-            </div>
+            
         </div>
         
-        <div class="big-card-button-container">
-            <button class="pointer"><img src="assets/img/delete.png" alt=""></button>
-            <button class="pointer"><img src="assets/img/pen.png" alt=""></button>
+        <div class="big-card-button-container-mobile">
+            <button class="pointer delete-button"><img src="assets/img/delete.png" alt=""></button>
+            <button class="pointer edit-button"><img src="assets/img/pen.png" alt=""></button>
         </div>
     </div>
 </body>

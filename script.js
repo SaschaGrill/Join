@@ -48,3 +48,7 @@ function addUrlVariable(id) {
 function openAddTaskSiteWithoutContact() {
     window.open(`add_task.html?contactToAddIndex=-1&user=${saveUrlVariable()}`, "_self");
 }
+
+function openBigCardMobile(cardIndex) {
+    window.open(`big_card_mobile.html?user=${saveUrlVariable()}&card_ind=${cardIndex}`, "_self");
+}
