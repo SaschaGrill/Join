@@ -94,11 +94,19 @@ function contactCircleHTML(member, deletable = true) {
 }
 
 function openAddTaskMenu(status = "to-do") {
-    showElement("addTaskPopUp");
-    showElement("Overlay");
-    updateAddTaskMemberSelection("popUp");
-    document.getElementById("boardContainer").classList.add("overflow-visible");
-    document.getElementById("addTaskButton_popUp").onclick = function () { addTaskFromPopUp(status) };
+    if (!(window.innerWidth < 1000)) {
+        showElement("addTaskPopUp");
+        showElement("Overlay");
+        updateAddTaskMemberSelection("popUp");
+        document.getElementById("boardContainer").classList.add("overflow-visible");
+        document.getElementById("addTaskButton_popUp").onclick = function () { addTaskFromPopUp(status) };
+    }
+    else {
+        console.log("AA");
+        //öffne AddTaskPage, sobald weniger als 1000px breite
+        openAddTaskSiteWithoutContact();
+    }
+
 }
 
 function closeAddTaskMenu() {

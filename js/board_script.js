@@ -146,12 +146,12 @@ function smallCardHTML(toDo, index) {
 <div class="small-card pointer" onclick="openBigCard(${index})" draggable="true" ondragstart="startDragCard(${index})">
         <span class="small-card-category" style="background-color: var(--${toDo["category"]}-color)"> ${toDo["category"]}</span>
         <h4>${toDo["title"]}</h4>
-        <p class="small-card-description"> 
+        <p class="small-card-description">
         ${toDo["description"]}
         </p>
         ${subtaskHTML(toDo)}
         <div class="small-card-bottom">
-          ${contactsHTML(toDo, false)} 
+          ${contactsHTML(toDo, false)}
             <img src="assets/img/priority${capitalizeFirstLetter(toDo["priority"])}.png" alt="" class="small-card-priority">
         </div>
 </div>
@@ -185,9 +185,17 @@ async function endDragCard(pinSpaceStatus) {
 }
 
 function openBigCard(cardIndex) {
-    document.getElementById("bigCardPopUp").innerHTML += bigCardHTML(cardIndex);
-    showElement("Overlay");
-    document.getElementById("boardContainer").classList.add("overflow-visible");
+    if (!(window.innerWidth < 1000)) {
+        console.log(window.innerWidth);
+        document.getElementById("bigCardPopUp").innerHTML += bigCardHTML(cardIndex);
+        showElement("Overlay");
+        document.getElementById("boardContainer").classList.add("overflow-visible");
+    }
+    else {
+        //öffne AddTaskPage, sobald weniger als 1000px breite
+        // openAddTaskSiteWithoutContact();
+        console.log("kleiner als 1000");
+    }
 }
 
 function closeBigCard() {
@@ -212,11 +220,11 @@ function bigCardHTML(cardIndex) {
         <div  class=" dflex align-center gap20">
             <p class="bold">Priority:</p>
             <div class="prio-container dflex align-center pointer">
-                ${capitalizeFirstLetter((toDoArray[cardIndex]["priority"]))} 
+                ${capitalizeFirstLetter((toDoArray[cardIndex]["priority"]))}
                 <img src="assets/img/priority${toDoArray[cardIndex]["priority"]}.png">
             </div>
         </div>
-        
+
         <div  class="assigned-to-field">
             <p class="bold">Assigned To:</p>
              ${assignedToContentBigCard(toDoArray[cardIndex].contactsInTask)}
@@ -225,9 +233,9 @@ function bigCardHTML(cardIndex) {
         <div >
             <p class="bold">Subtasks:</p>
             <br>
-            ${subtaskBigCardHTML(cardIndex)} 
+            ${subtaskBigCardHTML(cardIndex)}
         </div >
-       
+
         <div class="big-card-button-container">
           <button class="pointer"><img src="assets/img/delete.png" alt="" onclick="deleteToDo(${cardIndex})"></button>
           <button class="pointer"><img src="assets/img/pen.png" alt="" onclick="openEditTaskPopUp(${cardIndex})"></button>
@@ -266,7 +274,6 @@ function getRightRectangleColor(cardIndex, subTaskIndex) {
     if (!done) return `<div class="rectangle"></div>`;
     else if (done) return `<div class="rectangle-done"></div>`
 }
-// onclick="deleteSubTask(${cardIndex}, ${i})"
 
 function deleteSubTask(cardIndex, subTaskIndex) {
     toDoArray[cardIndex].subtasks.splice(subTaskIndex, 1);

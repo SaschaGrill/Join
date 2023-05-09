@@ -1,0 +1,72 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <script src="js/contacts_script.js"></script>
+    <script src="js/board_script.js"></script>
+    <script src="js/addTask_script.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/register.js"></script>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/bigJoinLogo.svg">
+    <title>Join | Board</title>
+</head>
+
+<body onload="initializeBoard()">
+
+    <div w3-include-html="assets/templates/desktop_template.html" class="navbar-board-top"></div>
+    
+    
+<body>
+    <div class="big-card-Container-mobile">
+        <button class="big-card-close-button pointer" onclick="closeBigCard()"> <img src="assets/img/cross.png" alt=""></button>
+        <h1 class="headlines">Call potential clients</h1>
+        <p>Make the product presentation to prospective buyers</p>
+        <div class="dflex align-center gap20">
+           <p class="bold">Due date:</p>
+           <p>05-08-2022</p>
+        </div>
+
+        <div  class=" dflex align-center gap20">
+            <p class="bold">Priority:</p>
+            <div class="prio-container dflex align-center pointer">
+                Urgent
+                <img src="assets/img/priorityurgent.png">
+            </div>
+        </div>
+
+        <div  class="assigned-to-field">
+            <p class="bold">Assigned To:</p>
+            <div class="assigned-to-item">
+                <div class="card-member">DS</div>
+                Danny Simsek
+            </div>
+
+            <div class="assigned-to-item">
+                <div class="card-member">DS</div>
+                Danny Simsek
+            </div>
+
+            <div class="assigned-to-item">
+                <div class="card-member">DS</div>
+                Danny Simsek
+            </div>
+
+            <div class="assigned-to-item">
+                <div class="card-member">DS</div>
+                Danny Simsek
+            </div>
+        </div>
+        
+        <div class="big-card-button-container">
+            <button class="pointer"><img src="assets/img/delete.png" alt=""></button>
+            <button class="pointer"><img src="assets/img/pen.png" alt=""></button>
+        </div>
+    </div>
+</body>
+
+    <div w3-include-html="assets/templates/navbar_mobile_template.html" class="navbar-mobile"></div>
+
+</body>
