@@ -17,7 +17,7 @@
 <body onload="initializeBoard()">
 
     <div w3-include-html="assets/templates/desktop_template.html" class="navbar-board-top"></div>
-    <div class="dflex width-100">
+    <div class="dflex flex-end">
         <div w3-include-html="assets/templates/desktop_side_template.html" class="navbar-board"></div>
         <div class="board-container" id="boardContainer">
             <div class="board-header">
@@ -58,8 +58,8 @@
             <div class="board-content">
               
                 <!-- <div w3-include-html="assets/templates/big_toDo_card_template.html" class="dnone" id="bigCardPopUp"></div> -->
-                <div id="bigCardPopUp"></div>
-                <div id="editCardPopUp"></div>
+                <div id="bigCardPopUp" class="big-card-pop-up"></div>
+                <div id="editCardPopUp" class="big-card-pop-up"></div>
                 <div w3-include-html="assets/templates/add_task_pop_up_template.html" class="dnone" id="addTaskPopUp"></div>
             
              <div class="board-column-wrapper">
@@ -100,9 +100,11 @@
                     </div>
                 </div>
              </div>
+
             </div>
 
         </div>
     </div>
+    <div w3-include-html="assets/templates/navbar_mobile_template.html" class="navbar-mobile"></div>
 
 </body>
