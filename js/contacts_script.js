@@ -208,14 +208,16 @@ function openAddContactForm() {
                 <div class="newContactImg">
                     <img src="assets/img/newContactGrey.svg">
                 </div>
-                <div class="newContactInput">    
-                    <input type="text" id="add-name" placeholder="Name" required>
-                    <input type="email" id="add-email" placeholder="Email" required>
-                    <input type="text" id="add-phone" placeholder="Phone" required>
-                    <div class="addContactButtons">
-                        <button class="cancel" onclick="closeOverlay(event)">Cancel<img src="assets/img/cancel.svg"></button>
-                        <button class="createContact" onclick="addNewContact(event)">Create Contact<img src="assets/img/apply.svg"</button>
-                    </div>
+                <div class="newContactInput">
+                    <form onsubmit="addNewContact(event); return false;">    
+                        <input type="text" id="add-name" placeholder="Name" required>
+                        <input type="email" id="add-email" placeholder="Email" required>
+                        <input type="tel" id="add-phone" placeholder="Phone" required>
+                        <div class="addContactButtons">
+                            <button class="cancel" onclick="closeOverlay(event)" formnovalidate>Cancel<img src="assets/img/cancel.svg"></button>
+                            <button class="createContact" onclick="addNewContact(event)">Create Contact<img src="assets/img/apply.svg"</button>
+                        </div>
+                    </form>    
                 </div>
             </div>
     </div>
@@ -228,6 +230,7 @@ function openAddContactForm() {
 
 // Fügt einen neuen Kontakt zum contacts Array hinzu
 async function addNewContact(event) {
+    event.preventDefault();
     const name = document.getElementById('add-name').value;
     const [firstName, lastName] = firstAndLastNameAsArray(name);
     const email = document.getElementById('add-email').value;
@@ -264,14 +267,16 @@ function openEditContactForm(contact) {
                     <div class="contacts-big-circle margin-right" style="background-color: ${contact.color}">
                     ${contact.initials}
                 </div>
-                <div class="editContactInput"> 
-                    <input type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
-                    <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
-                    <input type="text" id="edit-phone" value="${contact.phone}" placeholder="Phone">
-                    <div class="addContactButtons">
-                    <button class="delete" onclick="deleteContact(${contactIndex}, event); closeOverlay(event)">Delete</button>
-                        <button class="save" onclick="editContact(${contactIndex}); closeOverlay(event)">Save</button>
-                    </div>
+                <div class="editContactInput">
+                    <form onsubmit="editContact(${contactIndex}, event); return false;">
+                        <input type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
+                        <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
+                        <input type="tel" id="edit-phone" value="${contact.phone}" placeholder="Phone">
+                        <div class="addContactButtons">
+                            <button class="delete" onclick="deleteContact(${contactIndex}, event); closeOverlay(event)" formnovalidate>Delete</button>
+                            <button class="save" onclick="editContact(${contactIndex}); closeOverlay(event)">Save</button>
+                        </div>
+                    </form>    
                 </div>
             </div> 
         </div>       
@@ -292,6 +297,7 @@ function closeOverlay() {
 
 // Bearbeitet einen Kontakt im contacts Array
 async function editContact(contactIndex, event) {
+    event.preventDefault();
     const name = document.getElementById('edit-name').value;
     const [firstName, lastName] = firstAndLastNameAsArray(name);
     const email = document.getElementById('edit-email').value;
