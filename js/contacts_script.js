@@ -69,9 +69,13 @@ function getColorForName(firstName, lastName) {
     return getColorForInitials(initials);
 }
 
+async function getStoredColors() {
+    const storedColors = JSON.parse(await getItem('colors'));
+}
+
 // wandelt Initialen in Farben um
 function getColorForInitials(initials) {
-    const colors = {};
+    const colors = storedColors;
     if (!colors[initials]) {
         colors[initials] = getRandomColor();
     }
@@ -212,10 +216,10 @@ function openAddContactForm() {
                     <form onsubmit="addNewContact(event); return false;">    
                         <input type="text" id="add-name" placeholder="Name" required>
                         <input type="email" id="add-email" placeholder="Email" required>
-                        <input type="tel" id="add-phone" placeholder="Phone" required>
+                        <input type="number" id="add-phone" placeholder="Phone" required>
                         <div class="addContactButtons">
                             <button class="cancel" onclick="closeOverlay(event)" formnovalidate>Cancel<img src="assets/img/cancel.svg"></button>
-                            <button class="createContact" onclick="addNewContact(event)">Create Contact<img src="assets/img/apply.svg"</button>
+                            <button class="createContact">Create Contact<img src="assets/img/apply.svg"</button>
                         </div>
                     </form>    
                 </div>
@@ -250,6 +254,7 @@ async function addNewContact(event) {
     console.log("Contact added");
     renderContactsList();
     closeOverlay(event);
+    renderContactBig(contact);
 }
 
 // Öffnet das Formular zum Bearbeiten eines Kontakts
@@ -271,10 +276,10 @@ function openEditContactForm(contact) {
                     <form onsubmit="editContact(${contactIndex}, event); return false;">
                         <input type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
                         <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
-                        <input type="tel" id="edit-phone" value="${contact.phone}" placeholder="Phone">
+                        <input type="number" id="edit-phone" value="${contact.phone}" placeholder="Phone">
                         <div class="addContactButtons">
                             <button class="delete" onclick="deleteContact(${contactIndex}, event); closeOverlay(event)" formnovalidate>Delete</button>
-                            <button class="save" onclick="editContact(${contactIndex}); closeOverlay(event)">Save</button>
+                            <button class="save">Save</button>
                         </div>
                     </form>    
                 </div>
@@ -311,13 +316,15 @@ async function editContact(contactIndex, event) {
     await setItem('contacts', JSON.stringify(contacts));
     renderContactsList();
     closeOverlay(event);
+    renderContactBig(contact);
 }
 
-// Löscht einen Kontakt aus dem "contacts"-Array, aktualisiert das localStorage und schließt das Overlay
+// Löscht einen Kontakt aus dem "contacts"-Array, aktualisiert den Onlinespeicher und schließt das Overlay
 async function deleteContact(contactIndex, event) {
     contacts.splice(contactIndex, 1);
     await setItem('contacts', JSON.stringify(contacts));
     renderContactsList();
+    renderContactBig(contacts[0]);
     if (event) closeOverlay(event);
 }
 
