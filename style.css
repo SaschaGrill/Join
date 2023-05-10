@@ -1722,6 +1722,120 @@ body {
   color: white;
 }
 
+/* SUMMARY */
+
+/* Animations*/
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Media Queries */
+
+@media(max-width: 1300px) {
+
+  .summary-container {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 232px);
+    height: calc(100% - 89px);
+    position: relative;
+    top: 89px;
+    left: 232px;
+    background-color: #f5f5f5;
+    z-index: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+
+  .summary-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5F5;
+    z-index: 0;
+    width: 100vw;
+    height: fit-content;
+    top: 89px;
+    left: 0;
+  }
+
+  .summary-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #F5F5F5;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 0;
+  }
+
+  .summary-content-left,
+  .summary-content-right {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .summary-content-right {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+    width: 100vw;
+    z-index: 1;
+    animation: fadeOut 1s ease-in forwards;
+    animation-delay: 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+
+  .summary-content-left {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+    animation-delay: 0.5s;
+    height: 100%;
+    width: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 0 80px;
+    padding: 0;
+  }
+
+  .summary-header {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+    animation-delay: 1s;
+    position: unset;
+    top: 0;
+  }
+}
+
 /* CONTACTS */
 
 .contacts-container {
