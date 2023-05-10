@@ -11,20 +11,31 @@ function getInitials(firstName, lastName) {
     return [firstName[0], lastName[0]];
 }
 
+function isUserInContacts(email) {
+    for (let contact of contacts) {
+        if (contact.email === email) {
+            return true;
+        }
+    }
+    return false;
+}
+
 async function addContactForEveryUser() {
     await loadUsers();
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
-        let fullNameAsArray = firstAndLastNameAsArray(user.name);
-        let contact = {
-            firstName: fullNameAsArray[0],
-            lastName: fullNameAsArray[1],
-            color: getRandomColor(),
-            initials: getInitials(fullNameAsArray[0], fullNameAsArray[1]),
-            email: user.email,
-            phone: "to be added",
+        if (!isUserInContacts(user.email)) {
+            let fullNameAsArray = firstAndLastNameAsArray(user.name);
+            let contact = {
+                firstName: fullNameAsArray[0],
+                lastName: fullNameAsArray[1],
+                color: getRandomColor(),
+                initials: getInitials(fullNameAsArray[0], fullNameAsArray[1]),
+                email: user.email,
+                phone: "to be added",
+            }
+            contacts.push(contact);
         }
-        contacts.push(contact);
     }
 }
 
