@@ -26,16 +26,12 @@ async function addContactForEveryUser() {
         }
         contacts.push(contact);
     }
-    // Speichert die aktualisierte Liste der Kontakte online
-    await setItem('contacts', JSON.stringify(contacts));
 }
 
 async function initializeContact() {
     includeHTML();
     await loadContacts();
-    if (contacts.length === 0) {
-        await addContactForEveryUser();
-    }
+    await addContactForEveryUser();
     renderContactsList();
     saveUrlVariable();
     renderContactBig(contacts[0])
@@ -284,9 +280,9 @@ function openEditContactForm(contact) {
 function closeOverlay() {
     const overlayContainer = document.getElementById('overlay-container');
     if (overlayContainer.parentElement === document.body) {
-      document.body.removeChild(overlayContainer);
+        document.body.removeChild(overlayContainer);
     }
-  }  
+}
 
 // Bearbeitet einen Kontakt im contacts Array
 async function editContact(contactIndex, event) {
