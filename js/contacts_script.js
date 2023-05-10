@@ -38,14 +38,9 @@ async function initializeContact() {
 }
 
 async function loadContacts() {
-    console.log("Loading contacts");
-    const storedContacts = JSON.parse(await getItem('contacts'));
-    if (storedContacts && storedContacts.length > 0) {
-        contacts = storedContacts;
-    }
-    console.log("Contacts loaded:", contacts);
+    contacts = [];
+    contacts = JSON.parse(await getItem('contacts'));
 }
-
 
 // generiert zufällige Farbe
 function getRandomColor() {
