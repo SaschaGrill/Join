@@ -14,7 +14,7 @@
     <title>Join | Edit Task</title>
 </head>
 
-<body onload="initializeAddTaskSite()" >
+<body onload="initializeEditTaskSite()" >
 
     <div w3-include-html="assets/templates/desktop_template.html" ></div>
     <div class="dflex-except-mobile ">
@@ -34,21 +34,21 @@
             <div class="add-task-input-container">
                 <p>Title</p>
                 <div class="input-field">
-                    <input type="text" placeholder="Enter a title" id="addTaskTitle" required>
+                    <input type="text" placeholder="Enter a title" id="addTaskTitle_edit_mobile" required>
                 </div>
             </div>
 
             <div class="add-task-input-container">
                 <p>Description</p>
                 <div class="text-area-field">
-                <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription"></textarea>
+                <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription_edit_mobile"></textarea>
                 </div>
             </div>
 
             <div class="add-task-input-container">
                 <p>Category</p>
                 <div class="input-field">
-                    <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory" required>
+                    <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory_edit_mobile" required>
                         <option value="0">Select task Category</option>
                         <option value="Design">Design</option>
                         <option value="Sales">Sales</option>
@@ -62,12 +62,12 @@
             <div class="add-task-input-container dflex-col gap20">
                 <p>Assigned to</p>
                 <div class="input-field">
-                    <select name="add-task-category-select" id="addTaskSelection_site" class="select-category pointer" oninput="addMemberToTask(popUp = false)" required>
+                    <select name="add-task-category-select" id="addTaskSelection_edit_mobile" class="select-category pointer" oninput="addMemberToTask(popUp = false)" required>
                         <option value="0">Select contacts to assign </option>
 
                     </select>
                 </div>
-                <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_site">
+                <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_edit_mobile">
 
                 </div>
             </div>
@@ -79,7 +79,7 @@
            <div class="add-task-input-container">
                 <p>Due Date</p>
                 <div class="input-field date-input" >
-                    <input type="datetime" placeholder="dd/mm/yyyy" class="pointer" id="dueDateInput_addTaskSite">
+                    <input type="datetime" placeholder="dd/mm/yyyy" class="pointer" id="dueDateInput_edit_mobile" >
                     <img src="assets/img/calendar.png" alt="">
                 </div>
            </div>
@@ -110,7 +110,7 @@
                  <input type="text" placeholder="Add new subtask" id="subTaskInput_site">
                  <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('site')">
                 </div>
-                <div class="dflex-col" id="subTaskPreviewContainer_site">
+                <div class="dflex-col" id="subTaskPreviewContainer_edit_mobile">
                  <!-- <div class="dflex align-center">
                     <div class="rectangle"></div>
                      TestTask1

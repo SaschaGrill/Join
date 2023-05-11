@@ -61,6 +61,7 @@ async function initializeBigCardMobile() {
     await addContactForEveryUser();
     saveUrlVariable();
     renderBigCardMobile(getBigCardIndexFromURL());
+    document.getElementById("editButtonMobile").onclick = () => { openEditTaskMobile(getBigCardIndexFromURL()) };
 }
 
 function getBigCardIndexFromURL() {

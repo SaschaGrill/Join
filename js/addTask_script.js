@@ -120,6 +120,7 @@ function updateAddTaskMemberSelection(openedFromString) {
     if (openedFromString == "popUp") selection = document.getElementById("addTaskSelection_popUp");
     else if (openedFromString == "addTaskSite") selection = document.getElementById("addTaskSelection_site");
     else if (openedFromString == "editTask") selection = document.getElementById("addTaskSelection_edit");
+    // else if (openedFromString == "editTaskMobile") selection = document.getElementById("addTaskSelection_edit_mobile");
     else console.log(openedFromString);
 
     selection.innerHTML = "";
@@ -344,10 +345,48 @@ function dateIsNotInPast(source = "addTaskSite") {
 
 // EDIT TASK!!//////////////////////////////////////////////////////////////
 
+async function initializeEditTaskSite() {
+    let toDoIndex = getToDoFromURL();
+    includeHTML();
+    await loadTasksOnline();
+    await loadContacts();
+    await addContactForEveryUser();
+
+    // updateAddTaskMemberSelection("editTaskMobile");
+    document.getElementById("addTaskAssignedMembers_edit_mobile").innerHTML = addedMembersHTMLBigCard(toDoIndex);
+    document.getElementById("dueDateInput_edit_mobile").value = getDateString_Edit(toDoIndex);
+    document.getElementById("subTaskPreviewContainer_edit_mobile").innerHTML = addedSubTasksHTML(toDoIndex);
+    document.getElementById("addTaskTitle_edit_mobile").value = toDoArray[toDoIndex].title;
+    document.getElementById("addTaskDescription_edit_mobile").value = toDoArray[toDoIndex].description;
+    document.getElementById("addTaskCategory_edit_mobile").selectedIndex = selectOptionByValue(document.getElementById("addTaskCategory_edit_mobile"), capitalizeFirstLetter(toDoArray[toDoIndex].category));
+
+    saveUrlVariable();
+
+}
+
+function selectOptionByValue(selectElement, value) {
+    for (var i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === value) {
+            selectElement.selectedIndex = i;
+            return i;
+        }
+    }
+}
+
+function getToDoFromURL() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const user = urlParams.get('toDo');
+    return user;
+}
+
 function addedMembersHTMLBigCard(toDoIndex) {
     let string = "";
+    console.log(toDoIndex);
+
     for (let i = 0; i < toDoArray[toDoIndex].contactsInTask.length; i++) {
-        string += contactCircleHTML(toDoArray[toDoIndex].contactsInTask[i]);
+        if (toDoArray[toDoIndex].contactsInTask[i] != undefined)
+            string += contactCircleHTML(toDoArray[toDoIndex].contactsInTask[i]);
     }
 
     return string;
@@ -372,6 +411,32 @@ async function EditTask(cardIndex) {
     let titleInput = document.getElementById("addTaskTitle_edit");
     let descriptionInput = document.getElementById("addTaskDescription_edit");
     let categoryInput = document.getElementById("addTaskCategory_edit");
+
+    if (!dateIsNotInPast("edit")) return;
+
+    let JSON = {
+        category: categoryInput.value.toLowerCase(),
+        title: titleInput.value,
+        description: descriptionInput.value,
+        subtasks: subTasksToEdit,
+        priority: priorityToEdit,
+        contactsInTask: contactsToAdd,
+        status: toDoArray[cardIndex].status,
+        dueDate: getDateAsString("edit"),
+    }
+
+    toDoArray.splice(cardIndex, 1);
+    toDoArray.push(JSON);
+    closeEditTaskPopUp();
+    closeBigCard();
+    await saveTasksOnline();
+    renderToDos();
+}
+
+async function EditTaskMobile(cardIndex) {
+    let titleInput = document.getElementById("addTaskTitle_edit_mobile");
+    let descriptionInput = document.getElementById("addTaskDescription_edit_mobile");
+    let categoryInput = document.getElementById("addTaskCategory_edit_mobile");
 
     if (!dateIsNotInPast("edit")) return;
 
@@ -478,7 +543,7 @@ function editTaskHTML(toDoIndex) {
         <div class="add-task-input-container">
             <p>Category</p>
             <div class="input-field">
-                <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory_edit" required>
+                <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory_edit_mobile" required>
                     <option value="0" id="category_edit_0">Select task Category</option>
                     <option value="Design" id="category_edit_design">Design</option>
                     <option value="Sales" id="category_edit_sales">Sales</option>
@@ -492,12 +557,12 @@ function editTaskHTML(toDoIndex) {
         <div class="add-task-input-container dflex-col gap20">
             <p>Assigned to</p>
             <div class="input-field">
-                <select name="add-task-category-select" id="addTaskSelection_edit" class="select-category pointer" oninput="addMemberToTask()" required>
+                <select name="add-task-category-select" id="addTaskSelection_edit_mobile" class="select-category pointer" oninput="addMemberToTask()" required>
                     <option value="0">Select contacts to assign </option>
 
                 </select>
             </div>
-            <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_edit">
+            <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_edit_mobile">
                 ${addedMembersHTMLBigCard(toDoIndex)}
             </div>
         </div>
@@ -540,7 +605,7 @@ function editTaskHTML(toDoIndex) {
              <input type="text" placeholder="Add new subtask" id="subTaskInput_edit">
              <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('edit')">
             </div>
-            <div class="dflex-col gap10" id="subTaskPreviewContainer_edit">
+            <div class="dflex-col gap10" id="subTaskPreviewContainer_edit_mobile">
              ${addedSubTasksHTML(toDoIndex)}
             </div>
         </div>
@@ -554,6 +619,8 @@ function editTaskHTML(toDoIndex) {
 </div > `;
 }
 
-
+function openEditTaskMobile(toDoIndex) {
+    window.open(`edit_task_mobile.html?toDo=${toDoIndex}&user=${saveUrlVariable()}`, "_self");
+}
 // function
 //////////////////////////////////////////////////
