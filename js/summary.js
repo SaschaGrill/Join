@@ -3,7 +3,7 @@ async function initSummary() {
     greet();
     await loadTasksOnline();
     const taskCounts = getTaskCounts();
-    updateTaskCounts(taskCounts); 
+    updateTaskCounts(taskCounts);
     const urgentAndDeadlineInfo = getUrgentAndUpcomingDeadline();
     updateUrgentAndUpcomingDeadline(urgentAndDeadlineInfo);
     saveUrlVariable();
@@ -32,10 +32,6 @@ function greet() {
     greetingElement.innerHTML = getGreeting();
     let greetUser = document.getElementById('user');
     greetUser.innerHTML = currentUser;
-}
-
-function goToBoard() {
-    window.location.href = "board.html";
 }
 
 function getMonthName(monthIndex) {

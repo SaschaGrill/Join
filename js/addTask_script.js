@@ -554,5 +554,6 @@ function editTaskHTML(toDoIndex) {
 </div > `;
 }
 
+
 // function
 //////////////////////////////////////////////////

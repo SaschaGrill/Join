@@ -8,12 +8,17 @@ body {
   overflow: hidden;
 }
 
+
 :root {
   --design-color: #ff7a00;
   --sales-color: #fc71ff;
   --backoffice-color: #1fd7c1;
   --marketing-color: #0038ff;
   --media-color: #ffc701;
+}
+
+a span{
+  text-decoration: none !important;
 }
 
 .width-100 {
@@ -123,7 +128,7 @@ body {
 /* Header */
 
 .desktop-top {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 89px;
   left: 0px;
@@ -902,6 +907,15 @@ body {
   background-color: #ffffff;
   border-radius: 30px;
   padding: 18px;
+ 
+}
+
+
+.small-card:hover{
+  animation-name: "hover-effect";
+  animation-duration: 225ms;
+  transition: transform 225ms;
+  transform: rotate(1deg);
 }
 
 .small-card-description {
@@ -1748,6 +1762,8 @@ body {
 
   100% {
     opacity: 0;
+    height: 0px;
+    width: 0px;
   }
 }
 

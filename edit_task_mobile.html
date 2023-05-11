@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/img/bigJoinLogo.svg">
-    <title>Join | Add Task</title>
+    <title>Join | Edit Task</title>
 </head>
 
 <body onload="initializeAddTaskSite()" >
@@ -19,11 +19,13 @@
     <div w3-include-html="assets/templates/desktop_template.html" ></div>
     <div class="dflex-except-mobile ">
         <div w3-include-html="assets/templates/desktop_side_template.html" class="navbar-add-task-none"></div>
-        <div w3-include-html="assets/templates/header_add_task_mobile_template.html" class="navbar-add-task "></div>
+        <div w3-include-html="assets/templates/header_add_task_mobile_template.html" class="navbar-add-task"></div>
+        
+<body>
     <div class="add-task-container">
         <div class="add-task-heading-wrapper">
             <p class="mobile-view-only">Kanban Project Management Tool</p>
-            <h1 class="add-task-heading headlines">Add Task</h1>
+            <h1 class="add-task-heading headlines">Edit Task</h1>
         </div>
     
         <div class="add-task-content">
@@ -124,6 +126,7 @@
     </div>
     </div>
     <div w3-include-html="assets/templates/navbar_mobile_template.html" class="navbar-mobile"></div>
+</body>
 
         </div>
     </div>

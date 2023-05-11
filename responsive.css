@@ -21,6 +21,14 @@
         scale: 0.85;
         overflow: hidden;
     }
+
+    /* .progress-bar{
+        gap: 5px;
+    } */
+
+    .progress-bar p{
+        white-space: nowrap;
+    }
 }
 
 @media(max-width: 600px) {
@@ -169,3 +177,11 @@
         background-position: 280px;
     }
 }
+
+
+/* @media(min-width:1000px)
+{
+    .pos-fixed-desktop{
+     position: fixed !important;
+   }
+} */

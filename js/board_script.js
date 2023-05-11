@@ -208,8 +208,6 @@ function openBigCard(cardIndex) {
         document.getElementById("boardContainer").classList.add("overflow-visible");
     }
     else {
-        //öffne AddTaskPage, sobald weniger als 1000px breite
-        // openAddTaskSiteWithoutContact();
         openBigCardMobile(cardIndex);
     }
 }
@@ -222,9 +220,7 @@ function closeBigCard() {
         renderToDos();
     }
     else {
-        //öffne AddTaskPage, sobald weniger als 1000px breite
-        // openAddTaskSiteWithoutContact();
-        console.log("GOTOBOARD");
+        openBoard();
     }
 
 }
@@ -279,7 +275,6 @@ function assignedToContentBigCardHTML(toDoIndex) {
 }
 
 function bigCardContactHTML(toDoIndex, contactIndex) {
-    console.log(toDoArray[toDoIndex].contactsInTask[contactIndex]);
     let contact = toDoArray[toDoIndex].contactsInTask[contactIndex];
     return /*html*/`
     <div class="big-card-contact">
