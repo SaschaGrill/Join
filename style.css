@@ -513,6 +513,12 @@ body {
   height: 19px;
 }
 
+.remember-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 #login-checkbox {
   background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
   border: 1px solid #000000;
