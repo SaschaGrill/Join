@@ -69,17 +69,12 @@ function getColorForName(firstName, lastName) {
     return getColorForInitials(initials);
 }
 
-async function getStoredColors() {
-    const storedColors = JSON.parse(await getItem('colors'));
-}
-
 // wandelt Initialen in Farben um
 function getColorForInitials(initials) {
-    const colors = storedColors;
+    const colors = {};
     if (!colors[initials]) {
         colors[initials] = getRandomColor();
     }
-    return colors[initials];
 }
 
 //rendert die Liste Aller Kontakte am Linken Rand
