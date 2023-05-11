@@ -53,7 +53,6 @@
     @media(max-height: 844px) {
         .login-section {
             scale: 1;
-            overflow: hidden;
         }
     }
 
@@ -64,27 +63,23 @@
         }
     }
 
-    .responsive-login-signup {
+    .login-signup {
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
         gap: 35px;
-
         position: absolute !important;
-        width: 305px;
-        height: 51px;
         left: 82px;
-        top: 685px;
-        font-size: 21px;
-        margin-left: -50px;
+        top: 800px;
+        padding-bottom: 30px;
     }
 
     .responsive-login-bars {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 35px;
         transform: translate(-50%, -50%);
         background: #ffffff;
         box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
@@ -96,8 +91,7 @@
         animation-fill-mode: forwards;
         position: absolute;
         width: 350px;
-        height: 428px;
-        top: 365px;
+        top: 485px;
     }
 
     .responsive-login-bar {
@@ -135,7 +129,43 @@
         align-items: center;
     }
 
+    .login-btn {
+        width: 180px;
+        height: 51px;
+        font-size: 16px;
+    }
+
     .remember-checkbox {
         gap: 15px;
+    }
+
+    .sendemail {
+        position: fixed;
+        top: 120%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        width: 250px;
+        height: 250px;
+    }
+
+    .login-head-borderline {
+        min-height: 100px;
+        border: 1px solid #29abe2;
+        transform: rotate(90deg);
+        margin-top: -65px;
+        border-radius: 10px;
+    }
+
+    .bg-email {
+        background-image: url("assets/img/emailImg.svg");
+        background-repeat: no-repeat;
+        background-position: 280px;
+    }
+
+    .bg-password {
+        background-image: url("assets/img/passwordImg.svg");
+        background-repeat: no-repeat;
+        background-position: 280px;
     }
 }

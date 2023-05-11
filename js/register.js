@@ -171,6 +171,7 @@ function confirmEmailBanner() {
   let sendEmail = document.getElementById('confirmemail');
   let gray = document.querySelector('.login-section');
   let gray2 = document.querySelector('.fullscreen-img');
+  sendEmail.classList.remove('dnone');
   forgotBtn.classList.add('disabled');
   sendEmail.classList.add('sendemailiframe');
   gray.style.background ='lightgray';
@@ -180,6 +181,7 @@ function confirmEmailBanner() {
       gray.style.background = '#f6f7f8';
       gray2.style.backgroundColor = '#f6f7f8';
       forgotBtn.classList.remove('disabled');
+      sendEmail.classList.add('dnone');
     }, 2500);
 }
 
