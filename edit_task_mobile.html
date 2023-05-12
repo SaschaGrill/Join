@@ -62,7 +62,7 @@
             <div class="add-task-input-container dflex-col gap20">
                 <p>Assigned to</p>
                 <div class="input-field">
-                    <select name="add-task-category-select" id="addTaskSelection_edit_mobile" class="select-category pointer" oninput="addMemberToTask(popUp = false)" required>
+                    <select name="add-task-category-select" id="addTaskSelection_edit_mobile" class="select-category pointer" oninput="addMemberToTask('edit_mobile')" required>
                         <option value="0">Select contacts to assign </option>
 
                     </select>
@@ -87,17 +87,17 @@
            <div class="select-prio">
              <p>Prio</p>
              <div class="dflex gap10">
-                <div class="prio-container pointer" id="prioButton_urgent" onclick="selectPrio('urgent')">
+                <div class="prio-container pointer" id="prioButton_urgent_edit" onclick="selectPrioInEdit('urgent')">
                     <div class="prio-text">Urgent</div>
                     <img src="assets/img/priorityUrgent.png" alt="">
                 </div>
                 
-                <div class="prio-container pointer" id="prioButton_medium" onclick="selectPrio('medium')">
+                <div class="prio-container pointer" id="prioButton_medium_edit" onclick="selectPrioInEdit('medium')">
                     <div class="prio-text">Medium</div>
                     <img src="assets/img/priorityMedium.png" alt="">
                 </div>
                 
-                <div class="prio-container pointer selected-prio-container" id="prioButton_low" onclick="selectPrio('low')">
+                <div class="prio-container pointer" id="prioButton_low_edit" onclick="selectPrioInEdit('low')">
                     <div class="prio-text">Low</div>
                     <img src="assets/img/priorityLow.png" alt="">
                 </div>
@@ -107,14 +107,12 @@
             <div class="add-task-input-container">
              <p>Subtasks</p>
                 <div class="input-field">
-                 <input type="text" placeholder="Add new subtask" id="subTaskInput_site">
-                 <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('site')">
+                 <input type="text" placeholder="Add new subtask" id="subTaskInput_edit_mobile">
+                 <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('edit_mobile')">
                 </div>
+
                 <div class="dflex-col" id="subTaskPreviewContainer_edit_mobile">
-                 <!-- <div class="dflex align-center">
-                    <div class="rectangle"></div>
-                     TestTask1
-                </div> -->
+                
                 </div>
             </div>
 

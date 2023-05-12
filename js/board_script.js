@@ -268,7 +268,7 @@ function bigCardHTML(cardIndex) {
 
 function assignedToContentBigCardHTML(toDoIndex) {
 
-    let string = "";
+    let string = " <p class='bold'>Assigned To:</p>";
     for (let i = 0; i < toDoArray[toDoIndex].contactsInTask.length; i++) {
         string += bigCardContactHTML(toDoIndex, i);
     }
@@ -334,6 +334,7 @@ function renderBigCardMobile(cardIndex) {
     let prio = document.getElementById("bigCardPrio");
     let category = document.getElementById("bigCardCategoryMobile");
     let assignedToField = document.getElementById("assignedToFieldMobile");
+    let subTaskField = document.getElementById("subTaskPreviewContainer_edit_mobile");
 
     title.innerHTML = toDo.title;
     description.innerHTML = toDo.description;
@@ -342,6 +343,7 @@ function renderBigCardMobile(cardIndex) {
     category.innerHTML = capitalizeFirstLetter(toDo.category);
     category.style = `background-color: var(--${toDo.category}-color)`;
     assignedToField.innerHTML = assignedToContentBigCardHTML(cardIndex);
+    subTaskField.innerHTML = bigCardSubTaskHTMLMobile(cardIndex);
 }
 
 function bigCardPrioHTMLMobile(cardIndex) {
@@ -355,11 +357,12 @@ function bigCardPrioHTMLMobile(cardIndex) {
     `;
 }
 
-// function bigCardAssignedToFieldHTMLMobile(cardIndex) {
-//     return /*html*/`
-//     <p class="bold">Assigned To:</p>
-//     ${assignedToContentBigCard(toDoArray[cardIndex].contactsInTask)}
-//     `;
-// }
+function bigCardSubTaskHTMLMobile(cardIndex) {
+    return /*html*/`
+    <p class="bold">Subtasks:</p>
+        <br>
+    ${subtaskBigCardHTML(cardIndex)}
+    `;
+}
 
 
