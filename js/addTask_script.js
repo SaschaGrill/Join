@@ -79,18 +79,40 @@ function contactsHTMLsmallCard(toDo, deletable = true) {
     `
 }
 
-function contactCircleHTML(member, deletable = true) {
+function contactCircleHTML(member, deletable = true, edit = false) {
+    // let memberIndex = contactsToAdd.findIndex(member);
+    // console.log(memberIndex);
+    let colorID = getRandomColor();
+    let idToAdd = "${member.initials}_${colorID}";
     if (deletable) return /*html*/`
-    <div class="pos-rel">
+    <div class="pos-rel" id="${idToAdd}" onclick="removeContact('${member.firstName}', '${member.lastName}', ${edit}, '${idToAdd}')">
        <span class="delete-btn-member">X</span>
         <div class="card-member" style="background-color:${member["color"]}">${member["initials"][0]}${member["initials"][1]}</div>
     </div>
         `;
 
     else return /*html*/`
-        <div class="pos-rel">
+        <div class="pos-rel" id="${idToAdd}" onclick="removeContact(removeContact('${member.firstName}', '${member.lastName}', ${edit}, '${idToAdd}'))">
             <div class="card-member" style="background-color:${member["color"]}">${member["initials"][0]}${member["initials"][1]}</div>
         </div>`;
+}
+
+function removeContact(firstName, lastName, edit = false, id) {
+    let contactToRemove;
+    if (!edit) {
+        for (let i = 0; i < contactsToAdd.length; i++) {
+            if (contactsToAdd[i].firstName == firstName && contactsToAdd[i].lastName == lastName)
+                contactsToAdd.splice(i, 1);
+        }
+    }
+    else if (edit) {
+        for (let i = 0; i < contactsToEdit.length; i++) {
+            if (contactsToEdit[i].firstName == firstName && contactsToEdit[i].lastName == lastName)
+                contactsToEdit.splice(i, 1);
+        }
+    }
+
+    document.getElementById(id).remove();
 }
 
 function openAddTaskMenu(status = "to-do") {
