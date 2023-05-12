@@ -75,6 +75,7 @@ function getColorForInitials(initials) {
     if (!colors[initials]) {
         colors[initials] = getRandomColor();
     }
+    return colors[initials];
 }
 
 //rendert die Liste Aller Kontakte am Linken Rand
