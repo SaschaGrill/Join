@@ -1767,8 +1767,7 @@ a span{
 
   100% {
     opacity: 0;
-    height: 0px;
-    width: 0px;
+    z-index: -1;
   }
 }
 
