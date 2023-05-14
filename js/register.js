@@ -253,6 +253,7 @@ async function saveUser(name, password, email) {
 function resettedPassword() {
   let continueBtn = document.querySelector('.change-password-btn')
   let resetPassword = document.getElementById('resetted-password');
+  resetPassword.classList.remove('dnone');
   let gray = document.querySelector('.login-section');
   let gray2 = document.querySelector('.login-join-img');
   continueBtn.classList.add('disabled');
@@ -264,5 +265,10 @@ function resettedPassword() {
       gray.style.background = '#f6f7f8';
       gray2.style.backgroundColor = '#f6f7f8';
       continueBtn.classList.remove('disabled');
+      resetPassword.classList.add('dnone');
     }, 2500);
+}
+
+function backToIndex() {
+  window.location.href = 'https://gruppe-544.developerakademie.net/Join/index.html';
 }

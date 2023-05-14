@@ -370,6 +370,7 @@ a span {
   animation-duration: 750ms;
   animation-delay: 225ms;
   animation-fill-mode: forwards;
+  content: url('assets/img/joinlogodark.svg');
 }
 
 @keyframes movingJoin {
@@ -378,6 +379,8 @@ a span {
     left: 40%;
     width: 274px;
     height: 334px;
+    content: url('assets/img/joinlogodark.svg');
+    background-color: transparent;
   }
 
   100% {
@@ -385,6 +388,8 @@ a span {
     left: 5.35%;
     width: 100px;
     height: 122px;
+    content: url('assets/img/joinlogodark.svg');
+    background-color: transparent;
   }
 }
 
@@ -624,11 +629,12 @@ a span {
   align-items: center;
   padding: 35px 0px;
   gap: 35px;
-  position: absolute;
-  width: 880px;
+  width: 800px;
   height: 513px;
-  left: 30%;
-  top: 25%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #ffffff;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
   border-radius: 30px;
@@ -637,6 +643,7 @@ a span {
   animation-duration: 500ms;
   animation-delay: 225ms;
   animation-fill-mode: forwards;
+  padding-left: 50px;
 }
 
 .forgot-btn {

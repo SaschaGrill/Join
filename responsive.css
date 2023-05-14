@@ -1,3 +1,48 @@
+@media(max-width: 1200px) {
+    @keyframes movingJoin {
+        0% {
+          top: 35%;
+          left: 40%;
+          width: 274px;
+          height: 334px;
+          content: url('assets/img/joinlogodark.svg');
+          background-color: transparent;
+        }
+      
+        100% {
+          top: 3.33%;
+          left: 5.35%;
+          width: 100px;
+          height: 122px;
+          content: url('assets/img/joinlogodark.svg');
+          background-color: transparent;
+        }
+      }
+
+      .password-forget {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 35px 0px;
+        gap: 35px;
+        width: 652px;
+        height: 513px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+        border-radius: 30px;
+        opacity: 0%;
+        animation-name: opacity-login;
+        animation-duration: 500ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+        padding-left: 50px;
+    }
+}
+
 @media(max-width: 1000px) {
 
     .responsive-fullscreen-img {
@@ -5,9 +50,9 @@
         justify-content: center;
         align-items: center;
         position: absolute;
-        width: 100px !important;
-        height: 100px !important;
-        top: 5% !important;
+        width: 100px;
+        height: 100px;
+        top: 5%;
         left: 40%;
         z-index: 500;
         background-color: #f6f7f8;
@@ -16,6 +61,49 @@
         animation-delay: 225ms;
         animation-fill-mode: forwards;
     }
+
+    .password-forget {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 35px 0px;
+        gap: 35px;
+        width: 652px;
+        height: 513px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+        border-radius: 30px;
+        opacity: 0%;
+        animation-name: opacity-login;
+        animation-duration: 500ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+        padding-left: 50px;
+    }
+
+    @keyframes movingJoin {
+        0% {
+          top: 35%;
+          left: 40%;
+          width: 274px;
+          height: 334px;
+          content: url('assets/img/joinlogodark.svg');
+          background-color: transparent;
+        }
+      
+        100% {
+          top: 3.33%;
+          left: 5.35%;
+          width: 100px;
+          height: 122px;
+          content: url('assets/img/joinlogodark.svg');
+          background-color: transparent;
+        }
+      }
 
     .login-section {
         scale: 0.85;
@@ -39,18 +127,17 @@
         position: absolute;
         z-index: 500;
         background-color: #f6f7f8;
-        animation-name: movingJoin;
+        animation-name: none;
         animation-duration: 750ms;
-        animation-delay: 225ms;
         animation-fill-mode: forwards;
         padding: 0px;
         gap: 10px;
 
         position: absolute;
-        width: 64px !important;
-        height: 78.03px !important;
-        left: 10% !important;
-        top: 5% !important;
+        width: 64px;
+        height: 78px;
+        left: 40%;
+        top: 40%;
     }
 
     .login-section {
@@ -82,6 +169,10 @@
         left: 82px;
         top: 800px;
         padding-bottom: 30px;
+        animation-name: opacity-login;
+        animation-duration: 500ms;
+        animation-delay: 1225ms;
+        animation-fill-mode: forwards;
     }
 
     .responsive-login-bars {
@@ -95,7 +186,7 @@
         opacity: 0%;
         animation-name: opacity-login;
         animation-duration: 500ms;
-        animation-delay: 225ms;
+        animation-delay: 1225ms;
         animation-fill-mode: forwards;
         position: absolute;
         width: 350px;
@@ -270,9 +361,9 @@
         justify-content: center;
         align-items: center;
         position: absolute;
-        width: 100px !important;
-        height: 100px !important;
-        top: 5% !important;
+        width: 64px;
+        height: 78.03px;
+        top: 5%;
         left: 40%;
         z-index: 500;
         background-color: #f6f7f8;
@@ -295,7 +386,50 @@
         text-align: center;
         display: flex;
         justify-content: center;
-      }
+    }
+
+    .login-screen-responsive {
+        animation-name: login-animation;
+        background-color: #2A3647;
+        animation-delay: 1000ms;
+        animation-duration: 1000ms;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes login-animation {
+        0% {
+            background-color: #2A3647;
+            opacity: 1;
+        }
+
+        100% {
+            background-color: #ffffff;
+            opacity: 1;
+        }
+    }
+
+    .join-logo-responsive {
+        animation-name: moving-join-responsive;
+        animation-delay: 1000ms;
+        animation-duration: 750ms;
+        animation-fill-mode: forwards;
+        background-color: transparent;
+    }
+
+    @keyframes moving-join-responsive {
+        0% {
+            left: 40%;
+            top: 40%;
+            content: url('assets/img/joinlogobright.svg');
+        }
+
+        100% {
+            left: 10%;
+            top: 5%;
+            content: url('assets/img/joinlogodark.svg'); 
+            background-color: transparent;
+        }
+    }
 
 }
 
