@@ -236,9 +236,66 @@
         cursor: pointer;
     }
 
-    .signup-btn {
+    .font-size-37 {
+        font-size: 37px;
+    }
+
+    .font-size-16 {
         font-size: 16px;
     }
+
+    .password-reset {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+        border-radius: 30px;
+        opacity: 0%;
+        animation-name: opacity-login;
+        animation-duration: 500ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+        position: absolute;
+        width: 350px;
+        top: 485px;
+        padding: 35px 0px;
+        gap: 35px;
+        left: 50%;
+    }
+
+    .login-join-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100px !important;
+        height: 100px !important;
+        top: 5% !important;
+        left: 40%;
+        z-index: 500;
+        background-color: #f6f7f8;
+        animation-name: movingJoin;
+        animation-duration: 750ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+        object-fit: scale-down;
+    }
+
+    .change-password {
+        width: 320px;
+        height: 25px;
+        font-family: "Inter";
+        font-weight: 400;
+        font-size: 19px;
+        color: #000000;
+        padding-bottom: 50px;
+        margin-top: -50px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+      }
 
 }
 
