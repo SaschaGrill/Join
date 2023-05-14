@@ -91,7 +91,7 @@
           left: 40%;
           width: 274px;
           height: 334px;
-          content: url('assets/img/joinlogodark.svg');
+          content: url('assets/img/joinlogobright.svg');
           background-color: transparent;
         }
       
@@ -414,6 +414,7 @@
         animation-duration: 750ms;
         animation-fill-mode: forwards;
         background-color: transparent;
+        content: url('assets/img/joinlogobright.svg');
     }
 
     @keyframes moving-join-responsive {
