@@ -176,6 +176,70 @@
         background-repeat: no-repeat;
         background-position: 280px;
     }
+
+    .leftarrow {
+        position: absolute;
+        left: 6%;
+        top: 7%;
+        width: 25px;
+        height: 25px;
+        filter: brightness(0);
+    }
+
+    .bg-name {
+        background-image: url("assets/img/nameImg.svg");
+        background-repeat: no-repeat;
+        background-position: 280px;
+    }
+
+    .password-forget {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+        border-radius: 30px;
+        opacity: 0%;
+        animation-name: opacity-login;
+        animation-duration: 500ms;
+        animation-delay: 225ms;
+        animation-fill-mode: forwards;
+        position: absolute;
+        width: 350px;
+        top: 485px;
+        left: 50%;
+    }
+
+    .forgot-headlines {
+        font-size: 37px;
+    }
+
+    .text-width-bar {
+        width: 245px;
+    }
+    
+    .forgot-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 0px;
+        width: 250px;
+        height: 51px;
+        background: #2a3647;
+        border-radius: 8px;
+        font-family: "Inter";
+        font-weight: 700;
+        font-size: 16px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .signup-btn {
+        font-size: 16px;
+    }
+
 }
 
 

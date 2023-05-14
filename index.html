@@ -45,15 +45,15 @@
         </div>
     </div>
     <!-- SIGN UP SECTION -->
-    <div class="login-bars dnone" id="signup-section">
+    <div class="login-bars responsive-login-bars dnone" id="signup-section">
         <img class="leftarrow pointer" src="assets/img/leftarrow.png" onclick="register()">
         <span class="headlines">Sign up</span>
         <div class="login-head-borderline"></div>
         <form onsubmit="signup(); return false;">
-            <input required type="name" id="name-signup" class="login-bar bg-name margin-btm35 negative-margin"
+            <input required type="name" id="name-signup" class="login-bar bg-name margin-btm35 negative-margin responsive-login-bar"
                 placeholder="Name">
-            <input required type="email" id="email-signup" class="login-bar bg-email margin-btm35" placeholder="Email">
-            <input required type="password" id="password-signup" class="login-bar bg-password margin-btm35"
+            <input required type="email" id="email-signup" class="login-bar bg-email margin-btm35 responsive-login-bar" placeholder="Email">
+            <input required type="password" id="password-signup" class="login-bar bg-password margin-btm35 responsive-login-bar"
                 placeholder="Password">
             <div class="dflex justify">
                 <button id="registerBtn" type="submit" class="login-btn">Sign up</button>
@@ -63,12 +63,12 @@
     <!-- FORGOT PASSWORD SECTION -->
     <div id="forgot-password" class="password-forget dnone">
         <img class="leftarrow pointer" src="assets/img/leftarrow.png" onclick="register()">
-        <span class="headlines">I forgot my password</span>
+        <span class="headlines forgot-headlines">I forgot my password</span>
         <div class="login-head-borderline"></div>
-        <span class="align-text negative-margin">Don't worry! We will send you an email with the instructions to<br>
+        <span class="align-text negative-margin text-width-bar">Don't worry! We will send you an email with the instructions to<br>
             reset your password.</span>
         <form onsubmit="resetPassword(event)">
-            <input required type="email" id="email-forgot" class="login-bar bg-email margin-btm35" placeholder="Email"
+            <input required type="email" id="email-forgot" class="login-bar bg-email margin-btm35 responsive-login-bar" placeholder="Email"
                 name="email">
             <div class="dflex justify">
                 <button class="forgot-btn" id="forgotBtn">Send me the email</button>
