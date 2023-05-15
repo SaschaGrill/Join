@@ -50,6 +50,14 @@ function updateTaskCounts(taskCounts) {
     document.getElementById('awaiting-feedback').innerText = taskCounts.awaitingFeedback;
 }
 
+// Konvertiert das Datum von dd/mm/yyy zu Monatsname Tag,yyyy
+function convertDateFormat(dueDateString) {
+    const [day, month, year] = dueDateString.split('-');
+    const dateObject = new Date(`${year}-${month}-${day}`);
+    return dateObject;
+}
+
+// Ändere die getUrgentAndUpcomingDeadline Funktion, um die convertDateFormat Funktion zu verwenden
 function getUrgentAndUpcomingDeadline() {
     let urgentTasks = 0;
     let upcomingDeadline = null;
@@ -60,7 +68,9 @@ function getUrgentAndUpcomingDeadline() {
         }
 
         if (task.dueDate) {
-            const taskDueDate = new Date(task.dueDate);
+            console.log("Original due date:", task.dueDate); // Hinzugefügt
+            const taskDueDate = convertDateFormat(task.dueDate);
+            console.log("Converted due date:", taskDueDate); // Hinzugefügt
             if (upcomingDeadline === null || taskDueDate < upcomingDeadline) {
                 upcomingDeadline = taskDueDate;
             }
