@@ -269,7 +269,7 @@ function openEditContactForm(contact) {
                     ${contact.initials}
                 </div>
                 <div class="editContactInput">
-                    <form onsubmit="editContact(${contactIndex}, event); return false;">
+                    <form onsubmit="editContact(${contactIndex}, event, contacts[${contactIndex}]); return false;">
                         <input type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
                         <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
                         <input type="number" id="edit-phone" value="${contact.phone}" placeholder="Phone">
@@ -297,7 +297,7 @@ function closeOverlay() {
 }
 
 // Bearbeitet einen Kontakt im contacts Array
-async function editContact(contactIndex, event) {
+async function editContact(contactIndex, event, contact) {
     event.preventDefault();
     const name = document.getElementById('edit-name').value;
     const [firstName, lastName] = firstAndLastNameAsArray(name);
