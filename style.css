@@ -2497,88 +2497,34 @@ a span {
 }
 
 /* Contacts Media Queries */
-@media(max-width: 1300px) {
 
-  .conacts-container {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 232px);
-    height: calc(100% - 89px);
-    position: relative;
-    top: 89px;
-    left: 232px;
-    background-color: #f5f5f5;
-    z-index: 0;
-    padding-bottom: 100px;
+@media (max-width: 1100px) {
+
+  .contacts-container {
+    width: 100%;
+    height: 100%;
+    left: 0;
   }
 
   .contacts-content {
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
   }
 
   .contacts-content-left {
-    gap: 40px;
-  }
-}
-
-@media (max-width: 1000px) {
-
-  .contacts-container {
-    display: flex;
-    flex-direction: column;
-    background-color: #F5F5F5;
-    z-index: 0;
-    width: 100vw;
-    height: fit-content;
-    top: 89px;
-    left: 0;
-    padding-bottom: 100px;
-  }
-
-  .contacts-header h1 {
-    margin-block-start: 0.2em;
-    margin-block-end: 0.2em;
-    font-size: 47px;
-  }
-
-  .contacts-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #F5F5F5;
     height: 100%;
     width: 100%;
-    position: relative;
-    top: 0;
-  }
-
-  .contacts-content-left,
-  .contacts-content-right {
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin: -105px 0px;
+    padding: 0px;
   }
 
   .contacts-content-right {
     display: none;
-  }
-
-  .contacts-content-left {
-    height: 100%;
-    width: calc(100% - 60px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    margin: 0px 18px;
-    padding: 0px;
+    z-index: -1;
   }
 }
 
@@ -2669,7 +2615,7 @@ a span {
 .overlay-contact-form {
   background-color: white;
   display: flex;
-  border-radius: 5px;
+  border-radius: 31px;
   width: 1212px;
   height: 594px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -2683,17 +2629,37 @@ a span {
   border-radius: 10px;
   border-width: 2px;
   border-style: solid;
+  font-size: 21px;
   margin-bottom: 50px;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #D1D1D1;
+  opacity: 1;
+  /* Firefox */
+  font-weight: 400;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #D1D1D1;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #D1D1D1;
 }
 
 .newContactLeft {
   background-color: #2a3647;
+  border-radius: 30px 0 0 30px;
   width: 463px;
   display: flex;
   padding: 46px;
   flex-direction: column;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: flex-start;
   justify-content: center;
   align-items: flex-start;
   color: white;
@@ -2742,10 +2708,9 @@ a span {
 .addContactButtons {
   display: flex;
   flex-direction: row;
-  align-content: center;
   justify-content: flex-start;
   align-items: center;
-  margin-right: 50px;
+  margin-right: 28px;
 }
 
 .addContactButtons img {
@@ -2765,9 +2730,17 @@ a span {
   padding: 5px;
   border-radius: 10px;
   font-size: 21px;
-  margin-right: 50px;
+  margin-right: 20px;
   cursor: pointer;
   z-index: 200;
+}
+
+.contactCancel {
+  position: absolute;
+  transform: translate(316px, -262px);
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
 }
 
 .createContact {
@@ -2804,12 +2777,13 @@ a span {
 
 .editContactLeft {
   background-color: #2a3647;
+  border-radius: 30px 0 0 30px;
   width: 463px;
   display: flex;
   padding: 46px;
   flex-direction: column;
   flex-wrap: wrap;
-  align-content: center;
+  align-content: flex-start;
   justify-content: center;
   align-items: flex-start;
   color: white;
@@ -2835,13 +2809,20 @@ a span {
   height: 66px;
 }
 
+.blue-line {
+  width: 90px;
+  height: 0px;
+  border: 2px solid #29ABE2;
+  border-radius: 10px;
+}
+
 .editContactRight {
+  width: 700px;
   display: flex;
   align-content: center;
   justify-content: center;
   align-items: center;
   padding: 51px;
-  margin-right: 50px;
 }
 
 .editContactImg img {
@@ -2851,6 +2832,7 @@ a span {
 }
 
 .editContactInput {
+  width: 422px;
   display: flex;
   flex-direction: column;
 }
@@ -2873,7 +2855,7 @@ a span {
   padding: 5px;
   border-radius: 10px;
   font-size: 21px;
-  margin-right: 50px;
+  margin-right: 20px;
   cursor: pointer;
   z-index: 200;
 }
@@ -2908,4 +2890,22 @@ a span {
   color: #3dbdf3 !important;
   transform: scale(1.01);
   transition: transform 225ms ease-in-out;
+}
+
+.contacts-user {
+  background-image: url(assets/img/user-line.svg);
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+}
+
+.contacts-email {
+  background-image: url(assets/img/mail.svg);
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+}
+
+.contacts-phone {
+  background-image: url(assets/img/phone.svg);
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
 }

@@ -203,19 +203,21 @@ function openAddContactForm() {
                 <img src="assets/img/joinlogobright.svg">
                 <h1>Add Contact</h1>
                 <p>Tasks are better with a team!</p>
+                <div class="blue-line"></div>
             </div>
             <div class="newContactRight">
+                <img class="contactCancel" src="assets/img/cancel.svg" onclick="closeOverlay(event)">
                 <div class="newContactImg">
                     <img src="assets/img/newContactGrey.svg">
                 </div>
                 <div class="newContactInput">
                     <form onsubmit="addNewContact(event); return false;">    
-                        <input type="text" id="add-name" placeholder="Name" required>
-                        <input type="email" id="add-email" placeholder="Email" required>
-                        <input type="number" id="add-phone" placeholder="Phone" required>
+                        <input class="contacts-user" type="text" id="add-name" placeholder="Name" required>
+                        <input class="contacts-email" type="email" id="add-email" placeholder="Email" required>
+                        <input class="contacts-phone" type="number" id="add-phone" placeholder="Phone" required>
                         <div class="addContactButtons">
                             <button class="cancel" onclick="closeOverlay(event)" formnovalidate>Cancel<img src="assets/img/cancel.svg"></button>
-                            <button class="createContact">Create Contact<img src="assets/img/apply.svg"</button>
+                            <button class="createContact">Create Contact<img src="assets/img/apply.svg"></button>
                         </div>
                     </form>    
                 </div>
@@ -262,17 +264,18 @@ function openEditContactForm(contact) {
                 <div class="editContactLeft">
                     <img src="assets/img/joinlogobright.svg">
                     <h1>Edit Contact</h1>
-                    <p>Tasks are better with a team!</p>
+                    <div class="blue-line"></div>
                 </div>
                 <div class="editContactRight">
+                    <img class="contactCancel" src="assets/img/cancel.svg" onclick="closeOverlay(event)">
                     <div class="contacts-big-circle margin-right" style="background-color: ${contact.color}">
                     ${contact.initials}
                 </div>
                 <div class="editContactInput">
                     <form onsubmit="editContact(${contactIndex}, event, contacts[${contactIndex}]); return false;">
-                        <input type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
-                        <input type="email" id="edit-email" value="${contact.email}" placeholder="Email">
-                        <input type="number" id="edit-phone" value="${contact.phone}" placeholder="Phone">
+                        <input class="contacts-user" type="text" id="edit-name" value="${contact.firstName} ${contact.lastName}" placeholder="Name">
+                        <input class="contacts-email" type="email" id="edit-email" value="${contact.email}" placeholder="Email">
+                        <input class="contacts-phone" type="number" id="edit-phone" value="${contact.phone}" placeholder="Phone">
                         <div class="addContactButtons">
                             <button class="delete" onclick="deleteContact(${contactIndex}, event); closeOverlay(event)" formnovalidate>Delete</button>
                             <button class="save">Save</button>
