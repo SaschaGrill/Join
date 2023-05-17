@@ -181,12 +181,6 @@ function contactsBigHTML(contact) {
                         ${contact.phone}
                         </a>
                     </div>
-
-                    <div class="new-contact-button">
-                        <button id="new-contact-button" onclick="openAddContactForm()">New contact
-                            <img src="assets/img/newContact.svg" alt="">
-                        </button>
-                    </div>
     `;
 }
 
