@@ -321,4 +321,21 @@ async function deleteContact(contactIndex, event) {
     if (event) closeOverlay(event);
 }
 
+/* function changeMobileView() {
+    let contactList = document.getElementById("contactList");
+    let contactBigContainer = document.getElementById("contactBigContainer");
+    let mobileViewButton = document.getElementById("mobile-view-button");
+
+    if(window.innerWidth < 1000){
+        contactList.classList.remove('dnone');
+        contactBigContainer.classList.add('dnone');
+        mobileViewButton.classList.add('dnone');
+    }
+}
+
+function changeMobileViewOfBigCard() {
+    document.getElementById('contactList').classList.add('dnone');
+    document.getElementById('contactBigContainer').classList.remove('dnone');
+} */
+
 

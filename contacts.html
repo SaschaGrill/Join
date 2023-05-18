@@ -21,7 +21,8 @@
         <div w3-include-html="assets/templates/desktop_side_template.html"></div>
         <div class="contacts-container">
             <div class="contacts-content">
-                <div class="contacts-content-left">
+                <button id="mobile-view-button" onclick="changeMobileView()" class="dnone">Zurück zur Kontaktliste</button>
+                <div class="contacts-content-left" id="contactList">
                     <div class="new-contact-button">
                         <button id="new-contact-button" onclick="openAddContactForm()">New contact
                             <img src="assets/img/newContact.svg" alt="">
