@@ -10,6 +10,9 @@ let priorityToEdit = "low";
 let currentChoosenCategoryToEdit = document.getElementById("category_edit_0");
 
 
+/**
+ * Initializes the add task site.
+ */
 async function initializeAddTaskSite() {
     includeHTML();
     await loadContacts();
@@ -22,6 +25,12 @@ async function initializeAddTaskSite() {
         addMemberToTaskWithIndex(getUserToAddFromURL());
 }
 
+
+/**
+ * Retrieves the user index to add from the URL query string.
+ * 
+ * @returns {number|null} - The user index to add or null if not found.
+ */
 function getUserToAddFromURL() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -29,32 +38,55 @@ function getUserToAddFromURL() {
     return Number(userIndex);
 }
 
+
+/**
+ * Generates the HTML code for the subtask section in a small card.
+ * 
+ * @param {object} toDo - The to-do object.
+ * @returns {string} - The HTML code for the subtask section.
+ */
 function subtaskHTML(toDo) {
     let totalTaskCount = toDo["subtasks"].length;
     let finishedTasks = getFinishedTaskCount(toDo["subtasks"]);
 
-    if (totalTaskCount != 0) {
-
-        return /*html*/`
+    if (totalTaskCount !== 0) {
+        return /*html*/ `
         <div class="progress-bar">
-           <div class="bar-with-fill">
-            <div class="fill" style="transform: scaleX(${calculateFillPercentage(toDo["subtasks"])}%);"></div>
-           </div>
-           <p>${finishedTasks}/${totalTaskCount} Done</p>
-        </div>`
+            <div class="bar-with-fill">
+                <div class="fill" style="transform: scaleX(${calculateFillPercentage(toDo["subtasks"])}%);"></div>
+            </div>
+            <p>${finishedTasks}/${totalTaskCount} Done</p>
+        </div>`;
+    } else {
+        return "";
     }
-    else return "";
 }
 
+
+/**
+ * Returns the number of finished tasks in a subtask array.
+ * 
+ * @param {Array} subTaskArray - The subtask array.
+ * @returns {number} - The number of finished tasks.
+ */
 function getFinishedTaskCount(subTaskArray) {
     let finishedTasks = 0;
     for (let i = 0; i < subTaskArray.length; i++) {
         const subTask = subTaskArray[i];
-        if (subTask["done"]) finishedTasks++;
+        if (subTask["done"]) {
+            finishedTasks++;
+        }
     }
     return finishedTasks;
 }
 
+
+/**
+ * Calculates the fill percentage for the subtask progress bar.
+ * 
+ * @param {Array} subTaskArray - The subtask array.
+ * @returns {number} - The fill percentage.
+ */
 function calculateFillPercentage(subTaskArray) {
     let totalTaskCount = subTaskArray.length;
     let finishedTasks = getFinishedTaskCount(subTaskArray);
@@ -63,58 +95,81 @@ function calculateFillPercentage(subTaskArray) {
     return percentage * 100;
 }
 
+
+/**
+ * Generates the HTML code for the contacts section in a small card.
+ * 
+ * @param {object} toDo - The to-do object.
+ * @param {boolean} deletable - Indicates if the contacts are deletable.
+ * @returns {string} - The HTML code for the contacts section.
+ */
 function contactsHTMLsmallCard(toDo, deletable = true) {
     let members = toDo["contactsInTask"];
     let string = "";
     for (let i = 0; i < members.length; i++) {
         let member = members[i];
-        if (member == null) return;
+        if (member == null) return "";
         string += contactCircleHTML(member, deletable);
     }
 
-    return /*html*/`
-     <div class="small-card-members-container">
+    return /*html*/ `
+    <div class="small-card-members-container">
         ${string}
-    </div>
-    `
+    </div>`;
 }
 
-function contactCircleHTML(member, deletable = true, edit = false) {
-    // let memberIndex = contactsToAdd.findIndex(member);
-    // console.log(memberIndex);
-    let colorID = getRandomColor();
-    let idToAdd = "${member.initials}_${colorID}";
-    if (deletable) return /*html*/`
-    <div class="pos-rel" id="${idToAdd}" onclick="removeContact('${member.firstName}', '${member.lastName}', ${edit}, '${idToAdd}')">
-       <span class="delete-btn-member">X</span>
-        <div class="card-member" style="background-color:${member["color"]}">${member["initials"][0]}${member["initials"][1]}</div>
-    </div>
-        `;
 
-    else return /*html*/`
+/**
+ * Generates the HTML code for the contact circle in a small card.
+ * 
+ * @param {object} member - The member object.
+ * @param {boolean} deletable - Indicates if the contact is deletable.
+ * @param {boolean} edit - Indicates if it's an edit mode.
+ * @returns {string} - The HTML code for the contact circle.
+ */
+function contactCircleHTML(member, deletable = true, edit = false) {
+    let colorID = getRandomColor();
+    let idToAdd = `${member.initials}_${colorID}`;
+    if (deletable) {
+        return /*html*/ `
+        <div class="pos-rel" id="${idToAdd}" onclick="removeContact('${member.firstName}', '${member.lastName}', ${edit}, '${idToAdd}')">
+            <span class="delete-btn-member">X</span>
+            <div class="card-member" style="background-color:${member["color"]}">${member["initials"][0]}${member["initials"][1]}</div>
+        </div>`;
+    } else {
+        return /*html*/ `
         <div class="pos-rel" id="${idToAdd}" onclick="removeContact(removeContact('${member.firstName}', '${member.lastName}', ${edit}, '${idToAdd}'))">
             <div class="card-member" style="background-color:${member["color"]}">${member["initials"][0]}${member["initials"][1]}</div>
         </div>`;
+    }
 }
 
-function removeContact(firstName, lastName, edit = false, id) {
-    let contactToRemove;
-    if (!edit) {
-        for (let i = 0; i < contactsToAdd.length; i++) {
-            if (contactsToAdd[i].firstName == firstName && contactsToAdd[i].lastName == lastName)
-                contactsToAdd.splice(i, 1);
-        }
-    }
-    else if (edit) {
-        for (let i = 0; i < contactsToEdit.length; i++) {
-            if (contactsToEdit[i].firstName == firstName && contactsToEdit[i].lastName == lastName)
-                contactsToEdit.splice(i, 1);
-        }
-    }
 
+/**
+ * Removes a contact from the contactsToAdd or contactsToEdit array.
+ * 
+ * @param {string} firstName - The first name of the contact to remove.
+ * @param {string} lastName - The last name of the contact to remove.
+ * @param {boolean} edit - Indicates if it's an edit mode.
+ * @param {string} id - The ID of the HTML element to remove.
+ */
+function removeContact(firstName, lastName, edit = false, id) {
+    let contactArray = edit ? contactsToEdit : contactsToAdd;
+    for (let i = 0; i < contactArray.length; i++) {
+        if (contactArray[i].firstName === firstName && contactArray[i].lastName === lastName) {
+            contactArray.splice(i, 1);
+            break;
+        }
+    }
     document.getElementById(id).remove();
 }
 
+
+/**
+ * Opens the add task menu.
+ * 
+ * @param {string} status - The status of the task.
+ */
 function openAddTaskMenu(status = "to-do") {
     if (!(window.innerWidth < 1000)) {
         showElement("addTaskPopUp");
@@ -122,32 +177,40 @@ function openAddTaskMenu(status = "to-do") {
         updateAddTaskMemberSelection("popUp");
         document.getElementById("boardContainer").classList.add("overflow-visible");
         document.getElementById("addTaskButton_popUp").onclick = function () { addTaskFromPopUp(status) };
-    }
-    else {
+    } else {
         console.log("AA");
-        //öffne AddTaskPage, sobald weniger als 1000px breite
+        // Open AddTaskPage when width is less than 1000px
         openAddTaskSiteWithoutContact();
     }
-
 }
 
+
+/**
+ * Closes the add task menu.
+ */
 function closeAddTaskMenu() {
     hideElement("addTaskPopUp");
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
 }
 
+
+/**
+ * Updates the member selection in the add task menu.
+ * 
+ * @param {string} openedFromString - The source from where the menu was opened.
+ */
 function updateAddTaskMemberSelection(openedFromString) {
     let selection;
 
-    if (openedFromString == "popUp") selection = document.getElementById("addTaskSelection_popUp");
-    else if (openedFromString == "addTaskSite") selection = document.getElementById("addTaskSelection_site");
-    else if (openedFromString == "editTask") selection = document.getElementById("addTaskSelection_edit");
-    else if (openedFromString == "editTaskMobile") selection = document.getElementById("addTaskSelection_edit_mobile");
+    if (openedFromString === "popUp") selection = document.getElementById("addTaskSelection_popUp");
+    else if (openedFromString === "addTaskSite") selection = document.getElementById("addTaskSelection_site");
+    else if (openedFromString === "editTask") selection = document.getElementById("addTaskSelection_edit");
+    else if (openedFromString === "editTaskMobile") selection = document.getElementById("addTaskSelection_edit_mobile");
     else console.log(openedFromString);
 
     selection.innerHTML = "";
-    selection.innerHTML += `<option value="-1">Select contacts to assign </option>`;
+    selection.innerHTML += `<option value="-1">Select contacts to assign</option>`;
 
     for (let i = 0; i < contacts.length; i++) {
         const member = contacts[i];
@@ -155,12 +218,25 @@ function updateAddTaskMemberSelection(openedFromString) {
     }
 }
 
+
+/**
+ * Generates the HTML code for a member option in the member selection.
+ * 
+ * @param {number} index - The index of the contact.
+ * @returns {string} - The HTML code for the member option.
+ */
 function addMemberHTML(index) {
-    return /*html*/`
+    return /*html*/ `
     <option value="${index}">${contacts[index]['firstName']}</option>
     `;
 }
 
+
+/**
+ * Adds a task from the pop-up menu.
+ * 
+ * @param {string} status - The status of the task.
+ */
 async function addTaskFromPopUp(status = "to-do") {
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
@@ -188,6 +264,10 @@ async function addTaskFromPopUp(status = "to-do") {
     emptyPopUpInputs();
 }
 
+
+/**
+ * Clears the input fields and resets the selected values in the pop-up.
+ */
 function emptyPopUpInputs() {
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
@@ -204,6 +284,11 @@ function emptyPopUpInputs() {
     contactsToAdd = [];
 }
 
+
+/**
+ * Adds a task from the "Add Task" site.
+ * Saves the task online and redirects to the board.
+ */
 async function addTaskFromAddTaskSite() {
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
@@ -211,7 +296,7 @@ async function addTaskFromAddTaskSite() {
 
     if (!dateIsNotInPast()) return;
 
-    let JSON = {
+    let taskJSON = {
         category: categoryInput.value.toLowerCase(),
         title: titleInput.value,
         description: descriptionInput.value,
@@ -222,21 +307,34 @@ async function addTaskFromAddTaskSite() {
         dueDate: getDateAsString("addTaskSite"),
     }
     await loadTasksOnline()
-    toDoArray.push(JSON);
+    toDoArray.push(taskJSON);
     await saveTasksOnline();
 
-    // window.open("board.html");
-    addUrlVariable("board.html")
+    addUrlVariable("board.html");
 }
 
+
+/**
+ * Saves the tasks array online.
+ */
 async function saveTasksOnline() {
     await setItem("taskArray", JSON.stringify(toDoArray));
 }
 
+
+/**
+ * Loads the tasks array from online storage.
+ */
 async function loadTasksOnline() {
     toDoArray = JSON.parse(await getItem("taskArray"));
 }
 
+
+/**
+ * Adds a member to the task with the given source.
+ * 
+ * @param {string} source - The source of the task.
+ */
 function addMemberToTask(source) {
     let inputField = document.getElementById(`addTaskSelection_${source}`);
     let memberIndex = inputField.value;
@@ -250,18 +348,30 @@ function addMemberToTask(source) {
     membersDiv.innerHTML += circleHTML;
 }
 
+
+/**
+ * Adds a member to the task with the given contact index.
+ * 
+ * @param {number} contactIndex - The index of the contact.
+ * @param {boolean} [popUp=false] - Indicates if the member is being added in the pop-up.
+ */
 function addMemberToTaskWithIndex(contactIndex, popUp = false) {
     if (contactsToAdd.includes(contacts[contactIndex])) return;
 
     contactsToAdd.push(contacts[contactIndex]);
-    console.log(contacts[contactIndex]);
     let circleHTML = contactCircleHTML(contacts[contactIndex]);
     let membersDiv = popUp ? document.getElementById("addTaskAssignedMembers_popUp") : document.getElementById("addTaskAssignedMembers_site");
-
 
     membersDiv.innerHTML += circleHTML;
 }
 
+
+/**
+ * Adds a subtask to the task.
+ * 
+ * @param {string} [source="popUp"] - The source of the task.
+ * @param {number} cardIndex - The index of the card.
+ */
 function addSubTask(source = "popUp", cardIndex) {
     let addSubTaskInputField = document.getElementById(`subTaskInput_${source}`);
 
@@ -275,24 +385,47 @@ function addSubTask(source = "popUp", cardIndex) {
     addSubTaskInputField.value = "";
 }
 
+
+/**
+ * Pushes the subtask to the corresponding array based on the source.
+ * 
+ * @param {string} source - The source of the task.
+ * @param {object} subTaskToAdd - The subtask to add.
+ */
 function pushSubTask(source, subTaskToAdd) {
     if (source == "edit_mobile" || source == "edit")
         subTasksToEdit.push(subTaskToAdd);
     else if (source != "edit")
         subTasksToAdd.push(subTaskToAdd);
     else console.log("error");
-
 }
 
+
+/**
+ * Generates the HTML for displaying a subtask preview.
+ * 
+ * @param {string} subTaskTitle - The title of the subtask.
+ * @param {number} cardIndex - The index of the card.
+ * @param {string} [source="addTask"] - The source of the task.
+ * @returns {string} The HTML for the subtask preview.
+ */
 function subTaskPreviewHTML(subTaskTitle, cardIndex, source = "addTask") {
-    return/*html*/`
+    return /*html*/ `
     <div class="dflex align-center gap10" id="subTaskPreview_${cardIndex}_${subTaskTitle}">
         <div class="rectangle"></div>
         ${subTaskTitle}
         <img src="assets/img/delete.png" alt="" class="pointer" onclick="deleteSubTask(${cardIndex},'${subTaskTitle}','${source}')">
-    </div>`
+    </div>`;
 }
 
+
+/**
+ * 
+ * Deletes a subtask from the task.
+ * @param {number} cardIndex - The index of the card.
+ * @param {string} subTaskTitle - The title of the subtask.
+ * @param {string} [source="addTask"] - The source of the task.
+ */
 function deleteSubTask(cardIndex, subTaskTitle, source = "addTask") {
     let previewDiv = document.getElementById(`subTaskPreview_${cardIndex}_${subTaskTitle}`);
     previewDiv.remove();
@@ -305,9 +438,16 @@ function deleteSubTask(cardIndex, subTaskTitle, source = "addTask") {
         let subTaskIndex = subTasksToAdd.findIndex(obj => obj.title === subTaskTitle);
         subTasksToEdit.splice(subTaskIndex, 1);
     }
-    else console.error("ungültige source:", source);
+    else console.error("Invalid source:", source);
 }
 
+
+/**
+ * Selects the priority for the task.
+ * 
+ * @param {string} prio - The selected priority.
+ * @param {boolean} [fromEditMobile=false] - Indicates if the priority is being selected from the edit mobile site.
+ */
 function selectPrio(prio, fromEditMobile = false) {
     let currentSelectedPrio = document.getElementById(`prioButton_${priorityToAdd}`);
     let prioButton = document.getElementById(`prioButton_${prio}`);
@@ -318,6 +458,12 @@ function selectPrio(prio, fromEditMobile = false) {
     priorityToAdd = prio;
 }
 
+
+/**
+ * Selects the priority for editing the task.
+ * 
+ * @param {string} prio - The selected priority.
+ */
 function selectPrioInEdit(prio) {
     let currentSelectedPrio = document.getElementById(`prioButton_${priorityToEdit}_edit`);
     let prioButton = document.getElementById(`prioButton_${prio}_edit`);
@@ -328,48 +474,66 @@ function selectPrioInEdit(prio) {
     priorityToEdit = prio;
 }
 
+
+/**
+ * Retrieves the formatted date as a string.
+ * 
+ * @param {string} [source="addTaskSite"] - The source of the task.
+ * @returns {string} The formatted date as a string.
+ * @throws {Error} If the date format is invalid.
+ */
 function getDateAsString(source = "addTaskSite") {
     let dateInputField = document.getElementById(`dueDateInput_${source}`);
 
-    // Zuerst das Format des Eingabestrings überprüfen
-    if (!dateInputField) console.error("ungültige ID für DateInput");
-    //ich liebe ChatGPT
+    if (!dateInputField) console.error("Invalid ID for dateInput");
+
     const datePattern = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
     if (!datePattern.test(dateInputField.value)) {
-        throw new Error("Das Datumsformat ist ungültig. Bitte verwenden Sie das Format 'dd/mm/yyyy'.");
+        throw new Error("The date format is invalid. Please use the format 'dd/mm/yyyy'.");
     }
 
-    // Wenn das Format gültig ist, das Datum in das gewünschte Format umwandeln
     const dateParts = dateInputField.value.split("/");
     const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
 
     return formattedDate;
 }
 
+
+/**
+ * Checks if the selected date is not in the past.
+ * 
+ * @param {string} [source="addTaskSite"] - The source of the task.
+ * @returns {boolean} True if the selected date is not in the past, false otherwise.
+ */
 function dateIsNotInPast(source = "addTaskSite") {
     let dateInputField = document.getElementById(`dueDateInput_${source}`);
 
-    if (!dateInputField) console.error("ungültige ID für DateInput:", source);
+    if (!dateInputField) console.error("Invalid ID for dateInput:", source);
     const dateString = dateInputField.value;
     const dateParts = dateString.split("/");
 
     const day = dateParts[0];
-    const month = dateParts[1] - 1; // Monate in JavaScript beginnen bei 0 (Januar) und enden bei 11 (Dezember)
+    const month = dateParts[1] - 1;
     const year = dateParts[2];
 
     const currentDate = new Date();
     const dateToCheck = new Date(year, month, day);
 
-    // Wenn das Datum in der Vergangenheit liegt, wird ein Fehler ausgelöst
     if (dateToCheck < currentDate) {
-        alert("Das ausgewählte Datum liegt in der Vergangenheit.");
+        alert("The selected date is in the past.");
         return false;
     }
     else return true;
 }
 
+
 // EDIT TASK!!//////////////////////////////////////////////////////////////
 
+/**
+ * Initializes the edit task site.
+ * 
+ * @returns {Promise<void>}
+ */
 async function initializeEditTaskSite() {
     let toDoIndex = getToDoFromURL();
     includeHTML();
@@ -381,20 +545,23 @@ async function initializeEditTaskSite() {
 
     updateAddTaskMemberSelection("editTaskMobile");
 
-    // updateAddTaskMemberSelection("editTaskMobile");
     document.getElementById("addTaskAssignedMembers_edit_mobile").innerHTML = addedMembersHTMLBigCard(toDoIndex);
     document.getElementById("dueDateInput_edit_mobile").value = getDateString_Edit(toDoIndex);
     document.getElementById("subTaskPreviewContainer_edit_mobile").innerHTML = addedSubTasksHTML(toDoIndex);
     document.getElementById("addTaskTitle_edit_mobile").value = toDoArray[toDoIndex].title;
     document.getElementById("addTaskDescription_edit_mobile").value = toDoArray[toDoIndex].description;
     document.getElementById("addTaskCategory_edit_mobile").selectedIndex = selectOptionByValue(document.getElementById("addTaskCategory_edit_mobile"), capitalizeFirstLetter(toDoArray[toDoIndex].category));
-    console.log(document.getElementById("addTaskButton_mobile"));
 
     document.getElementById("addTaskButton_mobile").onclick = function () { EditTaskMobile(toDoIndex) };
     saveUrlVariable();
-
 }
 
+
+/**
+ * Opens the edit task popup.
+ * 
+ * @param {number} cardIndex - The index of the card.
+ */
 function openEditTaskPopUp(cardIndex) {
     document.getElementById("editCardPopUp").innerHTML += editTaskHTML(cardIndex);
     showElement("Overlay");
@@ -406,6 +573,14 @@ function openEditTaskPopUp(cardIndex) {
     integrateOldSubTasksToEditArray(cardIndex);
 }
 
+
+/**
+ * Selects an option in a select element based on its value.
+ * 
+ * @param {HTMLSelectElement} selectElement - The select element.
+ * @param {string} value - The value to select.
+ * @returns {number} The index of the selected option.
+ */
 function selectOptionByValue(selectElement, value) {
     for (var i = 0; i < selectElement.options.length; i++) {
         if (selectElement.options[i].value === value) {
@@ -415,6 +590,12 @@ function selectOptionByValue(selectElement, value) {
     }
 }
 
+
+/**
+ * Retrieves the 'toDo' parameter from the URL.
+ * 
+ * @returns {string} The 'toDo' parameter value.
+ */
 function getToDoFromURL() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -422,6 +603,13 @@ function getToDoFromURL() {
     return user;
 }
 
+
+/**
+ * Generates the HTML for displaying added members in the big card.
+ * 
+ * @param {number} toDoIndex - The index of the to-do item.
+ * @returns {string} The HTML for displaying added members.
+ */
 function addedMembersHTMLBigCard(toDoIndex) {
     let string = "";
 
@@ -433,6 +621,13 @@ function addedMembersHTMLBigCard(toDoIndex) {
     return string;
 }
 
+
+/**
+ * Generates the HTML for displaying added subtasks in the big card.
+ * 
+ * @param {number} toDoIndex - The index of the to-do item.
+ * @returns {string} The HTML for displaying added subtasks.
+ */
 function addedSubTasksHTML(toDoIndex) {
     let string = "";
     for (let i = 0; i < toDoArray[toDoIndex].subtasks.length; i++) {
@@ -442,12 +637,25 @@ function addedSubTasksHTML(toDoIndex) {
     return string;
 }
 
+
+/**
+ * Highlights the chosen priority in the edit task.
+ * 
+ * @param {number} toDoIndex - The index of the to-do item.
+ */
 function highlightChosenPrio(toDoIndex) {
     let prio = toDoArray[toDoIndex].priority;
     priorityToEdit = prio;
     document.getElementById(`prioButton_${prio}_edit`).classList.add("selected-prio-container");
 }
 
+
+/**
+ * Edits a task.
+ * 
+ * @param {number} cardIndex - The index of the card.
+ * @returns {Promise<void>}
+ */
 async function EditTask(cardIndex) {
     let titleInput = document.getElementById("addTaskTitle_edit");
     let descriptionInput = document.getElementById("addTaskDescription_edit");
@@ -474,8 +682,14 @@ async function EditTask(cardIndex) {
     renderToDos();
 }
 
+
+/**
+ * Edits a task in mobile view.
+ * 
+ * @param {number} cardIndex - The index of the card.
+ * @returns {Promise<void>}
+ */
 async function EditTaskMobile(cardIndex) {
-    console.log("edit");
     let titleInput = document.getElementById("addTaskTitle_edit_mobile");
     let descriptionInput = document.getElementById("addTaskDescription_edit_mobile");
     let categoryInput = document.getElementById("addTaskCategory_edit_mobile");
@@ -500,19 +714,33 @@ async function EditTaskMobile(cardIndex) {
     renderToDos();
 }
 
+
+/**
+ * Deletes a to-do item.
+ * 
+ * @param {number} cardIndex - The index of the card.
+ * @returns {Promise<void>}
+ */
 async function deleteToDo(cardIndex) {
     toDoArray.splice(cardIndex, 1);
     await saveTasksOnline();
     renderToDos();
     closeBigCard();
-
 }
 
+
+/**
+ * Retrieves the formatted date string for editing a task.
+ * 
+ * @param {number} cardIndex - The index of the card.
+ * @returns {string} The formatted date string.
+ */
 function getDateString_Edit(cardIndex) {
     let dateStringFormatted = toDoArray[cardIndex].dueDate;
     const outputString = dateStringFormatted.replace(/-/g, "/");
     return outputString;
 }
+
 
 // function getNewSubTaskArray(cardIndex) {
 //     let newArray = [];
@@ -528,7 +756,11 @@ function getDateString_Edit(cardIndex) {
 // }
 
 
-
+/**
+ * Integrates old subtasks into the edit array.
+ * 
+ * @param {number} cardIndex - The index of the card.
+ */
 function integrateOldSubTasksToEditArray(cardIndex) {
     subTasksToEdit = [];
     for (let i = 0; i < toDoArray[cardIndex].subtasks.length; i++) {
@@ -536,122 +768,132 @@ function integrateOldSubTasksToEditArray(cardIndex) {
     }
 }
 
+
+/**
+ * Closes the edit task popup.
+ */
 function closeEditTaskPopUp() {
-    // hideElement("bigCardPopUp");
     document.getElementById("editCardPopUp").innerHTML = "";
     hideElement("Overlay");
     document.getElementById("boardContainer").classList.remove("overflow-visible");
     closeBigCard();
-
 }
 
+
+/**
+ * Selects the current category in the edit task.
+ * 
+ * @param {number} cardIndex - The index of the card.
+ */
 function selectCurrentCategory(cardIndex) {
     let categoryOfCard = toDoArray[cardIndex].category;
     let categoryElement = document.getElementById(`category_edit_${categoryOfCard}`).setAttribute("selected", true);
 }
 
+
+/**
+ * Generates the HTML for the edit task popup.
+ * 
+ * @param {number} toDoIndex - The index of the to-do item.
+ * @returns {string} The HTML for the edit task popup.
+ */
 function editTaskHTML(toDoIndex) {
     return /*html*/`    
     <div class="add-task-container-pop-up">
-      <h1 class="add-task-heading headlines">Edit Task</h1>
-      <div class="add-task-content">
-
-       <div class="add-task-half" >
-        <div class="add-task-input-container">
-            <p>Title</p>
-            <div class="input-field">
-                <input type="text" placeholder="Enter a title" id="addTaskTitle_edit" value="${toDoArray[toDoIndex]["title"]}" required>
+        <h1 class="add-task-heading headlines">Edit Task</h1>
+        <div class="add-task-content">
+            <div class="add-task-half">
+                <div class="add-task-input-container">
+                    <p>Title</p>
+                    <div class="input-field">
+                        <input type="text" placeholder="Enter a title" id="addTaskTitle_edit" value="${toDoArray[toDoIndex]["title"]}" required>
+                    </div>
+                </div>
+                <div class="add-task-input-container">
+                    <p>Description</p>
+                    <div class="text-area-field">
+                        <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription_edit">${toDoArray[toDoIndex].description}</textarea>
+                    </div>
+                </div>
+                <div class="add-task-input-container">
+                    <p>Category</p>
+                    <div class="input-field">
+                        <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory_edit" required>
+                            <option value="0" id="category_edit_0">Select task Category</option>
+                            <option value="Design" id="category_edit_design">Design</option>
+                            <option value="Sales" id="category_edit_sales">Sales</option>
+                            <option value="Backoffice" id="category_edit_backoffice">Backoffice</option>
+                            <option value="Media" id="category_edit_media">Media</option>
+                            <option value="Marketing" id="category_edit_marketing">Marketing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="add-task-input-container dflex-col gap20">
+                    <p>Assigned to</p>
+                    <div class="input-field">
+                        <select name="add-task-category-select" id="addTaskSelection_edit" class="select-category pointer" oninput="addMemberToTask('edit')" required>
+                            <option value="0">Select contacts to assign</option>
+                        </select>
+                    </div>
+                    <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_edit">
+                        ${addedMembersHTMLBigCard(toDoIndex)}
+                    </div>
+                </div>
+            </div>
+            <span class="vertical-line"></span>
+            <div class="add-task-half">
+                <div class="add-task-input-container">
+                    <p>Due Date</p>
+                    <div class="input-field date-input">
+                        <input type="datetime" placeholder="dd/mm/yyy" class="pointer" id="dueDateInput_edit" value="${getDateString_Edit(toDoIndex)}">
+                        <img src="assets/img/calendar.png" alt="">
+                    </div>
+                </div>
+                <div class="select-prio">
+                    <p>Prio</p>
+                    <div class="dflex gap10">
+                        <div class="prio-container pointer" id="prioButton_urgent_edit" onclick="selectPrioInEdit('urgent')">
+                            <div>Urgent</div>
+                            <img src="assets/img/priorityUrgent.png" alt="">
+                        </div>
+                        <div class="prio-container pointer" id="prioButton_medium_edit" onclick="selectPrioInEdit('medium')">
+                            <div>Medium</div>
+                            <img src="assets/img/priorityMedium.png" alt="">
+                        </div>
+                        <div class="prio-container pointer" id="prioButton_low_edit" onclick="selectPrioInEdit('low')">
+                            <div>Low</div>
+                            <img src="assets/img/priorityLow.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="add-task-input-container">
+                    <p>Subtasks</p>
+                    <div class="input-field">
+                        <input type="text" placeholder="Add new subtask" id="subTaskInput_edit">
+                        <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('edit')">
+                    </div>
+                    <div class="dflex-col gap10" id="subTaskPreviewContainer_edit">
+                        ${addedSubTasksHTML(toDoIndex)}
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="add-task-input-container">
-            <p>Description</p>
-            <div class="text-area-field">
-            <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription_edit">${toDoArray[toDoIndex].description}</textarea>
-            </div>
+        <div class="btn-container">
+            <button class="login-btn clear-btn" onclick="closeEditTaskPopUp()">Clear X</button>
+            <button type="submit" class="login-btn add-task-btn" onclick="EditTask(${toDoIndex})">Edit Task <img src="assets/img/plusbutton.png" alt=""></button>
         </div>
-
-        <div class="add-task-input-container">
-            <p>Category</p>
-            <div class="input-field">
-                <select name="add-task-category-select" class="select-category pointer" id="addTaskCategory_edit" required>
-                    <option value="0" id="category_edit_0">Select task Category</option>
-                    <option value="Design" id="category_edit_design">Design</option>
-                    <option value="Sales" id="category_edit_sales">Sales</option>
-                    <option value="Backoffice" id="category_edit_backoffice">Backoffice</option>
-                    <option value="Media" id="category_edit_media">Media</option>
-                    <option value="Marketing" id="category_edit_marketing">Marketing</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="add-task-input-container dflex-col gap20">
-            <p>Assigned to</p>
-            <div class="input-field">
-                <select name="add-task-category-select" id="addTaskSelection_edit" class="select-category pointer" oninput="addMemberToTask('edit')" required>
-                    <option value="0">Select contacts to assign </option>
-
-                </select>
-            </div>
-            <div class="add-task-assigned-members dflex gap10" id="addTaskAssignedMembers_edit">
-                ${addedMembersHTMLBigCard(toDoIndex)}
-            </div>
-        </div>
-      </div>
-
-      <span class="vertical-line"></span>
-      <!-- TRENNUNG!!! -->
-      <div class="add-task-half">
-       <div class="add-task-input-container">
-            <p>Due Date</p>
-            <div class="input-field date-input" >
-                    <input type="datetime" placeholder="dd/mm/yyy" class="pointer" id="dueDateInput_edit" value="${getDateString_Edit(toDoIndex)}">
-    <img src="assets/img/calendar.png" alt="">
-    </div>
-       </div >
-
-       <div class="select-prio">
-         <p>Prio</p>
-         <div class="dflex gap10">
-            <div class="prio-container pointer" id="prioButton_urgent_edit" onclick="selectPrioInEdit('urgent')">
-                <div>Urgent</div>
-                <img src="assets/img/priorityUrgent.png" alt="">
-            </div>
-            
-            <div class="prio-container pointer" id="prioButton_medium_edit" onclick="selectPrioInEdit('medium')">
-                <div>Medium</div>
-                <img src="assets/img/priorityMedium.png" alt="">
-            </div>
-            
-            <div class="prio-container pointer" id="prioButton_low_edit" onclick="selectPrioInEdit('low')">
-                <div>Low</div>
-                <img src="assets/img/priorityLow.png" alt="">
-            </div>
-         </div>
-       </div>
-       
-        <div class="add-task-input-container">
-         <p>Subtasks</p>
-            <div class="input-field">
-             <input type="text" placeholder="Add new subtask" id="subTaskInput_edit">
-             <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('edit')">
-            </div>
-            <div class="dflex-col gap10" id="subTaskPreviewContainer_edit">
-             ${addedSubTasksHTML(toDoIndex)}
-            </div>
-        </div>
-
-    </div>
-    <div class="btn-container">
-        <button class="login-btn clear-btn" onclick="closeEditTaskPopUp()">Clear X</button>
-        <button type="submit" class="login-btn add-task-btn" onclick="EditTask(${toDoIndex})">Edit Task <img src="assets/img/plusbutton.png" alt=""></button>
-    </div>
-</div >
-</div > `;
+    </div>`;
 }
 
+
+/**
+ * Opens the edit task in mobile view.
+ * 
+ * @param {number} toDoIndex - The index of the to-do item.
+ */
 function openEditTaskMobile(toDoIndex) {
     window.open(`edit_task_mobile.html?toDo=${toDoIndex}&user=${saveUrlVariable()}`, "_self");
 }
+
 // function
 //////////////////////////////////////////////////

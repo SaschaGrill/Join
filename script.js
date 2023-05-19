@@ -1,7 +1,5 @@
 /**
  * This function will load templates to your html
- * 
- * 
  */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');

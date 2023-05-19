@@ -1,5 +1,11 @@
 let contacts = [];
 
+/**
+ * Splits a full name into an array of first name and last name.
+ * 
+ * @param {string} fullName - The full name to split.
+ * @returns {string[]} An array containing the first name and last name.
+ */
 function firstAndLastNameAsArray(fullName) {
     const names = fullName.split(" ");
     const firstName = names[0];
@@ -7,10 +13,25 @@ function firstAndLastNameAsArray(fullName) {
     return [firstName, lastName];
 }
 
+
+/**
+ * Gets the initials of a first name and last name.
+ * 
+ * @param {string} firstName - The first name.
+ * @param {string} lastName - The last name.
+ * @returns {string[]} An array containing the initials of the first name and last name.
+ */
 function getInitials(firstName, lastName) {
     return [firstName[0], lastName[0]];
 }
 
+
+/**
+ * Checks if a user with the given email is in the contacts list.
+ * 
+ * @param {string} email - The email to search for.
+ * @returns {boolean} Returns true if the user is found in the contacts list, false otherwise.
+ */
 function isUserInContacts(email) {
     for (let contact of contacts) {
         if (contact.email === email) {
@@ -20,6 +41,54 @@ function isUserInContacts(email) {
     return false;
 }
 
+
+/**
+ * Splits a full name into an array of first name and last name.
+ * 
+ * @param {string} fullName - The full name to split.
+ * @returns {string[]} An array containing the first name and last name.
+ */
+function firstAndLastNameAsArray(fullName) {
+    const names = fullName.split(" ");
+    const firstName = names[0];
+    const lastName = names[names.length - 1];
+    return [firstName, lastName];
+}
+
+
+/**
+ * Gets the initials of a first name and last name.
+ * 
+ * @param {string} firstName - The first name.
+ * @param {string} lastName - The last name.
+ * @returns {string[]} An array containing the initials of the first name and last name.
+ */
+function getInitials(firstName, lastName) {
+    return [firstName[0], lastName[0]];
+}
+
+
+/**
+ * Checks if a user with the given email is in the contacts list.
+ * 
+ * @param {string} email - The email to search for.
+ * @returns {boolean} Returns true if the user is found in the contacts list, false otherwise.
+ */
+function isUserInContacts(email) {
+    for (let contact of contacts) {
+        if (contact.email === email) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+/**
+ * Adds a contact for every user that is not already in the contacts list.
+ * 
+ * @returns {Promise<void>} A promise that resolves once all contacts are added.
+ */
 async function addContactForEveryUser() {
     await loadUsers();
     for (let i = 0; i < users.length; i++) {
@@ -33,27 +102,44 @@ async function addContactForEveryUser() {
                 initials: getInitials(fullNameAsArray[0], fullNameAsArray[1]),
                 email: user.email,
                 phone: "to be added",
-            }
+            };
             contacts.push(contact);
         }
     }
 }
 
+
+/**
+ * Initializes the contact management system.
+ * 
+ * @returns {Promise<void>} A promise that resolves once the initialization is complete.
+ */
 async function initializeContact() {
     includeHTML();
     await loadContacts();
     await addContactForEveryUser();
     renderContactsList();
     saveUrlVariable();
-    renderContactBig(contacts[0])
+    renderContactBig(contacts[0]);
 }
 
+
+/**
+ * Loads the contacts from storage.
+ * 
+ * @returns {Promise<void>} A promise that resolves once the contacts are loaded.
+ */
 async function loadContacts() {
     contacts = [];
     contacts = JSON.parse(await getItem('contacts'));
 }
 
-// generiert zufällige Farbe
+
+/**
+ * Generates a random color.
+ * 
+ * @returns {string} The randomly generated color in hexadecimal format.
+ */
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -63,13 +149,26 @@ function getRandomColor() {
     return color;
 }
 
-// Wandelt erste Buchstaben von Vor- und Nachname in Initialen um
+
+/**
+ * Gets the color corresponding to the initials of a name.
+ * 
+ * @param {string} firstName - The first name.
+ * @param {string} lastName - The last name.
+ * @returns {string} The color corresponding to the initials of the name.
+ */
 function getColorForName(firstName, lastName) {
     const initials = firstName.charAt(0) + lastName.charAt(0);
     return getColorForInitials(initials);
 }
 
-// wandelt Initialen in Farben um
+
+/**
+ * Gets the color corresponding to the initials.
+ * 
+ * @param {string} initials - The initials.
+ * @returns {string} The color corresponding to the initials.
+ */
 function getColorForInitials(initials) {
     const colors = {};
     if (!colors[initials]) {
@@ -78,11 +177,13 @@ function getColorForInitials(initials) {
     return colors[initials];
 }
 
-//rendert die Liste Aller Kontakte am Linken Rand
+
+/**
+ * Renders the contacts list on the left side.
+ */
 function renderContactsList() {
     var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-    // Kontaktliste leeren
     let contactList = document.getElementById("contact-list");
     contactList.innerHTML = "";
 
@@ -90,24 +191,30 @@ function renderContactsList() {
         const letter = alphabet[i];
         let contactsIncludingLetter = [];
         for (let j = 0; j < contacts.length; j++) {
-            // Überprüfen, ob contacts[j].firstName definiert ist
-            if (contacts[j].firstName && contacts[j].firstName[0].toLowerCase() == letter) {
+            if (contacts[j].firstName && contacts[j].firstName[0].toLowerCase() === letter) {
                 contactsIncludingLetter.push(contacts[j]);
             }
         }
 
-        let contactList = document.getElementById("contact-list");
+        let contactListElement = document.getElementById("contact-list");
 
         if (contactsIncludingLetter.length > 0) {
-            contactList.innerHTML += contactListLetterHTML(letter.toUpperCase());
+            contactListElement.innerHTML += contactListLetterHTML(letter.toUpperCase());
         }
 
         for (let k = 0; k < contactsIncludingLetter.length; k++) {
-            contactList.innerHTML += contactInListHTML(contactsIncludingLetter[k]);
+            contactListElement.innerHTML += contactInListHTML(contactsIncludingLetter[k]);
         }
     }
 }
 
+
+/**
+ * Generates the HTML for a contact list letter.
+ * 
+ * @param {string} letter - The letter.
+ * @returns {string} The HTML for the contact list letter.
+ */
 function contactListLetterHTML(letter = "no Letter") {
     return /*html*/`
     <div class="contact-list-letter">
@@ -115,6 +222,13 @@ function contactListLetterHTML(letter = "no Letter") {
     </div>`;
 }
 
+
+/**
+ * Generates the HTML for a contact in the contact list.
+ * 
+ * @param {object} contact - The contact object.
+ * @returns {string} The HTML for the contact in the contact list.
+ */
 function contactInListHTML(contact) {
     let contactIndex = contacts.indexOf(contact);
     return /*html*/`
@@ -128,67 +242,84 @@ function contactInListHTML(contact) {
     `;
 }
 
-//rendert einen Kontakt in der großen Anzeige
+
+/**
+ * Renders the big contact view.
+ * 
+ * @param {object} contact - The contact object.
+ */
 function renderContactBig(contact) {
     document.getElementById("contactBigContainer").innerHTML = "";
     document.getElementById("contactBigContainer").innerHTML += contactsBigHTML(contact);
 }
 
+
+/**
+ * Opens the add task site with the selected contact.
+ * 
+ * @param {number} contactIndex - The index of the contact to add the task for.
+ */
 function openAddTaskSiteWithContact(contactIndex) {
     window.open(`add_task.html?contactToAddIndex=${contactIndex}&user=${saveUrlVariable()}`, "_self");
 }
 
+
+/**
+ * Generates the HTML for the big contact view.
+ * 
+ * @param {object} contact - The contact object.
+ * @returns {string} The HTML for the big contact view.
+ */
 function contactsBigHTML(contact) {
     let contactIndex = contacts.indexOf(contact);
     return /*html*/`
     <div class="contacts-header">
-                        <h1 class="headlines">Contacts</h1>
-                        <p class="contacts-headline-line"></p>
-                        <p>Better with a team</p>
-                    </div>
+        <h1 class="headlines">Contacts</h1>
+        <p class="contacts-headline-line"></p>
+        <p>Better with a team</p>
+    </div>
 
-                    <div class="contact-name-container-big">
-                        <div class="contacts-big-circle" style="background-color: ${contact.color}">
-                            ${contact.initials}
-                        </div>
-                        <div>
-                           ${contact.firstName}  ${contact.lastName}
-                            <div class="contact-add-task" onclick="openAddTaskSiteWithContact(${contactIndex})">+ Add Task</div>
-                        </div>
-                    </div>
+    <div class="contact-name-container-big">
+        <div class="contacts-big-circle" style="background-color: ${contact.color}">
+            ${contact.initials}
+        </div>
+        <div>
+            ${contact.firstName}  ${contact.lastName}
+            <div class="contact-add-task" onclick="openAddTaskSiteWithContact(${contactIndex})">+ Add Task</div>
+        </div>
+    </div>
 
-                    <div class="contact-information padding-bt10">
-                        <span>Contact Information</span>
-                        <span class="edit-task-contact" onclick="openEditContactForm(contacts[${contactIndex}])">
-                            <img src="assets/img/pen_black.png" alt="">Edit Contact
-                        </span>
-                    </div>
+    <div class="contact-information padding-bt10">
+        <span>Contact Information</span>
+        <span class="edit-task-contact" onclick="openEditContactForm(contacts[${contactIndex}])">
+            <img src="assets/img/pen_black.png" alt="">Edit Contact
+        </span>
+    </div>
 
-                    <div class="dflex-col gap10 padding-bt10">
-                        <span class="bold">
-                        Email
-                        </span>
-                        <a href='mailto:${contact.email}' class="contact-list-link pointer">
-                        ${contact.email}
-                        </a>
-                    </div>
+    <div class="dflex-col gap10 padding-bt10">
+        <span class="bold">
+            Email
+        </span>
+        <a href='mailto:${contact.email}' class="contact-list-link pointer">
+            ${contact.email}
+        </a>
+    </div>
 
-                    <div class="dflex-col gap10 padding-bt10">
-                        <span class="bold">
-                        Phone
-                        </span>
-                        <a href='tel:${contact.phone}' class="contact-list-link pointer">
-                        ${contact.phone}
-                        </a>
-                    </div>
+    <div class="dflex-col gap10 padding-bt10">
+        <span class="bold">
+            Phone
+        </span>
+        <a href='tel:${contact.phone}' class="contact-list-link pointer">
+            ${contact.phone}
+        </a>
+    </div>
     `;
 }
 
 
-
-// von Gloria eingefügt
-
-// Öffnet das Formular zum Hinzufügen eines neuen Kontakts
+/**
+ * Opens the form for adding a new contact.
+ */
 function openAddContactForm() {
     const formHTML = `
     <div class="overlay-contacts">
@@ -224,7 +355,12 @@ function openAddContactForm() {
     document.body.appendChild(overlayDiv);
 }
 
-// Fügt einen neuen Kontakt zum contacts Array hinzu
+
+/**
+ * Adds a new contact to the contacts array.
+ * 
+ * @param {Event} event - The event object.
+ */
 async function addNewContact(event) {
     event.preventDefault();
     const name = document.getElementById('add-name').value;
@@ -241,15 +377,20 @@ async function addNewContact(event) {
         phone,
     };
 
-    contacts.push(contact); // Hinzufügen des neuen Kontakts zum Array
-    await setItem('contacts', JSON.stringify(contacts)); // Speichern des aktualisierten Arrays online
+    contacts.push(contact);
+    await setItem('contacts', JSON.stringify(contacts));
     console.log("Contact added");
     renderContactsList();
     closeOverlay(event);
     renderContactBig(contact);
 }
 
-// Öffnet das Formular zum Bearbeiten eines Kontakts
+
+/**
+ * Opens the form for editing a contact.
+ * 
+ * @param {object} contact - The contact object to be edited.
+ */
 function openEditContactForm(contact) {
     const contactIndex = contacts.indexOf(contact);
     const formHTML = `
@@ -285,7 +426,10 @@ function openEditContactForm(contact) {
     document.body.appendChild(overlayDiv);
 }
 
-// Schließt das Overlay, wenn außerhalb des Formulars geklickt wird
+
+/**
+ * Closes the overlay when clicked outside the form.
+ */
 function closeOverlay() {
     const overlayContainer = document.getElementById('overlay-container');
     if (overlayContainer.parentElement === document.body) {
@@ -293,7 +437,14 @@ function closeOverlay() {
     }
 }
 
-// Bearbeitet einen Kontakt im contacts Array
+
+/**
+ * Edits a contact in the contacts array.
+ * 
+ * @param {number} contactIndex - The index of the contact to be edited.
+ * @param {Event} event - The event object.
+ * @param {object} contact - The contact object being edited.
+ */
 async function editContact(contactIndex, event, contact) {
     event.preventDefault();
     const name = document.getElementById('edit-name').value;
@@ -312,7 +463,13 @@ async function editContact(contactIndex, event, contact) {
     renderContactBig(contact);
 }
 
-// Löscht einen Kontakt aus dem "contacts"-Array, aktualisiert den Onlinespeicher und schließt das Overlay
+
+/**
+ * Deletes a contact from the "contacts" array, updates the online storage, and closes the overlay.
+ * 
+ * @param {number} contactIndex - The index of the contact to be deleted.
+ * @param {Event} event - The event object.
+ */
 async function deleteContact(contactIndex, event) {
     contacts.splice(contactIndex, 1);
     await setItem('contacts', JSON.stringify(contacts));
@@ -320,6 +477,7 @@ async function deleteContact(contactIndex, event) {
     renderContactBig(contacts[0]);
     if (event) closeOverlay(event);
 }
+
 
 /* function changeMobileView() {
     let contactList = document.getElementById("contactList");
