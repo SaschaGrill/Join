@@ -2914,3 +2914,135 @@ a span {
   background-repeat: no-repeat;
   background-position: 95% 50%;
 }
+
+/* Media Query Contact form */
+
+@media (max-width: 1000px) {
+  .overlay-contact-form {
+    max-width: 100%;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .overlay-contact-form input {
+    width: 327px;
+    height: 41px;
+    margin-bottom: 30px;
+  }
+
+  .newContactInput form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .newContactImg img {
+    padding-right: 0px;
+    padding-bottom: 24px;
+  }
+
+  .newContactLeft {
+    max-width: 100% !important;
+    width: auto;
+    align-content: center;
+    height: 351px;
+    padding: 46px;
+    border-radius: 0;
+  }
+
+  .newContactLeft img {
+    display: none;
+}
+
+  .newContactRight {
+    max-width: 100% !important;
+    width: auto;
+    height: 350px;
+    flex-direction: column;
+    padding: 5px;
+    justify-content: flex-end;
+  }
+
+  .contactCancel {
+    transform: translate(151px, -674px);
+    filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
+  }
+
+  .addContactButtons {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  .cancel {
+    display: none;
+  }
+}
+
+@media (max-width: 440px) {
+
+  .overlay-contact-form {
+    max-width: 100%;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .overlay-contact-form input {
+    width: 327px;
+    height: 41px;
+    margin-bottom: 30px;
+  }
+
+  .newContactInput form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .newContactImg img {
+    padding-right: 0px;
+    padding-bottom: 24px;
+  }
+
+  .newContactLeft {
+    max-width: 100% !important;
+    width: auto;
+    align-content: center;
+    height: 351px;
+    padding: 46px;
+    border-radius: 0;
+  }
+
+  .newContactLeft img {
+    display: none;
+}
+
+  .newContactRight {
+    max-width: 100% !important;
+    width: auto;
+    height: 350px;
+    flex-direction: column;
+    padding: 5px;
+    justify-content: flex-end;
+  }
+
+  .contactCancel {
+    transform: translate(151px, -674px);
+    background-color: white;
+  }
+
+  .addContactButtons {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  .cancel {
+    display: none;
+  }
+
+}
