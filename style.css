@@ -2500,6 +2500,14 @@ a span {
 
 @media (max-width: 1000px) {
 
+  .return-icon {
+    position: absolute;
+    top: 77px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+}
+
   .contacts-container {
     width: 100%;
     height: 100%;
@@ -2522,9 +2530,29 @@ a span {
     padding-top: 28px;
   }
 
-  .contacts-content-right {
+  .contacts-headline-line {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    rotate: 90deg;
+  }
+
+  .contacts-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contacts-header p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    font-size: 21px;
+  }
+
+  .contact-name-container-big {
+    margin-top: 44px;
+  }
+
+  .edit-task-contact {
     display: none;
-    z-index: -1;
   }
 
   .contact-list {
@@ -2534,6 +2562,11 @@ a span {
     margin-top: 15px;
     padding: 0;
     overflow-x: hidden;
+  }
+
+  .contacts-header h1 {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
   }
 
   .contact-list-letter {
@@ -2578,10 +2611,10 @@ a span {
     padding-top: 28px;
   }
 
-  .contacts-content-right {
+  /* .contacts-content-right {
     display: none;
     z-index: -1;
-  }
+  } */
 
   .contact-list {
     height: 70vh;
@@ -2915,6 +2948,7 @@ a span {
   background-position: 95% 50%;
 }
 
+
 /* Media Query Contact form */
 
 @media (max-width: 1000px) {
@@ -3033,7 +3067,7 @@ a span {
 
   .contactCancel {
     transform: translate(151px, -674px);
-    background-color: white;
+    filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
   }
 
   .addContactButtons {
