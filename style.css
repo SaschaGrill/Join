@@ -2552,6 +2552,25 @@ a span {
   }
 
   .edit-task-contact {
+    background-color: #2A3647;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 215px;
+    right: 54px;
+  }
+
+  .edit-task-contact img {
+    filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
+    max-height: 40px;
+    width: auto;
+  }
+
+  .edit-task-contact p {
     display: none;
   }
 

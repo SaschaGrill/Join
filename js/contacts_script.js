@@ -175,7 +175,7 @@ function contactsBigHTML(contact) {
                     <div class="contact-information padding-bt10">
                         <span>Contact Information</span>
                         <span class="edit-task-contact" onclick="openEditContactForm(contacts[${contactIndex}])">
-                            <img src="assets/img/pen_black.png" alt="">Edit Contact
+                            <img src="assets/img/pen_black.png" alt=""><p>Edit Contact</p>
                         </span>
                     </div>
 
