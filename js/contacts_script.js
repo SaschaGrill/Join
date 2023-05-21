@@ -80,7 +80,7 @@ function getColorForInitials(initials) {
 
 //rendert die Liste Aller Kontakte am Linken Rand
 function renderContactsList() {
-    var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     // Kontaktliste leeren
     let contactList = document.getElementById("contact-list");
