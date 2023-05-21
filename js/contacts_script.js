@@ -141,9 +141,12 @@ function renderContactBig(contact) {
 
     contactBigContainer.innerHTML = "";
 
-    // Fügt das Rückkehr-Symbol hinzu, wenn die Fenstergröße kleiner als 1000px ist
+    // Fügt das Rückkehr-Symbol und den "Löschen"-Button hinzu, wenn die Fenstergröße kleiner als 1000px ist
     if (window.innerWidth < 1000) {
-        contactBigContainer.innerHTML += `<img src="assets/img/arrow-left-line.svg" class="return-icon" onclick="returnToListView()" alt="Return">`;
+        let contactIndex = contacts.indexOf(contact);
+        contactBigContainer.innerHTML += `
+        <img src="assets/img/arrow-left-line.svg" class="return-icon" id="return-icon" onclick="returnToListView()">
+        <div class="mobile-delete-button" onclick="deleteContact(${contactIndex}, event); returnToListView()"><img src="assets/img/delete.png"></div>`;
     }
 
     contactBigContainer.innerHTML += contactsBigHTML(contact);
@@ -157,9 +160,12 @@ function contactsBigHTML(contact) {
     let contactIndex = contacts.indexOf(contact);
     return /*html*/`
     <div class="contacts-header">
+                        <p class="dnone" id="kanbanboard-head">Kanban Project Management Tool</p>
                         <h1 class="headlines">Contacts</h1>
-                        <p class="contacts-headline-line"></p>
-                        <p>Better with a team</p>
+                            <div class="mobile-contacts-header">
+                                <p class="contacts-headline-line"></p>
+                                <p>Better with a team</p>
+                            </div>
                     </div>
 
                     <div class="contact-name-container-big">
@@ -332,7 +338,9 @@ async function deleteContact(contactIndex, event) {
     contacts.splice(contactIndex, 1);
     await setItem('contacts', JSON.stringify(contacts));
     renderContactsList();
-    renderContactBig(contacts[0]);
+    if (contacts.length > 0) {
+        renderContactBig(contacts[0]);
+    }
     if (event) closeOverlay(event);
 }
 
@@ -340,17 +348,20 @@ async function deleteContact(contactIndex, event) {
 function returnToListView() {
     let contactBigContainer = document.getElementById('contactBigContainer');
     let contactList = document.getElementById('contactList');
+    let kanbanboard = document.getElementById('kanbanboard-head');
 
     // Blendet den großen Kontakt-Container aus und die Kontaktliste ein, wenn die Fenstergröße kleiner als 1000px ist
     if (window.innerWidth < 1000) {
         contactBigContainer.classList.add('dnone');
         contactList.classList.remove('dnone');
+        kanbanboard.classList.remove('dnone');
     }
 }
 
 window.addEventListener('resize', function() {
     let contactBigContainer = document.getElementById("contactBigContainer");
     let contactList = document.getElementById('contactList');
+    let returnIcon = document.getElementById('return-icon');
 
     if (window.innerWidth < 1000) {
         // Stellt sicher, dass der große Kontakt-Container ausgeblendet ist, wenn das Fenster verkleinert wird
@@ -360,5 +371,8 @@ window.addEventListener('resize', function() {
         // Stellt sicher, dass beide Elemente angezeigt werden, wenn das Fenster vergrößert wird
         contactBigContainer.classList.remove('dnone');
         contactList.classList.remove('dnone');
+        if (returnIcon) {
+            returnIcon.style.display = "none"; // Hide the icon when width is greater than 1000px
+        }
     }
 });
