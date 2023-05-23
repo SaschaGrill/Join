@@ -146,7 +146,7 @@ function renderContactBig(contact) {
         let contactIndex = contacts.indexOf(contact);
         contactBigContainer.innerHTML += `
         <img src="assets/img/arrow-left-line.svg" class="return-icon" id="return-icon" onclick="returnToListView()">
-        <div class="mobile-delete-button" onclick="deleteContact(${contactIndex}, event); returnToListView()"><img src="assets/img/delete.png"></div>`;
+        <div class="mobile-delete-button pointer" onclick="deleteContact(${contactIndex}, event); returnToListView()"><img src="assets/img/delete.png"></div>`;
     }
 
     contactBigContainer.innerHTML += contactsBigHTML(contact);
