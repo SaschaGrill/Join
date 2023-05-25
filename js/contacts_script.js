@@ -45,7 +45,7 @@ async function initializeContact() {
     await addContactForEveryUser();
     renderContactsList();
     saveUrlVariable();
-    renderContactBig(contacts[0])
+    renderContactBig(contacts[0]);
 }
 
 async function loadContacts() {
@@ -133,20 +133,18 @@ function renderContactBig(contact) {
     let contactBigContainer = document.getElementById('contactBigContainer');
     let contactList = document.getElementById('contactList');
 
-    // Blendet die Kontaktliste aus und den großen Kontakt-Container ein, wenn die Fenstergröße kleiner als 1000px ist
-    if (window.innerWidth < 1000) {
+    if (isMobileView()) {
         contactList.classList.add('dnone');
         contactBigContainer.classList.remove('dnone');
     }
 
     contactBigContainer.innerHTML = "";
 
-    // Fügt das Rückkehr-Symbol und den "Löschen"-Button hinzu, wenn die Fenstergröße kleiner als 1000px ist
-    if (window.innerWidth < 1000) {
+    if (isMobileView()) {
         let contactIndex = contacts.indexOf(contact);
         contactBigContainer.innerHTML += `
         <img src="assets/img/arrow-left-line.svg" class="return-icon" id="return-icon" onclick="returnToListView()">
-        <div class="mobile-delete-button pointer" onclick="deleteContact(${contactIndex}, event); returnToListView()"><img src="assets/img/delete.png"></div>`;
+        <div class="mobile-delete-button pointer" id="mobile-delete-button" onclick="deleteContact(${contactIndex}, event); returnToListView()"><img src="assets/img/delete.png"></div>`;
     }
 
     contactBigContainer.innerHTML += contactsBigHTML(contact);
@@ -264,11 +262,24 @@ async function addNewContact(event) {
 
     contacts.push(contact); // Hinzufügen des neuen Kontakts zum Array
     await setItem('contacts', JSON.stringify(contacts)); // Speichern des aktualisierten Arrays online
-    console.log("Contact added");
     renderContactsList();
     closeOverlay(event);
     renderContactBig(contact);
+    showNotification("Contact succesfully created");
 }
+
+function showNotification(message) {
+    const notification = document.createElement("div");
+    notification.classList.add("notification");
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        if (notification.parentElement === document.body) {
+            document.body.removeChild(notification);
+        }
+    }, 4000); // entfernt die Benachrichtigung nach 5 Sekunden
+}
+
 
 // Öffnet das Formular zum Bearbeiten eines Kontakts
 function openEditContactForm(contact) {
@@ -309,10 +320,11 @@ function openEditContactForm(contact) {
 // Schließt das Overlay, wenn außerhalb des Formulars geklickt wird
 function closeOverlay() {
     const overlayContainer = document.getElementById('overlay-container');
-    if (overlayContainer.parentElement === document.body) {
+    if (overlayContainer && overlayContainer.parentElement === document.body) {
         document.body.removeChild(overlayContainer);
     }
 }
+
 
 // Bearbeitet einen Kontakt im contacts Array
 async function editContact(contactIndex, event, contact) {
@@ -344,14 +356,17 @@ async function deleteContact(contactIndex, event) {
     if (event) closeOverlay(event);
 }
 
+function isMobileView() {
+    return window.innerWidth < 1000;
+}
+
 // Die Funktion zum Zurückkehren zur Listenansicht
 function returnToListView() {
     let contactBigContainer = document.getElementById('contactBigContainer');
     let contactList = document.getElementById('contactList');
     let kanbanboard = document.getElementById('kanbanboard-head');
 
-    // Blendet den großen Kontakt-Container aus und die Kontaktliste ein, wenn die Fenstergröße kleiner als 1000px ist
-    if (window.innerWidth < 1000) {
+    if (isMobileView()) {
         contactBigContainer.classList.add('dnone');
         contactList.classList.remove('dnone');
         kanbanboard.classList.remove('dnone');
@@ -362,17 +377,20 @@ window.addEventListener('resize', function() {
     let contactBigContainer = document.getElementById("contactBigContainer");
     let contactList = document.getElementById('contactList');
     let returnIcon = document.getElementById('return-icon');
+    let mobileDeleteButton = document.getElementById('mobile-delete-button');
 
-    if (window.innerWidth < 1000) {
-        // Stellt sicher, dass der große Kontakt-Container ausgeblendet ist, wenn das Fenster verkleinert wird
+    if (isMobileView()) {
         contactBigContainer.classList.add('dnone');
         contactList.classList.remove('dnone');
     } else {
-        // Stellt sicher, dass beide Elemente angezeigt werden, wenn das Fenster vergrößert wird
         contactBigContainer.classList.remove('dnone');
         contactList.classList.remove('dnone');
         if (returnIcon) {
-            returnIcon.style.display = "none"; // Hide the icon when width is greater than 1000px
+            returnIcon.classList.add('dnone'); // Verstecke das Icon, wenn die Breite größer als 1000px ist
+        }
+        if (mobileDeleteButton) {
+            mobileDeleteButton.classList.add('dnone'); // Verstecke den mobile-delete-button, wenn die Breite größer als 1000px ist
         }
     }
 });
+
