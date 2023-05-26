@@ -3067,6 +3067,31 @@ a span {
 
 /* Media Query Contact form */
 
+@media (max-width: 1300px) {
+  .overlay-contact-form {
+    width: 1000px;
+  }
+
+  .newContactLeft {
+    width: 284px;
+    padding: 35px;
+  }
+
+  .newContactRight {
+    width: 538px;
+    padding: 40px;
+  }
+
+  .newContactImg img {
+    padding-right: 35px;
+  }
+
+  .overlay-contact-form input {
+    width: 375px;
+  }
+
+}
+
 @media (max-width: 1000px) {
   .overlay-contact-form {
     max-width: 100%;
@@ -3153,7 +3178,9 @@ a span {
   }
 
   .contactCancel {
-    transform: translate(151px, -674px);
+    position: fixed;
+    top: 288px;
+    right: 338px;
     filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
   }
 
@@ -3218,7 +3245,9 @@ a span {
   }
 
   .contactCancel {
-    transform: translate(151px, -674px);
+    position: fixed;
+    top: 288px;
+    right: 338px;
     filter: brightness(101%) contrast(200%) grayscale(52%) hue-rotate(-7deg) invert(100%) saturate(0%);
   }
 
