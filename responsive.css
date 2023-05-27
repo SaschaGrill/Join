@@ -300,6 +300,7 @@
         width: 350px;
         top: 485px;
         left: 50%;
+        padding-left: 0px;
     }
 
     .forgot-headlines {
