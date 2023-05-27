@@ -6,8 +6,13 @@ let user;
  * Initializes the page by loading email and password data and users data.
  */
 function init() {
-  loadEmailPassword();
-  loadUsers();
+  setTimeout(function() {
+    window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
+    loadEmailPassword();
+    loadUsers();
+    document.body.style.overflow = 'visible';
+  }, 0);
 }
 
 

@@ -271,9 +271,9 @@
     .leftarrow {
         position: absolute;
         left: 6%;
-        top: 7%;
-        width: 25px;
-        height: 25px;
+        top: 3%;
+        width: 18px;
+        height: 18px;
         filter: brightness(0);
     }
 
@@ -373,6 +373,8 @@
         animation-delay: 225ms;
         animation-fill-mode: forwards;
         object-fit: scale-down;
+        width: 64px !important;
+        height: 78px !important;
     }
 
     .change-password {
@@ -395,6 +397,7 @@
         animation-delay: 1000ms;
         animation-duration: 1000ms;
         animation-fill-mode: forwards;
+        height: 100vh;
     }
 
     @keyframes login-animation {
