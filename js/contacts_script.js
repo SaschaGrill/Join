@@ -453,6 +453,9 @@ async function deleteContact(contactIndex, event) {
     if (event) closeOverlay(event);
 }
 
+/**
+ * Checks if width is under 1000px
+ */
 function isMobileView() {
     return window.innerWidth < 1000;
 }
