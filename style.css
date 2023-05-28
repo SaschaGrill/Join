@@ -970,6 +970,8 @@ a span {
   justify-content: center;
   align-items: center;
   border-radius: 50px;
+  color: white;
+  border: 3px solid white;
 }
 
 .delete-btn-member {
@@ -1344,7 +1346,7 @@ a span {
 }
 
 .big-card-container::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 
 }
 
@@ -2307,8 +2309,24 @@ a span {
 .contact-list {
   height: 85vh;
   overflow-y: scroll !important;
-  padding: 20px;
+  padding: 0px 16px 0px 22px;
   margin-top: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: #bcbcbc #ffffff;
+}
+
+.contact-list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.contact-list::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.contact-list::-webkit-scrollbar-thumb {
+  background-color: #bcbcbc;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
 }
 
 .contacts-content-left {
@@ -2466,6 +2484,8 @@ a span {
   height: 120px;
   background-color: #07af07;
   border-radius: 50%;
+  border: 4px solid white;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2563,7 +2583,7 @@ a span {
   .return-icon {
     position: absolute;
     top: 77px;
-    right: 28px;
+    right: 50px;
     width: 24px;
     height: 24px;
   }
@@ -2599,6 +2619,22 @@ a span {
   .contacts-content-right {
     overflow-y: scroll !important;
     margin-bottom: 190px;
+    scrollbar-width: thin;
+    scrollbar-color: #bcbcbc #ffffff;
+  }
+
+  .contacts-content-right::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .contacts-content-right::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  .contacts-content-right::-webkit-scrollbar-thumb {
+    background-color: #bcbcbc;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
   }
 
   .contacts-headline-line {
@@ -2645,7 +2681,7 @@ a span {
     justify-content: center;
     position: absolute;
     bottom: 184px;
-    right: 22px;
+    right: 50px;
   }
 
   .edit-task-contact img {
@@ -2663,7 +2699,7 @@ a span {
     width: 85%;
     overflow-y: scroll !important;
     margin-top: 15px;
-    padding: 0;
+    padding: 0px 16px 0px 22px;
     overflow-x: hidden;
     margin-bottom: 100px;
   }
@@ -2680,7 +2716,7 @@ a span {
   .new-contact-button {
     position: static;
     height: 60px;
-    margin-top: 100px;
+    margin-top: 90px;
     padding-right: 50px;
   }
 
@@ -2699,7 +2735,7 @@ a span {
     justify-content: center;
     position: absolute;
     bottom: 259px;
-    right: 22px;
+    right: 50px;
     align-items: center;
   }
 
@@ -2744,7 +2780,7 @@ a span {
     width: 85%;
     overflow-y: scroll !important;
     margin-top: 20px;
-    padding: 0;
+    padding: 0px 8px 0px 12px;
   }
 
   .contact-list-letter {
@@ -2773,6 +2809,15 @@ a span {
   z-index: 100;
 }
 
+@keyframes slideInFromRight {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
 .overlay-contact-form {
   background-color: white;
   display: flex;
@@ -2780,6 +2825,7 @@ a span {
   width: 1212px;
   height: 594px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: slideInFromRight 0.5s;
 }
 
 .overlay-contact-form input {

@@ -246,7 +246,7 @@ function contactsBigHTML(contact) {
 
                     <div class="contact-name-container-big">
                         <div class="contacts-big-circle" style="background-color: ${contact.color}">
-                            ${contact.initials}
+                            ${contact.initials.join('')}
                         </div>
                         <div>
                            ${contact.firstName}  ${contact.lastName}
@@ -285,6 +285,11 @@ function contactsBigHTML(contact) {
  * Opens the form for adding a new contact.
  */
 function openAddContactForm() {
+    const oldOverlay = document.getElementById('overlay-container');
+    if (oldOverlay) {
+        oldOverlay.remove();
+    }
+
     const formHTML = `
     <div class="overlay-contacts">
         <div class="overlay-contact-form">
@@ -460,7 +465,9 @@ function isMobileView() {
     return window.innerWidth < 1000;
 }
 
-// Die Funktion zum Zurückkehren zur Listenansicht
+/**
+ * Returns to List
+ */
 function returnToListView() {
     let contactBigContainer = document.getElementById('contactBigContainer');
     let contactList = document.getElementById('contactList');
@@ -473,6 +480,12 @@ function returnToListView() {
     }
 }
 
+/**
+ * Event listener for window 'resize' event.
+ * Toggles visibility of specific DOM elements based on the current view (Mobile or Desktop).
+ *
+ * @param {Event} event - The Event object representing the 'resize' event.
+ */
 window.addEventListener('resize', function() {
     let contactBigContainer = document.getElementById("contactBigContainer");
     let contactList = document.getElementById('contactList');
