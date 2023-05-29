@@ -1810,6 +1810,7 @@ a span {
 
   .summary-container {
     padding-bottom: 100px;
+    overflow-x: hidden;
   }
 
   .summary-content {
@@ -1819,6 +1820,10 @@ a span {
   .summary-content-left {
     gap: 40px;
     padding: 0px 5%;
+  }
+
+  .fiftyfiftyboxleft {
+    margin-right: 0;
   }
 }
 

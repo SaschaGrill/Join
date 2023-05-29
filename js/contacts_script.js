@@ -133,7 +133,6 @@ function getColorForInitials(initials) {
 function renderContactsList() {
     let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-    // Kontaktliste leeren
     let contactList = document.getElementById("contact-list");
     contactList.innerHTML = "";
 
@@ -141,7 +140,6 @@ function renderContactsList() {
         const letter = alphabet[i];
         let contactsIncludingLetter = [];
         for (let j = 0; j < contacts.length; j++) {
-            // Überprüfen, ob contacts[j].firstName definiert ist
             if (contacts[j].firstName && contacts[j].firstName[0].toLowerCase() == letter) {
                 contactsIncludingLetter.push(contacts[j]);
             }
