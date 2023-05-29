@@ -477,6 +477,8 @@ function returnToListView() {
         contactBigContainer.classList.add('dnone');
         contactList.classList.remove('dnone');
         kanbanboard.classList.remove('dnone');
+    } else {
+        kanbanboard.classList.add('dnone');
     }
 }
 
