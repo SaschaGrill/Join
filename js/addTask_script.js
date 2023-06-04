@@ -179,7 +179,7 @@ function openAddTaskMenu(status = "to-do") {
         document.getElementById("addTaskButton_popUp").onclick = function () { addTaskFromPopUp(status) };
     } else {
         console.log("AA");
-        // Open AddTaskPage when width is less than 1000px
+        // Open AddTaskPage when width is less than 1200px
         openAddTaskSiteWithoutContact();
     }
 }
@@ -374,6 +374,10 @@ function addMemberToTaskWithIndex(contactIndex, popUp = false) {
  */
 function addSubTask(source = "popUp", cardIndex) {
     let addSubTaskInputField = document.getElementById(`subTaskInput_${source}`);
+    if (addSubTaskInputField.value == "") {
+        alert("Enter Subtask!");
+        return;
+    }
 
     let subTaskToAdd = { title: addSubTaskInputField.value, done: false };
 
@@ -520,7 +524,7 @@ function dateIsNotInPast(source = "addTaskSite") {
     const dateToCheck = new Date(year, month, day);
 
     if (dateToCheck < currentDate) {
-        alert("The selected date is in the past.");
+        alert("The selected date is either in the past or has the wrong format. Use format dd/mm/yyyy");
         return false;
     }
     else return true;

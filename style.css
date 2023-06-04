@@ -134,7 +134,7 @@ a span {
 
 .desktop-top {
   position: fixed;
-  width: 100vw;
+  /* width: 100vw; */
   height: 89px;
   left: 0px;
   top: 0px;
@@ -145,6 +145,12 @@ a span {
   gap: 34px;
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width:1000px){
+  .desktop-top{
+    width: 100vw !important;
+  }
 }
 
 .desktop-kanban {
@@ -1034,6 +1040,12 @@ a span {
   padding: 0 50px;
 }
 
+@media (max-width:1000px) {
+  .add-task-container {
+    padding: 0 0 !important;
+  }
+}
+
 .navbar-add-task {
   display: none;
 }
@@ -1041,7 +1053,7 @@ a span {
 
 @media (max-width:1000px) {
   .add-task-container {
-    width: 100vw;
+    width: 93vw;
     left: 0;
     top: 80px;
     position: relative;
@@ -1060,7 +1072,7 @@ a span {
     align-items: flex-start;
     justify-self: center;
     position: relative;
-    padding: 0 90px;
+    align-self: center;
   }
 
   .add-task-heading {
@@ -1138,11 +1150,26 @@ a span {
     right: 5px;
     cursor: pointer;
   }
+
+  .add-task-half {
+    width: 40% !important;
+  }
 }
 
 .add-task-half {
   height: 560px;
 }
+
+@media(max-width:1200px) {
+  .add-task-half {
+    width: 40% !important;
+  }
+
+  .prio-container{
+    max-width: 20%;
+  }
+}
+
 
 .add-task-container-pop-up .vertical-line {
   height: 70vh;
@@ -1182,11 +1209,17 @@ a span {
   height: 100px;
 }
 
+.add-task-input-container .input-field{
+  padding: 0 4px;
+}
+
 .add-task-input-container .input-field input {
   outline: none;
   border: none;
   font-size: 21px;
-  width: 80%;
+  width: 100%;
+  padding: 0 8px;
+  border-radius: 10px;
   height: 90%;
 }
 
@@ -1196,12 +1229,20 @@ a span {
   font-size: 21px;
 }
 
+@media (max-width:650px){
+ .select-category{
+  font-size: 16px;
+ }
+}
+
 .add-task-input-container .text-area-field textarea {
   outline: none;
   border: none;
   resize: none;
   font-size: 21px;
-  width: 80%;
+  width: 100%;
+  padding: 0 8px;
+  border-radius: 10px;
   height: 100%;
 }
 
@@ -1232,15 +1273,29 @@ a span {
     max-width: 70px;
     /* background-color: #FF3D00; */
   }
+
+  .select-prio{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .prio-button-container{
+    align-self: center;
+  }
+
+  
+.subTask-preview{
+  width: calc(100% - 80px) !important;
+}
 }
 
-@media(max-width:450px) {
+@media(max-width:480px) {
   .prio-text {
     display: none;
   }
 
   .select-category {
-    width: 160px;
+    width: calc(100% - 80px);
   }
 }
 
@@ -1315,6 +1370,13 @@ a span {
 .subTask-delete-button:hover {
   cursor: pointer;
   background-color: lightgray;
+}
+
+.subTask-preview{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 
@@ -1403,7 +1465,7 @@ a span {
 .big-card-button-container {
   position: absolute;
   right: 47px;
-  bottom: 61px;
+  bottom: 20px;
   display: flex;
 }
 
@@ -1476,6 +1538,9 @@ a span {
   border: 1px solid #2A3647;
   width: 40px;
   height: 40px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .big-card-button-container-mobile .edit-button {
@@ -1484,6 +1549,22 @@ a span {
   width: 50px;
   height: 50px;
   background-color: #2a3647;
+}
+
+@media(max-width:350px){
+  .big-card-button-container-mobile{
+    gap: 10px !important;
+  }
+  .big-card-button-container-mobile .delete-button {
+    width: 30px;
+    height: 30px;
+
+  }
+  
+  .big-card-button-container-mobile .edit-button {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 /* SUMMARY */

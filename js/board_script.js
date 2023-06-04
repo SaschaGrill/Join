@@ -411,11 +411,15 @@ function subtaskBigCardHTML(cardIndex) {
 
     for (let i = 0; i < subtasks.length; i++) {
         string += /*html*/`
-        <div class="dflex align-center gap10" >
-        ${getRightRectangleColor(cardIndex, i)}
-        ${subtasks[i].title}
-        <img src="assets/img/cross.png" alt="" class="subTask-delete-button" id="subTaskDelete_${i}" onclick="checkSubTaskUndone(${cardIndex}, ${i})">
-        <img src="assets/img/doneFullcolorInverted.png" alt="" class="subTask-done-button" id="subTaskDone_${i}" onclick="checkSubTaskDone(${cardIndex}, ${i})">
+        <div class="subTask-preview" >
+            <div class="dflex align-center gap10">
+                ${getRightRectangleColor(cardIndex, i)}
+                ${subtasks[i].title}
+            </div>
+            <div class="dflex align-center gap10">
+                <img src="assets/img/cross.png" alt="" class="subTask-delete-button" id="subTaskDelete_${i}" onclick="checkSubTaskUndone(${cardIndex}, ${i})">
+                <img src="assets/img/doneFullcolorInverted.png" alt="" class="subTask-done-button" id="subTaskDone_${i}" onclick="checkSubTaskDone(${cardIndex}, ${i})">
+            </div>
         </div > `;
     }
 
