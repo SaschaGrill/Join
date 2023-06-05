@@ -52,8 +52,9 @@ async function initializeBoard() {
     includeHTML();
     await loadContacts();
     await addContactForEveryUser();
-    saveUrlVariable();
+    // userFromURL();
     renderToDos();
+    setNavBarLinks();
 }
 
 
@@ -66,7 +67,7 @@ async function initializeBigCardMobile() {
     includeHTML();
     await loadContacts();
     await addContactForEveryUser();
-    saveUrlVariable();
+    userFromURL();;
     renderBigCardMobile(getBigCardIndexFromURL());
     document.getElementById("editButtonMobile").onclick = () => { openEditTaskMobile(getBigCardIndexFromURL()) };
 }
@@ -314,7 +315,7 @@ function closeBigCard() {
         document.getElementById("boardContainer").classList.remove("overflow-visible");
         renderToDos();
     } else {
-        openBoard();
+        window.open(openBoardLink());
     }
 }
 
@@ -330,6 +331,7 @@ function bigCardHTML(cardIndex) {
     <div class="big-card-Container">
         <button class="big-card-close-button pointer" onclick="closeBigCard()"> <img src="assets/img/cross.png" alt="">
         </button>
+        <span class="big-card-category" style="background-color: var(--${toDoArray[cardIndex].category}-color)"> ${capitalizeFirstLetter(toDoArray[cardIndex].category)}</span>
         <h1 class="headlines">${toDoArray[cardIndex]["title"]}</h1>
         <p>${toDoArray[cardIndex]["description"]}</p>
         <div class="dflex align-center gap20">
@@ -346,7 +348,6 @@ function bigCardHTML(cardIndex) {
         </div>
 
         <div  class="assigned-to-field">
-            <p class="bold">Assigned To:</p>
              ${assignedToContentBigCardHTML(cardIndex)}
         </div>
 
@@ -518,7 +519,7 @@ function bigCardPrioHTMLMobile(cardIndex) {
     <p class="bold">Priority:</p>
     <div class="prio-container-big-card dflex align-center pointer">
         ${capitalizeFirstLetter(prio)}
-        <img src="assets/img/priority${prio}.png">
+        <img src="assets/img/priority${capitalizeFirstLetter(prio)}.png">
     </div>
     `;
 }

@@ -65,38 +65,58 @@ function getCurrentUserVariable() {
  * 
  * @returns {string|null} The value of the "user" URL parameter, or null if it is not found.
  */
-function saveUrlVariable() {
+function userFromURL() {
     let currentUser = getCurrentUserVariable();
     return currentUser;
 }
 
 
 /**
- * Adds the "user" URL parameter with the specified ID to the current page URL.
+ * Adds the "user" URL parameter with the specified ID to the according href.
  * 
  * @param {string} id - The ID to append as the "user" URL parameter.
  */
 function addUrlVariable(id) {
-    let currentUrl = window.location.href = id;
-    let newUrl = currentUrl + '?user=' + saveUrlVariable();
-    window.location.href = newUrl;
+    let currentUrl = window.location.href;
+    console.log(currentUrl);
+    let newUrl = currentUrl + '?user=' + userFromURL();
+    return newUrl;
 }
 
+function setNavBarLinks() {
+    let summaryLink = document.getElementById("summaryHTML");
+    let boardLink = document.getElementById("boardHTML");
+    let addTaskLink = document.getElementById("addTaskHTML");
+    let contactsLink = document.getElementById("contactsHTML");
+
+    summaryLink.href = openSummaryLink();
+    boardLink.href = openBoardLink();
+    addTaskLink.href = addTaskSiteWithoutContactLink();
+    contactsLink.href = openContactLink();
+}
 
 /**
  * Opens the "add_task.html" page without specifying a contact to add.
  */
-function openAddTaskSiteWithoutContact() {
-    window.open(`add_task.html?contactToAddIndex=-1&user=${saveUrlVariable()}`, "_self");
+function addTaskSiteWithoutContactLink() {
+    return `add_task.html?contactToAddIndex=-1&user=${userFromURL()}`;
 }
 
+
+function openSummaryLink() {
+    return `summary.html?user=${userFromURL()}`;
+}
+
+function openContactLink() {
+    return `contacts.html?user=${userFromURL()}`;
+}
 
 /**
  * Opens the "board.html" page.
  * 
  */
-function openBoard() {
-    window.open(`board.html?contactToAddIndex=-1&user=${saveUrlVariable()}`, "_self");
+function openBoardLink() {
+    return `board.html?contactToAddIndex=-1&user=${userFromURL()}`;
 }
 
 
@@ -106,5 +126,5 @@ function openBoard() {
  * @param {number} cardIndex - The index of the card to display.
  */
 function openBigCardMobile(cardIndex) {
-    window.open(`big_card_mobile.html?user=${saveUrlVariable()}&card_ind=${cardIndex}`, "_self");
+    window.open(`big_card_mobile.html?user=${userFromURL()}&card_ind=${cardIndex}`, "_self");
 }

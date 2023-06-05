@@ -1,4 +1,5 @@
 let contacts = [];
+let chosenContact = 0;
 
 /**
  * Splits a full name into an array of first name and last name.
@@ -73,8 +74,9 @@ async function initializeContact() {
     await loadContacts();
     await addContactForEveryUser();
     renderContactsList();
-    saveUrlVariable();
+    userFromURL(); //to save user in variable
     renderContactBig(contacts[0]);
+    setNavBarLinks();
 }
 
 /**
@@ -179,7 +181,7 @@ function contactListLetterHTML(letter = "no Letter") {
 function contactInListHTML(contact) {
     let contactIndex = contacts.indexOf(contact);
     return /*html*/`
-    <div class="contact pointer" onclick="renderContactBig(contacts[${contactIndex}])">
+    <div class="contact pointer" id="contactInList_${contactIndex}" onclick="renderContactBig(contacts[${contactIndex}], ${contactIndex})">
         ${contactCircleHTML(contact, false)}
         <div class="contact-details">
             <span class="contact-list-name">${contact.firstName} ${contact.lastName}</span>
@@ -189,14 +191,24 @@ function contactInListHTML(contact) {
     `;
 }
 
+function markChosenContact(contactIndex = 0) {
+    let chosenContactElement = document.getElementById(`contactInList_${chosenContact}`);
+    chosenContactElement.classList.remove("contact-activated");
+    chosenContactElement = document.getElementById(`contactInList_${contactIndex}`)
+    chosenContactElement.classList.add("contact-activated");
+    chosenContact = contactIndex;
+}
+
 /**
  * Renders the big contact view.
  * 
  * @param {object} contact - The contact object.
  */
-function renderContactBig(contact) {
+function renderContactBig(contact, contactIndex) {
     let contactBigContainer = document.getElementById('contactBigContainer');
     let contactList = document.getElementById('contactList');
+
+    markChosenContact(contactIndex);
 
     if (isMobileView()) {
         contactList.classList.add('dnone');
@@ -221,7 +233,7 @@ function renderContactBig(contact) {
  * @param {number} contactIndex - The index of the contact to add the task for.
  */
 function openAddTaskSiteWithContact(contactIndex) {
-    window.open(`add_task.html?contactToAddIndex=${contactIndex}&user=${saveUrlVariable()}`, "_self");
+    window.open(`add_task.html?contactToAddIndex=${contactIndex}&user=${userFromURL()}`, "_self");
 }
 
 /**
@@ -304,7 +316,7 @@ function openAddContactForm() {
                 </div>
                 <div class="newContactInput">
                     <form onsubmit="addNewContact(event); return false;">    
-                        <input class="contacts-user" type="text" id="add-name" placeholder="Name" required>
+                        <input class="contacts-user" type="text" id="add-name" placeholder="Name" pattern="[A-Za-z]+" required>
                         <input class="contacts-email" type="email" id="add-email" placeholder="Email" required>
                         <input class="contacts-phone" type="number" id="add-phone" placeholder="Phone" required>
                         <div class="addContactButtons">
@@ -382,7 +394,7 @@ function openEditContactForm(contact) {
                 <div class="editContactRight">
                     <img class="contactCancel" src="assets/img/cancel.svg" onclick="closeOverlay(event)">
                     <div class="contacts-big-circle margin-right" style="background-color: ${contact.color}">
-                    ${contact.initials}
+                    ${contact.initials[0]}${contact.initials[1]}
                 </div>
                 <div class="editContactInput">
                     <form onsubmit="editContact(${contactIndex}, event, contacts[${contactIndex}]); return false;">
@@ -486,18 +498,24 @@ function returnToListView() {
  *
  * @param {Event} event - The Event object representing the 'resize' event.
  */
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
     let contactBigContainer = document.getElementById("contactBigContainer");
     let contactList = document.getElementById('contactList');
     let returnIcon = document.getElementById('return-icon');
     let mobileDeleteButton = document.getElementById('mobile-delete-button');
 
     if (isMobileView()) {
-        contactBigContainer.classList.add('dnone');
-        contactList.classList.remove('dnone');
+        if (contactBigContainer)
+            contactBigContainer.classList.add('dnone');
+        if (contactList)
+            contactList.classList.remove('dnone');
     } else {
-        contactBigContainer.classList.remove('dnone');
-        contactList.classList.remove('dnone');
+        if (contactBigContainer)
+            contactBigContainer.classList.remove('dnone');
+
+        if (contactList)
+            contactList.classList.remove('dnone');
+
         if (returnIcon) {
             returnIcon.classList.add('dnone');
         }
