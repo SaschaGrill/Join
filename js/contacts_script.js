@@ -394,11 +394,7 @@ function openEditContactForm(contact) {
                 <div class="editContactRight">
                     <img class="contactCancel" src="assets/img/cancel.svg" onclick="closeOverlay(event)">
                     <div class="contacts-big-circle margin-right" style="background-color: ${contact.color}">
-<<<<<<< HEAD
-                    ${contact.initials[0]}${contact.initials[1]}
-=======
                     ${contact.initials.join('')}
->>>>>>> 1b79b51900100dced6ec9dc6c0cb36553cbd4c40
                 </div>
                 <div class="editContactInput">
                     <form onsubmit="editContact(${contactIndex}, event, contacts[${contactIndex}]); return false;">
