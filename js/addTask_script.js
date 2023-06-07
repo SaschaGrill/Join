@@ -24,7 +24,8 @@ async function initializeAddTaskSite() {
     if (getUserToAddFromURL() != -1)
         addMemberToTaskWithIndex(getUserToAddFromURL());
 
-    setNavBarLinks();
+    setTimeout(setNavBarLinks(), 200);
+    setMinimumDateForInputFields();
 }
 
 
@@ -235,6 +236,23 @@ function addMemberHTML(index) {
 }
 
 
+function addTaskFieldsAreFilled(source = "popUp") {
+    let boolean = true;
+    let titleInput = document.getElementById("addTaskTitle");
+    let descriptionInput = document.getElementById("addTaskDescription");
+    let categoryInput = document.getElementById("addTaskCategory");
+    let dateInput = (source == "popUp") ? document.getElementById("dueDateInput_addTaskPopUp") : document.getElementById("dueDateInput_addTaskSite");
+
+    if (titleInput.value == "" ||
+        descriptionInput.value == "" ||
+        categoryInput.value == "0" ||
+        dateInput.value == "") {
+        boolean = false;
+    }
+    return boolean;
+
+}
+
 /**
  * Adds a task from the pop-up menu.
  * 
@@ -246,7 +264,10 @@ async function addTaskFromPopUp(status = "to-do") {
     let categoryInput = document.getElementById("addTaskCategory");
     let dateInput = document.getElementById("dueDateInput_addTaskPopUp");
 
-    if (!dateIsNotInPast("addTaskPopUp")) return;
+    if (!addTaskFieldsAreFilled("popUp")) {
+        alert("Fill in Fields");
+        return;
+    }
 
     let JSON = {
         category: categoryInput.value.toLowerCase(),
@@ -299,7 +320,10 @@ async function addTaskFromAddTaskSite() {
     let categoryInput = document.getElementById("addTaskCategory");
     let dateInput = document.getElementById("dueDateInput_addTaskSite");
 
-    if (!dateIsNotInPast()) return;
+    if (!addTaskFieldsAreFilled("popUp")) {
+        alert("Fill in Fields");
+        return;
+    }
 
     let taskJSON = {
         category: categoryInput.value.toLowerCase(),
@@ -500,50 +524,31 @@ function selectPrioInEdit(prio) {
 //  * @returns {string} The formatted date as a string.
 //  * @throws {Error} If the date format is invalid.
 //  */
-// function getDateAsString(source = "addTaskSite") {
-//     let dateInputField = document.getElementById(`dueDateInput_${source}`);
+function setMinimumDateForInputFields() {
 
-//     if (!dateInputField) console.error("Invalid ID for dateInput");
+    let field_edit = document.getElementById(`dueDateInput_edit`);
+    let field_edit_mobile = document.getElementById(`dueDateInput_edit_mobile`);
+    let field_addTaskSite = document.getElementById(`dueDateInput_addTaskSite`);
+    let field_addTaskPopUp = document.getElementById(`dueDateInput_addTaskPopUp`);
 
-//     const datePattern = /^(\d{1,2})\-(\d{1,2})\-(\d{4})$/;
-//     if (!datePattern.test(dateInputField.value)) {
-//         throw new Error("The date format is invalid. Please use the format 'dd/mm/yyyy'.");
-//     }
+    let date = getTodayAsDateString();
 
-//     const dateParts = dateInputField.value.split("-");
-//     const formattedDate = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}`;
+    if (field_addTaskPopUp) field_addTaskPopUp.min = date;
+    if (field_addTaskSite) field_addTaskSite.min = date;
+    if (field_edit) field_edit.min = date;
+    if (field_edit_mobile) field_edit_mobile.min = date;
 
-//     return formattedDate;
-// }
-
-
-/**
- * Checks if the selected date is not in the past.
- * 
- * @param {string} [source="addTaskSite"] - The source of the task.
- * @returns {boolean} True if the selected date is not in the past, false otherwise.
- */
-function dateIsNotInPast(source = "addTaskSite") {
-    let dateInputField = document.getElementById(`dueDateInput_${source}`);
-
-    if (!dateInputField) console.error("Invalid ID for dateInput:", source);
-    const dateString = dateInputField.value;
-    const dateParts = dateString.split("/");
-
-    const day = dateParts[0];
-    const month = dateParts[1] - 1;
-    const year = dateParts[2];
-
-    const currentDate = new Date();
-    const dateToCheck = new Date(year, month, day);
-
-    if (dateToCheck < currentDate) {
-        alert("The selected date is either in the past or has the wrong format. Use format dd/mm/yyyy");
-        return false;
-    }
-    else return true;
 }
 
+
+function getTodayAsDateString() {
+    const today = new Date(); // Erstellt ein Date-Objekt für das heutige Datum
+    const year = today.getFullYear(); // Ruft das aktuelle Jahr ab
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Ruft den aktuellen Monat ab (0-11) und fügt ggf. eine führende Null hinzu
+    const day = String(today.getDate()).padStart(2, '0'); // Ruft den aktuellen Tag ab und fügt ggf. eine führende Null hinzu
+    const formattedDate = `${year}-${month}-${day}`; // Setzt die Teile zu einem String im gewünschten Format zusammen
+    return formattedDate;
+}
 
 // EDIT TASK!!//////////////////////////////////////////////////////////////
 
@@ -561,7 +566,9 @@ async function initializeEditTaskSite() {
     highlightChosenPrio(toDoIndex);
     integrateOldSubTasksToEditArray(toDoIndex);
 
+    setTimeout(setNavBarLinks(), 200);
     updateAddTaskMemberSelection("editTaskMobile");
+    setMinimumDateForInputFields();
 
     // document.getElementById("addTaskButton_mobile").onclick = EditTask;
     document.getElementById("addTaskAssignedMembers_edit_mobile").innerHTML = addedMembersHTMLBigCard(toDoIndex);
@@ -682,8 +689,6 @@ async function EditTask(cardIndex) {
     let categoryInput = document.getElementById("addTaskCategory_edit");
     let dateInput = document.getElementById("dueDateInput_edit");
 
-    if (!dateIsNotInPast("edit")) return;
-
     let JSON = {
         category: categoryInput.value.toLowerCase(),
         title: titleInput.value,
@@ -716,8 +721,6 @@ async function EditTaskMobile(cardIndex) {
     let descriptionInput = document.getElementById("addTaskDescription_edit_mobile");
     let categoryInput = document.getElementById("addTaskCategory_edit_mobile");
     let dateInput = document.getElementById("dueDateInput_edit_mobile");
-
-    if (!dateIsNotInPast("edit_mobile")) return;
 
     let JSON = {
         category: categoryInput.value.toLowerCase(),
@@ -858,16 +861,16 @@ function editTaskHTML(toDoIndex) {
                 </div>
                 <div class="select-prio">
                     <p>Prio</p>
-                    <div class="dflex gap10">
-                        <div class="prio-container pointer" id="prioButton_urgent_edit" onclick="selectPrioInEdit('Urgent')">
+                    <div class="prio-container-container">
+                        <div class="prio-container pointer" id="prioButton_urgent_edit" onclick="selectPrioInEdit('urgent')">
                             <div>Urgent</div>
                             <img src="assets/img/priorityUrgent.png" alt="">
                         </div>
-                        <div class="prio-container pointer" id="prioButton_medium_edit" onclick="selectPrioInEdit('Medium')">
+                        <div class="prio-container pointer" id="prioButton_medium_edit" onclick="selectPrioInEdit('medium')">
                             <div>Medium</div>
                             <img src="assets/img/priorityMedium.png" alt="">
                         </div>
-                        <div class="prio-container pointer" id="prioButton_low_edit" onclick="selectPrioInEdit('Low')">
+                        <div class="prio-container pointer" id="prioButton_low_edit" onclick="selectPrioInEdit('low')">
                             <div>Low</div>
                             <img src="assets/img/priorityLow.png" alt="">
                         </div>
@@ -887,7 +890,7 @@ function editTaskHTML(toDoIndex) {
         </div>
         <div class="btn-container-edit-popUp">
             <button class="login-btn clear-btn" onclick="closeEditTaskPopUp()">Clear X</button>
-            <button type="submit" class="login-btn add-task-btn" onclick="EditTask(${toDoIndex})">Edit Task <img src="assets/img/plusbutton.png" alt=""></button>
+            <button type="submit" class="login-btn add-task-btn" onclick="EditTask(${toDoIndex})">Edit Task <img src="assets/img/check.png" alt=""></button>
         </div>
     </div>`;
 }

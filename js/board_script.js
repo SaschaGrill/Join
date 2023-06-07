@@ -55,6 +55,7 @@ async function initializeBoard() {
     // userFromURL();
     renderToDos();
     setNavBarLinks();
+    setTimeout(setNavBarLinks(), 200);
 }
 
 
@@ -69,6 +70,7 @@ async function initializeBigCardMobile() {
     await addContactForEveryUser();
     userFromURL();;
     renderBigCardMobile(getBigCardIndexFromURL());
+    setTimeout(setNavBarLinks(), 200);
     document.getElementById("editButtonMobile").onclick = () => { openEditTaskMobile(getBigCardIndexFromURL()) };
 }
 

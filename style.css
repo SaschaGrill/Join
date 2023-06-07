@@ -750,7 +750,6 @@ a span {
 .board-container {
   width: calc(100% - 252px);
   position: relative;
-  /* left: 112px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -800,10 +799,7 @@ a span {
   justify-content: center;
   align-items: center;
   position: relative;
-  /* left: 122px; */
-  /* display: flex;
-  justify-content: space-around; */
-  /* flex-wrap: wrap; */
+
 }
 
 .board-column-wrapper {
@@ -820,9 +816,7 @@ a span {
   .board-column-wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
-    /* 2 gleichgroße Spalten */
     grid-template-rows: 50% 50%;
-    /* 2 gleichgroße Reihen */
     gap: 10px;
   }
 
@@ -913,7 +907,7 @@ a span {
 }
 
 .board-pin-space {
-  min-height: 200px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1179,9 +1173,6 @@ a span {
     width: 40% !important;
   }
 
-  .prio-container{
-    max-width: 20%;
-  }
 }
 
 
@@ -1273,7 +1264,6 @@ a span {
   padding: 4px 18px;
   border: 1px solid #f5f5f5;
   color: rgb(14, 14, 14);
-  /* background-color: #FF3D00; */
 }
 
 @media (max-width:1000px) {
@@ -1287,8 +1277,12 @@ a span {
     padding: 4px 18px;
     border: 1px solid #f5f5f5;
     color: rgb(14, 14, 14);
-    max-width: 70px;
-    /* background-color: #FF3D00; */
+    width: 50% !important;
+  }
+
+  .prio-container-container{
+
+    align-self: center;
   }
 
   .select-prio{
@@ -1325,15 +1319,37 @@ a span {
   border: 1px solid black;
   gap: 10px;
   padding: 4px 18px;
-  /* border: 1px solid #f5f5f5; */
   color: rgb(5, 5, 5);
-  /* background-color: #FF3D00; */
 }
 
 .big-card-contact {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.prio-container{
+  box-sizing: border-box;
+  height: 40px;
+  width: 30%;
+}
+
+.prio-container-container{
+    display: flex;
+    gap: 10px;
+}
+
+@media(max-width:1200px){
+  .prio-container-container{
+    justify-content: space-between;
+  }
+
+  .prio-container{
+    box-sizing: border-box;
+    font-size: 21px;
+    height: 40px;
+    width: 40%;
+  }
 }
 
 .prio-container:hover {

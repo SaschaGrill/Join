@@ -2,7 +2,7 @@
  * Initializes the summary page.
  */
 async function initSummary() {
-  includeHTML();
+  await includeHTML();
   greet();
   await loadTasksOnline();
   const taskCounts = getTaskCounts();
@@ -10,7 +10,7 @@ async function initSummary() {
   const urgentAndDeadlineInfo = getUrgentAndUpcomingDeadline();
   updateUrgentAndUpcomingDeadline(urgentAndDeadlineInfo);
   userFromURL();
-  setNavBarLinks();
+  setTimeout(setNavBarLinks(), 200);
 }
 
 
@@ -85,7 +85,7 @@ function updateTaskCounts(taskCounts) {
  * @returns {Date} - The converted date object.
  */
 function convertDateFormat(dueDateString) {
-  const [day, month, year] = dueDateString.split('-');
+  const [year, month, day] = dueDateString.split('-');
   const dateObject = new Date(`${year}-${month}-${day}`);
   return dateObject;
 }
@@ -105,8 +105,10 @@ function getUrgentAndUpcomingDeadline() {
       urgentTasks++;
     }
 
+
     if (task.dueDate) {
       const taskDueDate = convertDateFormat(task.dueDate);
+
       if (upcomingDeadline === null || taskDueDate < upcomingDeadline) {
         upcomingDeadline = taskDueDate;
       }

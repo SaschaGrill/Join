@@ -84,10 +84,26 @@ function addUrlVariable(id) {
 }
 
 function setNavBarLinks() {
-    let summaryLink = document.getElementById("summaryHTML");
-    let boardLink = document.getElementById("boardHTML");
-    let addTaskLink = document.getElementById("addTaskHTML");
-    let contactsLink = document.getElementById("contactsHTML");
+    console.log("setLinks");
+    let summaryLink;
+    let boardLink;
+    let addTaskLink;
+    let contactsLink;
+
+    if (window.innerWidth > 999) {
+        summaryLink = document.getElementById("summaryHTML");
+        boardLink = document.getElementById("boardHTML");
+        addTaskLink = document.getElementById("addTaskHTML");
+        contactsLink = document.getElementById("contactsHTML");
+    }
+    else {
+        console.log("smal");
+        summaryLink = document.getElementById("summaryHTML_mobile");
+        boardLink = document.getElementById("boardHTML_mobile");
+        addTaskLink = document.getElementById("addTaskHTML_mobile");
+        contactsLink = document.getElementById("contactsHTML_mobile");
+    }
+
 
     summaryLink.href = openSummaryLink();
     boardLink.href = openBoardLink();
@@ -119,7 +135,9 @@ function openBoardLink() {
     return `board.html?contactToAddIndex=-1&user=${userFromURL()}`;
 }
 
-
+function goToBoard() {
+    window.open(openBoardLink(), "_self");
+}
 /**
  * Opens the "big_card_mobile.html" page with the specified card index.
  * 
