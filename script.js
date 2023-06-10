@@ -148,6 +148,13 @@ function openBigCardMobile(cardIndex) {
     window.open(`big_card_mobile.html?user=${userFromURL()}&card_ind=${cardIndex}`, "_self");
 }
 
+/**
+ * Navigates the user back to the previous page in their browser history.
+ *
+ * @function
+ * @name goBack
+ * @returns {void}
+ */
 function goBack() {
     window.history.back();
-}  
+  }   
