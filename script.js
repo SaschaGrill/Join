@@ -138,6 +138,7 @@ function openBoardLink() {
 function goToBoard() {
     window.open(openBoardLink(), "_self");
 }
+
 /**
  * Opens the "big_card_mobile.html" page with the specified card index.
  * 
@@ -146,3 +147,7 @@ function goToBoard() {
 function openBigCardMobile(cardIndex) {
     window.open(`big_card_mobile.html?user=${userFromURL()}&card_ind=${cardIndex}`, "_self");
 }
+
+function goBack() {
+    window.history.back();
+}  
