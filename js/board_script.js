@@ -56,6 +56,7 @@ async function initializeBoard() {
     renderToDos();
     setNavBarLinks();
     setTimeout(setNavBarLinks(), 200);
+
 }
 
 

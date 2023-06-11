@@ -176,6 +176,7 @@ function removeContact(firstName, lastName, edit = false, id) {
 function openAddTaskMenu(status = "to-do") {
     contactsToAdd = [];
 
+    setMinimumDateForInputFields();
     if (!(window.innerWidth < 1000)) {
         showElement("addTaskPopUp");
         showElement("Overlay");
@@ -525,7 +526,6 @@ function selectPrioInEdit(prio) {
 //  * @throws {Error} If the date format is invalid.
 //  */
 function setMinimumDateForInputFields() {
-
     let field_edit = document.getElementById(`dueDateInput_edit`);
     let field_edit_mobile = document.getElementById(`dueDateInput_edit_mobile`);
     let field_addTaskSite = document.getElementById(`dueDateInput_addTaskSite`);
@@ -590,6 +590,7 @@ async function initializeEditTaskSite() {
  */
 function openEditTaskPopUp(cardIndex) {
     document.getElementById("editCardPopUp").innerHTML += editTaskHTML(cardIndex);
+    setMinimumDateForInputFields();
     showElement("Overlay");
     updateAddTaskMemberSelection("editTask");
     document.getElementById("boardContainer").classList.add("overflow-visible");
