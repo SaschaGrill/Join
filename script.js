@@ -83,6 +83,14 @@ function addUrlVariable(id) {
     return newUrl;
 }
 
+
+/**
+ * Sets the navigation bar links based on the window size.
+ * 
+ * @function
+ * @name setNavBarLinks
+ * @returns {void}
+ */
 function setNavBarLinks() {
     console.log("setLinks");
     let summaryLink;
@@ -111,6 +119,7 @@ function setNavBarLinks() {
     contactsLink.href = openContactLink();
 }
 
+
 /**
  * Opens the "add_task.html" page without specifying a contact to add.
  */
@@ -119,13 +128,29 @@ function addTaskSiteWithoutContactLink() {
 }
 
 
+/**
+ * Generates a URL for the "summary.html" page with user parameters.
+ * 
+ * @function
+ * @name openSummaryLink
+ * @returns {string} The URL for the "summary.html" page with user parameters.
+ */
 function openSummaryLink() {
     return `summary.html?user=${userFromURL()}`;
 }
 
+
+/**
+ * Generates a URL for the "contacts.html" page with user parameters.
+ * 
+ * @function
+ * @name openContactLink
+ * @returns {string} The URL for the "contacts.html" page with user parameters.
+ */
 function openContactLink() {
     return `contacts.html?user=${userFromURL()}`;
 }
+
 
 /**
  * Opens the "board.html" page.
@@ -135,9 +160,18 @@ function openBoardLink() {
     return `board.html?contactToAddIndex=-1&user=${userFromURL()}`;
 }
 
+
+/**
+ * Navigates the user to the "board.html" page.
+ * 
+ * @function
+ * @name goToBoard
+ * @returns {void}
+ */
 function goToBoard() {
     window.open(openBoardLink(), "_self");
 }
+
 
 /**
  * Opens the "big_card_mobile.html" page with the specified card index.
@@ -147,6 +181,7 @@ function goToBoard() {
 function openBigCardMobile(cardIndex) {
     window.open(`big_card_mobile.html?user=${userFromURL()}&card_ind=${cardIndex}`, "_self");
 }
+
 
 /**
  * Navigates the user back to the previous page in their browser history.
