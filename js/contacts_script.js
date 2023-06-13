@@ -462,8 +462,10 @@ async function deleteContact(contactIndex, event) {
     contacts.splice(contactIndex, 1);
     await setItem('contacts', JSON.stringify(contacts));
     renderContactsList();
-    if (contacts.length > 0) {
+    if (!isMobileView() && contacts.length > 0) {
         renderContactBig(contacts[0]);
+    } else if (isMobileView()) {
+        returnToListView();
     }
     if (event) closeOverlay(event);
 }
@@ -512,10 +514,8 @@ window.addEventListener('resize', function () {
     } else {
         if (contactBigContainer)
             contactBigContainer.classList.remove('dnone');
-
         if (contactList)
             contactList.classList.remove('dnone');
-
         if (returnIcon) {
             returnIcon.classList.add('dnone');
         }
