@@ -363,7 +363,12 @@ async function addNewContact(event) {
     showNotification("Contact succesfully created");
 }
 
-/* */
+/**
+ * Creates a notification and adds it to the body of the document. 
+ * The notification is removed from the body after 4 seconds.
+ *
+ * @param {string} message - The message to be displayed in the notification.
+ */
 function showNotification(message) {
     const notification = document.createElement("div");
     notification.classList.add("notification");
