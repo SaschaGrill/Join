@@ -185,7 +185,8 @@ function openAddTaskMenu(status = "to-do") {
         document.getElementById("addTaskButton_popUp").onclick = function () { addTaskFromPopUp(status) };
     } else {
         // Open AddTaskPage when width is less than 1200px
-        openAddTaskSiteWithoutContact();
+        let URL = `add_task.html?contactToAddIndex=-1&user=${userFromURL()}`;
+        window.open(URL, "_self");
     }
 }
 
@@ -214,13 +215,9 @@ function updateAddTaskMemberSelection(openedFromString) {
     else if (openedFromString === "editTaskMobile") selection = document.getElementById("addTaskSelection_edit_mobile");
     else console.log(openedFromString);
 
-    selection.innerHTML = "";
-    selection.innerHTML += `<option value="-1">Select contacts to assign</option>`;
+    selection.innerHTML = `< option value = "-1" > Select contacts to assign</option > `;
 
-    for (let i = 0; i < contacts.length; i++) {
-        const member = contacts[i];
-        selection.innerHTML += addMemberHTML(i);
-    }
+    for (let i = 0; i < contacts.length; i++) selection.innerHTML += addMemberHTML(i);
 }
 
 
@@ -232,25 +229,21 @@ function updateAddTaskMemberSelection(openedFromString) {
  */
 function addMemberHTML(index) {
     return /*html*/ `
-    <option value="${index}">${contacts[index]['firstName']}</option>
-    `;
+        < option value = "${index}" > ${contacts[index]['firstName']}</option >
+        `;
 }
 
 
 function addTaskFieldsAreFilled(source = "popUp") {
-    let boolean = true;
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
     let categoryInput = document.getElementById("addTaskCategory");
     let dateInput = (source == "popUp") ? document.getElementById("dueDateInput_addTaskPopUp") : document.getElementById("dueDateInput_addTaskSite");
 
-    if (titleInput.value == "" ||
+    return (!titleInput.value == "" ||
         descriptionInput.value == "" ||
         categoryInput.value == "0" ||
-        dateInput.value == "") {
-        boolean = false;
-    }
-    return boolean;
+        dateInput.value == "");
 
 }
 
@@ -454,11 +447,11 @@ function pushSubTask(source, subTaskToAdd) {
  */
 function subTaskPreviewHTML(subTaskTitle, cardIndex, source = "addTask") {
     return /*html*/ `
-    <div class="dflex align-center gap10" id="subTaskPreview_${cardIndex}_${subTaskTitle}">
+        <div class= "dflex align-center gap10" id = "subTaskPreview_${cardIndex}_${subTaskTitle}" >
         <div class="rectangle"></div>
         ${subTaskTitle}
-        <img src="assets/img/delete.png" alt="" class="pointer" onclick="deleteSubTask(${cardIndex},'${subTaskTitle}','${source}')">
-    </div>`;
+        <img src = "assets/img/delete.png" alt = "" class= "pointer" onclick = "deleteSubTask(${cardIndex},'${subTaskTitle}','${source}')" >
+    </div > `;
 }
 
 
@@ -546,7 +539,7 @@ function getTodayAsDateString() {
     const year = today.getFullYear(); // Ruft das aktuelle Jahr ab
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Ruft den aktuellen Monat ab (0-11) und fügt ggf. eine führende Null hinzu
     const day = String(today.getDate()).padStart(2, '0'); // Ruft den aktuellen Tag ab und fügt ggf. eine führende Null hinzu
-    const formattedDate = `${year}-${month}-${day}`; // Setzt die Teile zu einem String im gewünschten Format zusammen
+    const formattedDate = `${year} - ${month} - ${day}`; // Setzt die Teile zu einem String im gewünschten Format zusammen
     return formattedDate;
 }
 
@@ -810,8 +803,8 @@ function selectCurrentCategory(cardIndex) {
  * @returns {string} The HTML for the edit task popup.
  */
 function editTaskHTML(toDoIndex) {
-    return /*html*/`    
-    <div class="add-task-container-pop-up">
+    return /*html*/`
+        <div class= "add-task-container-pop-up" >
         <h1 class="add-task-heading headlines">Edit Task</h1>
         <div class="add-task-content">
             <div class="add-task-half">
@@ -903,7 +896,7 @@ function editTaskHTML(toDoIndex) {
  * @param {number} toDoIndex - The index of the to-do item.
  */
 function openEditTaskMobile(toDoIndex) {
-    window.open(`edit_task_mobile.html?toDo=${toDoIndex}&user=${userFromURL()}`, "_self");
+    window.open(`edit_task_mobile.html ? toDo = ${toDoIndex} & user=${userFromURL()}`, "_self");
 }
 
 // function

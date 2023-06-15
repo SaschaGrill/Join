@@ -323,6 +323,10 @@ a span {
   display: none;
 }
 
+a{
+  text-decoration: none;
+}
+
 @media (max-width:1000px) {
   .headlines {
     font-size: 47px;
@@ -816,7 +820,6 @@ a span {
   .board-column-wrapper {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
     gap: 10px;
   }
 
@@ -1504,10 +1507,10 @@ a span {
 }
 
 .big-card-button-container {
-  position: absolute;
-  right: 47px;
-  bottom: 20px;
+  position: relative;
   display: flex;
+  top: 10px;
+  justify-content: flex-end;
 }
 
 .big-card-button-container button {

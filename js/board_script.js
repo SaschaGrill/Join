@@ -318,7 +318,7 @@ function closeBigCard() {
         document.getElementById("boardContainer").classList.remove("overflow-visible");
         renderToDos();
     } else {
-        window.open(openBoardLink());
+        window.open(openBoardLink(), "_self");
     }
 }
 
@@ -346,7 +346,7 @@ function bigCardHTML(cardIndex) {
             <p class="bold">Priority:</p>
             <div class="prio-container dflex align-center pointer">
                 ${capitalizeFirstLetter(toDoArray[cardIndex]["priority"])}
-                <img src="assets/img/priority${toDoArray[cardIndex]["priority"]}.png">
+                <img src="assets/img/priority${capitalizeFirstLetter(toDoArray[cardIndex]["priority"])}.png">
             </div>
         </div>
 

@@ -105,7 +105,6 @@ function getUrgentAndUpcomingDeadline() {
       urgentTasks++;
     }
 
-
     if (task.dueDate) {
       const taskDueDate = convertDateFormat(task.dueDate);
 

@@ -92,7 +92,6 @@ function addUrlVariable(id) {
  * @returns {void}
  */
 function setNavBarLinks() {
-    console.log("setLinks");
     let summaryLink;
     let boardLink;
     let addTaskLink;
@@ -105,7 +104,6 @@ function setNavBarLinks() {
         contactsLink = document.getElementById("contactsHTML");
     }
     else {
-        console.log("smal");
         summaryLink = document.getElementById("summaryHTML_mobile");
         boardLink = document.getElementById("boardHTML_mobile");
         addTaskLink = document.getElementById("addTaskHTML_mobile");
@@ -192,4 +190,4 @@ function openBigCardMobile(cardIndex) {
  */
 function goBack() {
     window.history.back();
-  }   
+}   
