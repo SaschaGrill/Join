@@ -316,7 +316,7 @@ function openAddContactForm() {
                 </div>
                 <div class="newContactInput">
                     <form onsubmit="addNewContact(event); return false;">    
-                        <input class="contacts-user" type="text" id="add-name" placeholder="Name" pattern="[A-Za-z]+" required>
+                        <input class="contacts-user" type="text" id="add-name" placeholder="Name" pattern="[A-Za-z ]+" required>
                         <input class="contacts-email" type="email" id="add-email" placeholder="Email" required>
                         <input class="contacts-phone" type="number" id="add-phone" placeholder="Phone" required>
                         <div class="addContactButtons">

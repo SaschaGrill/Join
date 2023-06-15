@@ -2,6 +2,7 @@ let users = [];
 let email;
 let user;
 
+
 /**
  * Initializes the page by loading email and password data and users data.
  */
@@ -42,6 +43,7 @@ function loadEmailPassword() {
 async function loadUsers() {
   users = JSON.parse(await getItem('users'));
 }
+
 
 /**
  * Switches to the registration form view.
@@ -350,13 +352,15 @@ async function saveUser(name, password, email) {
 function resettedPassword() {
   let continueBtn = document.querySelector('.change-password-btn')
   let resetPassword = document.getElementById('resetted-password');
-  resetPassword.classList.remove('dnone');
   let gray = document.querySelector('.login-section');
   let gray2 = document.querySelector('.login-join-img');
+  
+  resetPassword.classList.remove('dnone');
   continueBtn.classList.add('disabled');
   resetPassword.classList.add('sendemailiframe');
   gray.style.background = 'lightgray';
   gray2.style.backgroundColor = 'lightgray';
+  
   setTimeout(() => {
     resetPassword.classList.remove('sendemailiframe');
     gray.style.background = '#f6f7f8';
