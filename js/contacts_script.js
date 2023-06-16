@@ -193,7 +193,7 @@ function contactInListHTML(contact) {
 
 function markChosenContact(contactIndex = 0) {
     let chosenContactElement = document.getElementById(`contactInList_${chosenContact}`);
-    chosenContactElement.classList.remove("contact-activated");
+    if (chosenContactElement != null) chosenContactElement.classList.remove("contact-activated");
     chosenContactElement = document.getElementById(`contactInList_${contactIndex}`)
     chosenContactElement.classList.add("contact-activated");
     chosenContact = contactIndex;
@@ -360,6 +360,7 @@ async function addNewContact(event) {
     renderContactsList();
     closeOverlay(event);
     renderContactBig(contact);
+    markChosenContact(contacts.length - 1);
     showNotification("Contact succesfully created");
 }
 
@@ -464,6 +465,7 @@ async function editContact(contactIndex, event, contact) {
  * @param {Event} event - The event object.
  */
 async function deleteContact(contactIndex, event) {
+    markChosenContact(1);
     contacts.splice(contactIndex, 1);
     await setItem('contacts', JSON.stringify(contacts));
     renderContactsList();
