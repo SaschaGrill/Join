@@ -52,7 +52,6 @@ async function initializeBoard() {
     includeHTML();
     await loadContacts();
     await addContactForEveryUser();
-    // userFromURL();
     renderToDos();
     setNavBarLinks();
     setTimeout(setNavBarLinks(), 200);
