@@ -1042,8 +1042,54 @@ a{
   z-index: 97;
 }
 
+.confirm-add-task-banner{
+  background-color: #091931;
+  height: 40px;
+  position: absolute;
+  left: 50%;
+  bottom: 150px;
+  transform: translateX(50%);
+  opacity: 0;
+  color: white;
+  font-family: "Inter";
+  font-size: 21px;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:0 8px;
+  
+}
+
+.confirmation-animation{
+  animation: confirmationAnim 2000ms ease-in-out;
+  animation-direction: forwards;
+}
+
+@keyframes confirmationAnim{
+  0% {
+    opacity: 0%;
+    bottom: 150px;
+  }
+
+  50%{
+    opacity: 50%;
+  }
+
+  90%{
+    bottom: 500px;
+    opacity: 100%;
+  }
+
+  100%{
+    opacity: 0%;
+  }
+}
+
 .add-task-container {
-  width: calc(100vw - 232px);
+  width: calc(100vw - 250px);
+  height: calc(100vh - 100px);
   top: 100px;
   left: 232px;
   position: relative;
@@ -1054,6 +1100,7 @@ a{
 @media (max-width:1000px) {
   .add-task-container {
     padding: 0 0 !important;
+    height: auto;
   }
 }
 

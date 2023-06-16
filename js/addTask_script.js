@@ -215,7 +215,7 @@ function updateAddTaskMemberSelection(openedFromString) {
     else if (openedFromString === "editTaskMobile") selection = document.getElementById("addTaskSelection_edit_mobile");
     else console.log(openedFromString);
 
-    selection.innerHTML = `< option value = "-1" > Select contacts to assign</option > `;
+    selection.innerHTML = `<option value = "-1"> Select contacts to assign</option >`;
 
     for (let i = 0; i < contacts.length; i++) selection.innerHTML += addMemberHTML(i);
 }
@@ -229,7 +229,7 @@ function updateAddTaskMemberSelection(openedFromString) {
  */
 function addMemberHTML(index) {
     return /*html*/ `
-        < option value = "${index}" > ${contacts[index]['firstName']}</option >
+        <option value = "${index}" > ${contacts[index]['firstName']}</option>
         `;
 }
 
@@ -240,7 +240,7 @@ function addTaskFieldsAreFilled(source = "popUp") {
     let categoryInput = document.getElementById("addTaskCategory");
     let dateInput = (source == "popUp") ? document.getElementById("dueDateInput_addTaskPopUp") : document.getElementById("dueDateInput_addTaskSite");
 
-    return (!titleInput.value == "" ||
+    return !(titleInput.value == "" ||
         descriptionInput.value == "" ||
         categoryInput.value == "0" ||
         dateInput.value == "");
@@ -314,7 +314,7 @@ async function addTaskFromAddTaskSite() {
     let categoryInput = document.getElementById("addTaskCategory");
     let dateInput = document.getElementById("dueDateInput_addTaskSite");
 
-    if (!addTaskFieldsAreFilled("popUp")) {
+    if (!addTaskFieldsAreFilled("site")) {
         alert("Fill in Fields");
         return;
     }
@@ -333,7 +333,20 @@ async function addTaskFromAddTaskSite() {
     toDoArray.push(taskJSON);
     await saveTasksOnline();
 
-    addUrlVariable("board.html");
+    await confirmAddTask();
+    // setTimeout(window.open(openBoardLink(), "_self"), 200);
+}
+
+
+/**
+ * Displays a confirmation banner after successful email confirmation.
+ */
+async function confirmAddTask() {
+    let confirmationBanner = document.getElementById('addTaskConfirmation');
+    confirmationBanner.classList.add("confirmation-animation");
+    await new Promise(resolve => setTimeout(resolve, 200));
+
+
 }
 
 
@@ -539,7 +552,7 @@ function getTodayAsDateString() {
     const year = today.getFullYear(); // Ruft das aktuelle Jahr ab
     const month = String(today.getMonth() + 1).padStart(2, '0'); // Ruft den aktuellen Monat ab (0-11) und fügt ggf. eine führende Null hinzu
     const day = String(today.getDate()).padStart(2, '0'); // Ruft den aktuellen Tag ab und fügt ggf. eine führende Null hinzu
-    const formattedDate = `${year} - ${month} - ${day}`; // Setzt die Teile zu einem String im gewünschten Format zusammen
+    const formattedDate = `${year}-${month}-${day}`; // Setzt die Teile zu einem String im gewünschten Format zusammen
     return formattedDate;
 }
 
@@ -858,15 +871,15 @@ function editTaskHTML(toDoIndex) {
                     <div class="prio-container-container">
                         <div class="prio-container pointer" id="prioButton_urgent_edit" onclick="selectPrioInEdit('urgent')">
                             <div>Urgent</div>
-                            <img src="assets/img/priorityUrgent.png" alt="">
+                            <img src="assets/img/priorityurgent.png" alt="">
                         </div>
                         <div class="prio-container pointer" id="prioButton_medium_edit" onclick="selectPrioInEdit('medium')">
                             <div>Medium</div>
-                            <img src="assets/img/priorityMedium.png" alt="">
+                            <img src="assets/img/prioritymedium.png" alt="">
                         </div>
                         <div class="prio-container pointer" id="prioButton_low_edit" onclick="selectPrioInEdit('low')">
                             <div>Low</div>
-                            <img src="assets/img/priorityLow.png" alt="">
+                            <img src="assets/img/prioritylow.png" alt="">
                         </div>
                     </div>
                 </div>
