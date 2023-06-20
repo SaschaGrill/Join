@@ -96,12 +96,16 @@ function setNavBarLinks() {
     let boardLink;
     let addTaskLink;
     let contactsLink;
+    let legalNoticeLink;
+    let helpLink;
 
     if (window.innerWidth > 999) {
         summaryLink = document.getElementById("summaryHTML");
         boardLink = document.getElementById("boardHTML");
         addTaskLink = document.getElementById("addTaskHTML");
         contactsLink = document.getElementById("contactsHTML");
+        legalNoticeLink = document.getElementById("legalNoticeHTML");
+        helpLink = document.getElementById("helpHTML")
     }
     else {
         summaryLink = document.getElementById("summaryHTML_mobile");
@@ -115,6 +119,8 @@ function setNavBarLinks() {
     boardLink.href = openBoardLink();
     addTaskLink.href = addTaskSiteWithoutContactLink();
     contactsLink.href = openContactLink();
+    legalNoticeLink.href = openLegalNoticeLink();
+    helpLink.href = openHelpLink();
 }
 
 
@@ -156,6 +162,29 @@ function openContactLink() {
  */
 function openBoardLink() {
     return `board.html?contactToAddIndex=-1&user=${userFromURL()}`;
+}
+
+/**
+ * Generates a URL for the "summary.html" page with user parameters.
+ * 
+ * @function
+ * @name openLegalNoticeLink
+ * @returns {string} The URL for the "summary.html" page with user parameters.
+ */
+function openLegalNoticeLink() {
+    return `legal_notice.html?user=${userFromURL()}`;
+}
+
+
+/**
+ * Generates a URL for the "summary.html" page with user parameters.
+ * 
+ * @function
+ * @name openHelpLink
+ * @returns {string} The URL for the "summary.html" page with user parameters.
+ */
+function openHelpLink() {
+    return `help.html?user=${userFromURL()}`;
 }
 
 
