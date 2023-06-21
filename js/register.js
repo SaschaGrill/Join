@@ -96,19 +96,46 @@ function resetSignup(name, email, password) {
  */
 async function login() {
   await loadUsers();
-  let email = document.getElementById("email-login");
-  let password = document.getElementById("password-login");
-  let user = users.find(u => u.email == email.value && u.password == password.value);
-  if (user) {
-    rememberLogin(email.value, password.value);
-    email.value = '';
-    password.value = '';
-    window.location.href = `summary.html?user=${user.name}`;
-  } else {
-    alert('try again');
+  let emailInput = document.getElementById("email-login");
+  let passwordInput = document.getElementById("password-login");
+  let email = emailInput.value;
+  let password = passwordInput.value;
+  let user = users.find(u => u.email === email);
+
+  if (!user) {
+    // Benutzer nicht gefunden
+    emailInput.setCustomValidity("Unbekannte E-Mail-Adresse");
+    passwordInput.setCustomValidity("");
+    emailInput.value = "";
+    passwordInput.value = "";
+    return;
   }
+
+  if (password !== user.password) {
+    // Falsches Passwort
+    emailInput.setCustomValidity("");
+    passwordInput.setCustomValidity("Falsches Passwort");
+    passwordInput.value = "";
+    passwordInput.reportValidity(); 
+  } else {
+    rememberLogin(email, password);
+    emailInput.value = "";
+    passwordInput.value = "";
+    emailInput.setCustomValidity("");
+    passwordInput.setCustomValidity("");
+    window.location.href = `summary.html?user=${user.name}`;
+  }
+
+  passwordInput.addEventListener("input", function () {
+    passwordInput.setCustomValidity(""); 
+  });
+
   users = [];
 }
+
+
+
+
 
 
 /**
