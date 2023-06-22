@@ -1612,9 +1612,12 @@ a{
   word-wrap: break-word;
 }
 
+.small-card h4 {
+  word-wrap: break-word;
+}
+
 .big-card-container-mobile .headlines {
   text-align: left;
-  word-wrap: break-word;
 }
 
 .big-card-container-mobile .small-card-category {
