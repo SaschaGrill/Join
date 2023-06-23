@@ -935,7 +935,6 @@ a{
 
 .small-card-description {
   color: #a8a8a8;
-  word-wrap: break-word;
 }
 
 .small-card-category {
@@ -945,10 +944,6 @@ a{
   text-align: center;
   color: #ffffff;
   position: relative;
-}
-
-.small-card-category h4 {
-  word-wrap: break-word;
 }
 
 .big-card-category {
@@ -1606,14 +1601,6 @@ a{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-.big-card-container-mobile p {
-  word-wrap: break-word;
-}
-
-.small-card h4 {
-  word-wrap: break-word;
 }
 
 .big-card-container-mobile .headlines {
