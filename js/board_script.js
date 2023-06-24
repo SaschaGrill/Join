@@ -312,13 +312,25 @@ function openBigCard(cardIndex) {
  */
 function closeBigCard() {
     if (window.innerWidth > 1000) {
-        document.getElementById("bigCardPopUp").innerHTML = "";
+        const bigCardPopUp = document.getElementById("bigCardPopUp");
+        if (bigCardPopUp) bigCardPopUp.innerHTML = "";
+
         hideElement("Overlay");
-        document.getElementById("boardContainer").classList.remove("overflow-visible");
+
+        const boardContainer = document.getElementById("boardContainer");
+        if (boardContainer) boardContainer.classList.remove("overflow-visible");
+
         renderToDos();
     } else {
         window.open(openBoardLink(), "_self");
     }
+}
+
+function closeOverlay() {
+    closeBigCard();
+    closeEditTaskPopUp();
+    closeAddTaskMenu();
+
 }
 
 
@@ -335,7 +347,7 @@ function bigCardHTML(cardIndex) {
         </button>
         <span class="big-card-category" style="background-color: var(--${toDoArray[cardIndex].category}-color)"> ${capitalizeFirstLetter(toDoArray[cardIndex].category)}</span>
         <h1 class="headlines">${toDoArray[cardIndex]["title"]}</h1>
-        <p>${toDoArray[cardIndex]["description"]}</p>
+        <p class="big-card-description-text">${toDoArray[cardIndex]["description"]}</p>
         <div class="dflex align-center gap20">
            <p class="bold">Due date:</p>
            <p>${toDoArray[cardIndex]["dueDate"]}</p>

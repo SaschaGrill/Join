@@ -123,6 +123,10 @@ a span {
   color: #000000;
 }
 
+.overflow-hidden{
+  overflow: hidden;
+}
+
 .overflow-visible {
   overflow: visible !important;
 }
@@ -935,6 +939,7 @@ a{
 
 .small-card-description {
   color: #a8a8a8;
+  overflow: hidden;
 }
 
 .small-card-category {
@@ -986,6 +991,10 @@ a{
   border-radius: 50px;
   color: white;
   border: 3px solid white;
+}
+
+.small-card h4{
+  overflow: hidden;
 }
 
 .delete-btn-member {
@@ -1046,9 +1055,8 @@ a{
   background-color: #091931;
   height: 40px;
   position: absolute;
-  left: 50%;
-  bottom: 150px;
-  transform: translateX(50%);
+  top: 80vh;
+  left: 50vw;
   opacity: 0;
   color: white;
   font-family: "Inter";
@@ -1070,7 +1078,7 @@ a{
 @keyframes confirmationAnim{
   0% {
     opacity: 0%;
-    bottom: 150px;
+    top: 80vh;
   }
 
   50%{
@@ -1078,7 +1086,7 @@ a{
   }
 
   90%{
-    bottom: 500px;
+    top: 40vh;
     opacity: 100%;
   }
 
@@ -1378,6 +1386,11 @@ a{
   gap: 10px;
 }
 
+.big-card-description-text{
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
 .prio-container{
   box-sizing: border-box;
   height: 40px;
@@ -1468,6 +1481,11 @@ a{
   align-items: center;
   width: 100%;
   justify-content: space-between;
+}
+
+.subTask-text{
+  width: 100%;
+  overflow: hidden;
 }
 
 

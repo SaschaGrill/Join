@@ -31,7 +31,7 @@ async function initializeAddTaskSite() {
 
 /**
  * Retrieves the user index to add from the URL query string.
- * 
+ *
  * @returns {number|null} - The user index to add or null if not found.
  */
 function getUserToAddFromURL() {
@@ -44,7 +44,7 @@ function getUserToAddFromURL() {
 
 /**
  * Generates the HTML code for the subtask section in a small card.
- * 
+ *
  * @param {object} toDo - The to-do object.
  * @returns {string} - The HTML code for the subtask section.
  */
@@ -68,7 +68,7 @@ function subtaskHTML(toDo) {
 
 /**
  * Returns the number of finished tasks in a subtask array.
- * 
+ *
  * @param {Array} subTaskArray - The subtask array.
  * @returns {number} - The number of finished tasks.
  */
@@ -86,7 +86,7 @@ function getFinishedTaskCount(subTaskArray) {
 
 /**
  * Calculates the fill percentage for the subtask progress bar.
- * 
+ *
  * @param {Array} subTaskArray - The subtask array.
  * @returns {number} - The fill percentage.
  */
@@ -101,7 +101,7 @@ function calculateFillPercentage(subTaskArray) {
 
 /**
  * Generates the HTML code for the contacts section in a small card.
- * 
+ *
  * @param {object} toDo - The to-do object.
  * @param {boolean} deletable - Indicates if the contacts are deletable.
  * @returns {string} - The HTML code for the contacts section.
@@ -124,7 +124,7 @@ function contactsHTMLsmallCard(toDo, deletable = true) {
 
 /**
  * Generates the HTML code for the contact circle in a small card.
- * 
+ *
  * @param {object} member - The member object.
  * @param {boolean} deletable - Indicates if the contact is deletable.
  * @param {boolean} edit - Indicates if it's an edit mode.
@@ -150,7 +150,7 @@ function contactCircleHTML(member, deletable = true, edit = false) {
 
 /**
  * Removes a contact from the contactsToAdd or contactsToEdit array.
- * 
+ *
  * @param {string} firstName - The first name of the contact to remove.
  * @param {string} lastName - The last name of the contact to remove.
  * @param {boolean} edit - Indicates if it's an edit mode.
@@ -170,7 +170,7 @@ function removeContact(firstName, lastName, edit = false, id) {
 
 /**
  * Opens the add task menu.
- * 
+ *
  * @param {string} status - The status of the task.
  */
 function openAddTaskMenu(status = "to-do") {
@@ -203,7 +203,7 @@ function closeAddTaskMenu() {
 
 /**
  * Updates the member selection in the add task menu.
- * 
+ *
  * @param {string} openedFromString - The source from where the menu was opened.
  */
 function updateAddTaskMemberSelection(openedFromString) {
@@ -223,7 +223,7 @@ function updateAddTaskMemberSelection(openedFromString) {
 
 /**
  * Generates the HTML code for a member option in the member selection.
- * 
+ *
  * @param {number} index - The index of the contact.
  * @returns {string} - The HTML code for the member option.
  */
@@ -249,7 +249,7 @@ function addTaskFieldsAreFilled(source = "popUp") {
 
 /**
  * Adds a task from the pop-up menu.
- * 
+ *
  * @param {string} status - The status of the task.
  */
 async function addTaskFromPopUp(status = "to-do") {
@@ -259,7 +259,6 @@ async function addTaskFromPopUp(status = "to-do") {
     let dateInput = document.getElementById("dueDateInput_addTaskPopUp");
 
     if (!addTaskFieldsAreFilled("popUp")) {
-        alert("Fill in Fields");
         return;
     }
 
@@ -281,6 +280,7 @@ async function addTaskFromPopUp(status = "to-do") {
     renderToDos();
 
     emptyPopUpInputs();
+    await confirmAddTask();
 }
 
 
@@ -315,7 +315,6 @@ async function addTaskFromAddTaskSite() {
     let dateInput = document.getElementById("dueDateInput_addTaskSite");
 
     if (!addTaskFieldsAreFilled("site")) {
-        alert("Fill in Fields");
         return;
     }
 
@@ -344,9 +343,8 @@ async function addTaskFromAddTaskSite() {
 async function confirmAddTask() {
     let confirmationBanner = document.getElementById('addTaskConfirmation');
     confirmationBanner.classList.add("confirmation-animation");
-    await new Promise(resolve => setTimeout(resolve, 200));
-
-
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    confirmationBanner.classList.remove("confirmation-animation");
 }
 
 
@@ -368,7 +366,7 @@ async function loadTasksOnline() {
 
 /**
  * Adds a member to the task with the given source.
- * 
+ *
  * @param {string} source - The source of the task.
  */
 function addMemberToTask(source) {
@@ -398,7 +396,7 @@ function addMemberToTask(source) {
 
 /**
  * Adds a member to the task with the given contact index.
- * 
+ *
  * @param {number} contactIndex - The index of the contact.
  * @param {boolean} [popUp=false] - Indicates if the member is being added in the pop-up.
  */
@@ -415,7 +413,7 @@ function addMemberToTaskWithIndex(contactIndex, popUp = false) {
 
 /**
  * Adds a subtask to the task.
- * 
+ *
  * @param {string} [source="popUp"] - The source of the task.
  * @param {number} cardIndex - The index of the card.
  */
@@ -437,7 +435,7 @@ function addSubTask(source = "popUp", cardIndex) {
 
 /**
  * Pushes the subtask to the corresponding array based on the source.
- * 
+ *
  * @param {string} source - The source of the task.
  * @param {object} subTaskToAdd - The subtask to add.
  */
@@ -452,7 +450,7 @@ function pushSubTask(source, subTaskToAdd) {
 
 /**
  * Generates the HTML for displaying a subtask preview.
- * 
+ *
  * @param {string} subTaskTitle - The title of the subtask.
  * @param {number} cardIndex - The index of the card.
  * @param {string} [source="addTask"] - The source of the task.
@@ -462,14 +460,16 @@ function subTaskPreviewHTML(subTaskTitle, cardIndex, source = "addTask") {
     return /*html*/ `
         <div class= "dflex align-center gap10" id = "subTaskPreview_${cardIndex}_${subTaskTitle}" >
         <div class="rectangle"></div>
-        ${subTaskTitle}
+        <div class="subTask-text">
+            ${subTaskTitle}
+        </div>
         <img src = "assets/img/delete.png" alt = "" class= "pointer" onclick = "deleteSubTask(${cardIndex},'${subTaskTitle}','${source}')" >
     </div > `;
 }
 
 
 /**
- * 
+ *
  * Deletes a subtask from the task.
  * @param {number} cardIndex - The index of the card.
  * @param {string} subTaskTitle - The title of the subtask.
@@ -493,7 +493,7 @@ function deleteSubTask(cardIndex, subTaskTitle, source = "addTask") {
 
 /**
  * Selects the priority for the task.
- * 
+ *
  * @param {string} prio - The selected priority.
  * @param {boolean} [fromEditMobile=false] - Indicates if the priority is being selected from the edit mobile site.
  */
@@ -510,7 +510,7 @@ function selectPrio(prio, fromEditMobile = false) {
 
 /**
  * Selects the priority for editing the task.
- * 
+ *
  * @param {string} prio - The selected priority.
  */
 function selectPrioInEdit(prio) {
@@ -526,7 +526,7 @@ function selectPrioInEdit(prio) {
 
 // /**
 //  * Retrieves the formatted date as a string.
-//  * 
+//  *
 //  * @param {string} [source="addTaskSite"] - The source of the task.
 //  * @returns {string} The formatted date as a string.
 //  * @throws {Error} If the date format is invalid.
@@ -560,7 +560,7 @@ function getTodayAsDateString() {
 
 /**
  * Initializes the edit task site.
- * 
+ *
  * @returns {Promise<void>}
  */
 async function initializeEditTaskSite() {
@@ -591,7 +591,7 @@ async function initializeEditTaskSite() {
 
 /**
  * Opens the edit task popup.
- * 
+ *
  * @param {number} cardIndex - The index of the card.
  */
 function openEditTaskPopUp(cardIndex) {
@@ -610,7 +610,7 @@ function openEditTaskPopUp(cardIndex) {
 
 /**
  * Selects an option in a select element based on its value.
- * 
+ *
  * @param {HTMLSelectElement} selectElement - The select element.
  * @param {string} value - The value to select.
  * @returns {number} The index of the selected option.
@@ -627,7 +627,7 @@ function selectOptionByValue(selectElement, value) {
 
 /**
  * Retrieves the 'toDo' parameter from the URL.
- * 
+ *
  * @returns {string} The 'toDo' parameter value.
  */
 function getToDoFromURL() {
@@ -640,7 +640,7 @@ function getToDoFromURL() {
 
 /**
  * Generates the HTML for displaying added members in the big card.
- * 
+ *
  * @param {number} toDoIndex - The index of the to-do item.
  * @returns {string} The HTML for displaying added members.
  */
@@ -658,7 +658,7 @@ function addedMembersHTMLBigCard(toDoIndex) {
 
 /**
  * Generates the HTML for displaying added subtasks in the big card.
- * 
+ *
  * @param {number} toDoIndex - The index of the to-do item.
  * @returns {string} The HTML for displaying added subtasks.
  */
@@ -674,7 +674,7 @@ function addedSubTasksHTML(toDoIndex) {
 
 /**
  * Highlights the chosen priority in the edit task.
- * 
+ *
  * @param {number} toDoIndex - The index of the to-do item.
  */
 function highlightChosenPrio(toDoIndex) {
@@ -686,7 +686,7 @@ function highlightChosenPrio(toDoIndex) {
 
 /**
  * Edits a task.
- * 
+ *
  * @param {number} cardIndex - The index of the card.
  * @returns {Promise<void>}
  */
@@ -719,7 +719,7 @@ async function EditTask(cardIndex) {
 
 /**
  * Edits a task in mobile view.
- * 
+ *
  * @param {number} cardIndex - The index of the card.
  * @returns {Promise<void>}
  */
@@ -750,7 +750,7 @@ async function EditTaskMobile(cardIndex) {
 
 /**
  * Deletes a to-do item.
- * 
+ *
  * @param {number} cardIndex - The index of the card.
  * @returns {Promise<void>}
  */
@@ -764,7 +764,7 @@ async function deleteToDo(cardIndex) {
 
 /**
  * Retrieves the formatted date string for editing a task.
- * 
+ *
  * @param {number} cardIndex - The index of the card.
  * @returns {string} The formatted date string.
  */
@@ -776,7 +776,7 @@ function getDateString_Edit(cardIndex) {
 
 /**
  * Integrates old subtasks into the edit array.
- * 
+ *
  * @param {number} cardIndex - The index of the card.
  */
 function integrateOldSubTasksToEditArray(cardIndex) {
@@ -791,16 +791,20 @@ function integrateOldSubTasksToEditArray(cardIndex) {
  * Closes the edit task popup.
  */
 function closeEditTaskPopUp() {
-    document.getElementById("editCardPopUp").innerHTML = "";
+    const editCardPopUp = document.getElementById("editCardPopUp");
+    if (editCardPopUp) editCardPopUp.innerHTML = "";
+
     hideElement("Overlay");
-    document.getElementById("boardContainer").classList.remove("overflow-visible");
+
+    const boardContainer = document.getElementById("boardContainer");
+    boardContainer.classList.remove("overflow-visible");
     closeBigCard();
 }
 
 
 /**
  * Selects the current category in the edit task.
- * 
+ *
  * @param {number} cardIndex - The index of the card.
  */
 function selectCurrentCategory(cardIndex) {
@@ -811,7 +815,7 @@ function selectCurrentCategory(cardIndex) {
 
 /**
  * Generates the HTML for the edit task popup.
- * 
+ *
  * @param {number} toDoIndex - The index of the to-do item.
  * @returns {string} The HTML for the edit task popup.
  */
@@ -905,7 +909,7 @@ function editTaskHTML(toDoIndex) {
 
 /**
  * Opens the edit task in mobile view.
- * 
+ *
  * @param {number} toDoIndex - The index of the to-do item.
  */
 function openEditTaskMobile(toDoIndex) {

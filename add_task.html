@@ -20,7 +20,7 @@
     <div class="dflex-except-mobile ">
         <div w3-include-html="assets/templates/desktop_side_template.html" class="navbar-add-task-none"></div>
         <div w3-include-html="assets/templates/header_add_task_mobile_template.html" class="navbar-add-task "></div>
-    <div class="add-task-container">
+    <form class="add-task-container">
         <div class="add-task-heading-wrapper">
             <p class="mobile-view-only">Kanban Project Management Tool</p>
             <h1 class="add-task-heading headlines">Add Task</h1>
@@ -39,7 +39,7 @@
             <div class="add-task-input-container">
                 <p>Description</p>
                 <div class="text-area-field">
-                <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription"></textarea>
+                <textarea name="" cols="30" rows="4" placeholder="Enter a Description" id="addTaskDescription" required></textarea>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@
            <div class="add-task-input-container">
                 <p>Due Date</p>
                 <div class="input-field date-input" >
-                    <input type="date" placeholder="dd-mm-yyyy" class="pointer" id="dueDateInput_addTaskSite">
+                    <input type="date" placeholder="dd-mm-yyyy" class="pointer" id="dueDateInput_addTaskSite" required>
                 </div>
            </div>
 
@@ -120,9 +120,9 @@
             <button class="login-btn clear-btn" onclick="window.open('board.html', '_self')">Clear X</button>
             <button type="submit" class="login-btn add-task-btn" onclick="addTaskFromAddTaskSite()">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
         </div>
-    </div>
-    </div>
-    <div class="confirm-add-task-banner" id="addTaskConfirmation">Task added!</div>
+    </form>
+</div>
+<div class="confirm-add-task-banner" id="addTaskConfirmation">Task added!</div>
     <div w3-include-html="assets/templates/navbar_mobile_template.html" class="navbar-mobile"></div>
 
     </div>

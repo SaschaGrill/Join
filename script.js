@@ -119,8 +119,8 @@ function setNavBarLinks() {
     boardLink.href = openBoardLink();
     addTaskLink.href = addTaskSiteWithoutContactLink();
     contactsLink.href = openContactLink();
-    legalNoticeLink.href = openLegalNoticeLink();
-    helpLink.href = openHelpLink();
+    if (legalNoticeLink) legalNoticeLink.href = openLegalNoticeLink();
+    if (helpLink) helpLink.href = openHelpLink();
 }
 
 
