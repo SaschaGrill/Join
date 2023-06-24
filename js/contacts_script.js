@@ -62,7 +62,6 @@ async function addContactForEveryUser() {
             contacts.push(contact);
         }
     }
-    // Speichern Sie die Kontakte persistent, nachdem alle Benutzer hinzugefügt wurden
     await setItem('contacts', JSON.stringify(contacts));
 }
 
