@@ -192,6 +192,13 @@ function contactInListHTML(contact) {
     `;
 }
 
+/**
+ * Marks a contact as chosen by adding a specific CSS class to it.
+ * It also removes the mark from the previously chosen contact.
+ *
+ * @param {number} [contactIndex=0] - The index of the contact that should be chosen.
+ * The default value is 0, which corresponds to the first contact.
+ */
 function markChosenContact(contactIndex = 0) {
     let chosenContactElement = document.getElementById(`contactInList_${chosenContact}`);
     if (chosenContactElement != null) chosenContactElement.classList.remove("contact-activated");
