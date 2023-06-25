@@ -253,6 +253,7 @@ function addTaskFieldsAreFilled(source = "popUp") {
  * @param {string} status - The status of the task.
  */
 async function addTaskFromPopUp(status = "to-do") {
+    event.preventDefault();
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
     let categoryInput = document.getElementById("addTaskCategory");
@@ -309,6 +310,7 @@ function emptyPopUpInputs() {
  * Saves the task online and redirects to the board.
  */
 async function addTaskFromAddTaskSite() {
+    event.preventDefault();
     let titleInput = document.getElementById("addTaskTitle");
     let descriptionInput = document.getElementById("addTaskDescription");
     let categoryInput = document.getElementById("addTaskCategory");
@@ -333,7 +335,7 @@ async function addTaskFromAddTaskSite() {
     await saveTasksOnline();
 
     await confirmAddTask();
-    // setTimeout(window.open(openBoardLink(), "_self"), 200);
+    setTimeout(window.open(openBoardLink(), "_self"), 2000);
 }
 
 
@@ -341,6 +343,7 @@ async function addTaskFromAddTaskSite() {
  * Displays a confirmation banner after successful email confirmation.
  */
 async function confirmAddTask() {
+    console.log("AASDAS");
     let confirmationBanner = document.getElementById('addTaskConfirmation');
     confirmationBanner.classList.add("confirmation-animation");
     await new Promise(resolve => setTimeout(resolve, 2000));

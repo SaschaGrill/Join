@@ -1,6 +1,6 @@
 
 <body>
-    <form class="add-task-container-pop-up">
+    <form class="add-task-container-pop-up" onsubmit="addTaskFromPopUp()">
         <h1 class="add-task-heading headlines">Add Task</h1>
         <div class="add-task-content">
 
@@ -91,7 +91,7 @@
         </div>
         <div class="btn-container">
             <button class="login-btn clear-btn" onclick="closeAddTaskMenu()">Clear X</button>
-            <button type="submit" class="login-btn add-task-btn" onclick="addTaskFromPopUp()" id="addTaskButton_popUp">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
+            <button type="submit" class="login-btn add-task-btn"  id="addTaskButton_popUp">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
         </div>
     </form>
     </div>

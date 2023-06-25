@@ -315,7 +315,7 @@ function closeBigCard() {
         const bigCardPopUp = document.getElementById("bigCardPopUp");
         if (bigCardPopUp) bigCardPopUp.innerHTML = "";
 
-        hideElement("Overlay");
+        if (document.getElementById("Overlay")) hideElement("Overlay");
 
         const boardContainer = document.getElementById("boardContainer");
         if (boardContainer) boardContainer.classList.remove("overflow-visible");
@@ -326,7 +326,7 @@ function closeBigCard() {
     }
 }
 
-function closeOverlay() {
+function closeOverlayOnBoard() {
     closeBigCard();
     closeEditTaskPopUp();
     closeAddTaskMenu();

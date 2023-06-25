@@ -20,7 +20,7 @@
     <div class="dflex-except-mobile ">
         <div w3-include-html="assets/templates/desktop_side_template.html" class="navbar-add-task-none"></div>
         <div w3-include-html="assets/templates/header_add_task_mobile_template.html" class="navbar-add-task "></div>
-    <form class="add-task-container">
+    <form class="add-task-container" onsubmit="addTaskFromAddTaskSite()">
         <div class="add-task-heading-wrapper">
             <p class="mobile-view-only">Kanban Project Management Tool</p>
             <h1 class="add-task-heading headlines">Add Task</h1>
@@ -108,17 +108,14 @@
                  <img src="assets/img/plusbutton.png" alt="" class="pointer" onclick="addSubTask('site')">
                 </div>
                 <div class="dflex-col" id="subTaskPreviewContainer_site">
-                 <!-- <div class="dflex align-center">
-                    <div class="rectangle"></div>
-                     TestTask1
-                </div> -->
+        
                 </div>
             </div>
 
         </div>
         <div class="btn-container">
             <button class="login-btn clear-btn" onclick="window.open('board.html', '_self')">Clear X</button>
-            <button type="submit" class="login-btn add-task-btn" onclick="addTaskFromAddTaskSite()">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
+            <button type="submit" class="login-btn add-task-btn">Add Task <img src="assets/img/plusbutton.png" alt=""></button>
         </div>
     </form>
 </div>
