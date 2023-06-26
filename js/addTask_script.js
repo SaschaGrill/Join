@@ -918,6 +918,3 @@ function editTaskHTML(toDoIndex) {
 function openEditTaskMobile(toDoIndex) {
     window.open(`edit_task_mobile.html ? toDo = ${toDoIndex} & user=${userFromURL()}`, "_self");
 }
-
-// function
-//////////////////////////////////////////////////
