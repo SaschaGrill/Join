@@ -559,7 +559,7 @@ function getTodayAsDateString() {
     return formattedDate;
 }
 
-// EDIT TASK!!//////////////////////////////////////////////////////////////
+// EDIT TASK //
 
 /**
  * Initializes the edit task site.
